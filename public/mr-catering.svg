@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="700" viewBox="0 0 1000 700" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1000" height="700" fill="white"/>
+  <g transform="translate(115 35)">
+    <path d="M255 36C214 11 169 26 155 65C146 92 154 122 176 139C148 157 143 188 160 211C176 234 207 241 231 228"
+          stroke="#0F0F12" stroke-width="10" stroke-linecap="round"/>
+    <path d="M250 36C294 9 340 25 353 64C362 91 354 121 332 139C359 155 365 187 348 210C330 235 298 241 275 228"
+          stroke="#0F4C81" stroke-width="10" stroke-linecap="round"/>
+    <path d="M204 133C224 116 250 107 276 114C303 120 324 140 333 164"
+          stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
+    <path d="M213 160C233 147 257 144 278 150C299 156 313 171 319 192"
+          stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+    <path d="M190 170C176 190 174 217 187 239C201 263 224 274 249 268"
+          stroke="#111827" stroke-width="10" stroke-linecap="round"/>
+    <path d="M330 176C343 195 346 221 334 242C322 263 298 274 274 268"
+          stroke="#0F4C81" stroke-width="10" stroke-linecap="round"/>
+    <path d="M365 157C391 151 415 165 422 187C428 208 416 230 396 237"
+          stroke="#F97316" stroke-width="9" stroke-linecap="round"/>
+    <path d="M418 181C432 165 449 162 462 171C474 180 476 198 466 209"
+          stroke="#0F0F12" stroke-width="9" stroke-linecap="round"/>
+    <path d="M455 200C469 205 480 216 481 229C482 245 470 257 455 259"
+          stroke="#F97316" stroke-width="8" stroke-linecap="round"/>
+    <path d="M118 303C155 274 198 257 249 254C302 251 350 266 389 296"
+          stroke="#111827" stroke-width="12" stroke-linecap="round"/>
+  </g>
+
+  <g transform="translate(70 335)">
+    <text x="0" y="115" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" fill="#0F0F12">M</text>
+    <text x="125" y="115" font-family="Georgia, 'Times New Roman', serif" font-size="90" font-weight="700" fill="#F97316">&amp;</text>
+    <text x="230" y="115" font-family="Georgia, 'Times New Roman', serif" font-size="150" font-weight="700" fill="#0F0F12">R</text>
+    <line x1="4" y1="143" x2="430" y2="143" stroke="#F97316" stroke-width="7"/>
+    <text x="105" y="200" font-family="Georgia, 'Times New Roman', serif" font-size="56" letter-spacing="12" fill="#0F4C81">CATERING</text>
+    <text x="108" y="246" font-family="Arial, Helvetica, sans-serif" font-size="22" letter-spacing="8" fill="#2E3A4A">ES COMO COMER EN CASA...</text>
+  </g>
+
+  <g transform="translate(595 355)">
+    <path d="M40 138C57 87 107 55 168 55C230 55 280 87 297 138"
+          stroke="#111827" stroke-width="10"/>
+    <path d="M32 142H305C299 162 284 180 262 189H72C51 180 37 162 32 142Z"
+          fill="#F7F7F7" stroke="#111827" stroke-width="10"/>
+    <path d="M63 171H274" stroke="#0F4C81" stroke-width="10" stroke-linecap="round"/>
+    <path d="M91 184H248" stroke="#F97316" stroke-width="10" stroke-linecap="round"/>
+    <path d="M158 55C157 35 166 19 180 12" stroke="#111827" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="185" cy="9" r="8" fill="#F97316"/>
+  </g>
+</svg>

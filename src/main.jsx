@@ -136,7 +136,7 @@ function App() {
       <footer>
         <Logo />
         <span>UNA MIRADA QUE TRANSFORMA</span>
-        <span>© {new Date().getFullYear()} Medunz Corp.</span>
+        <span>© {new Date().getFullYear()} Medunz Corp. · Created by Ghost W&SD</span>
       </footer>
     </div>
   );

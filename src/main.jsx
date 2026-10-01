@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
+const medunzBrand = '/medunz-corp-emblem.jpg';
+
 const companies = [
   { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', accent: 'pharma' },
   { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.', accent: 'jardines' },
@@ -112,7 +114,7 @@ function App() {
 
       <main>
         <section id="inicio" className="hero">
-          <div className="hero-overlay" />
+          <div className="hero-overlay" /><div className="hero-art"><img src={medunzBrand} alt="" /></div>
           <div className="hero-art" aria-hidden="true"><img src="/medunz-medusa.svg" alt="" /></div>
           <div className="hero-content">
             <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
@@ -155,10 +157,10 @@ function App() {
 
         <section id="empresas" className="companies section-dark">
           <div className="section-label">03 / NUESTRO ECOSISTEMA</div>
-          <div className="section-heading"><h2>Seis caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
+          <div className="section-heading"><h2>Seis caminos.<br/><em>Una visión.</em></h2><p>Seis unidades de negocio que comparten un mismo propósito, cada una con identidad propia.</p></div>
           <div className="company-grid">
             {companies.map((company, i) => (
-              <article className={`company-card card-${i+1} ${company.accent === 'catering' ? 'catering-card' : ''} ${company.accent === 'medriv' ? 'medriv-card' : ''}`} key={company.name}>
+              <article className={"company-card card-" + (i + 1) + " " + company.accent + "-card"} key={company.name}>
                 <div className="card-number">0{i+1}</div>
                 {company.logo && <img className="company-logo" src={company.logo} alt={`${company.name} logo`} />}
                 <div className="card-content">

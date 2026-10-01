@@ -100,7 +100,9 @@ function App() {
         </section>
 
         <section id="vision" className="vision">
-          <div className="vision-mark" aria-hidden="true">M</div>
+          <div className="vision-media">
+            <img src="/medunz-vision-profile.webp" alt="Medunz Corp. — Una mirada que transforma" />
+          </div>
           <div className="vision-copy">
             <div className="section-kicker">03 · VISIÓN</div>
             <h2>Una mirada<br /><em>que transforma.</em></h2>

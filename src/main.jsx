@@ -6,10 +6,10 @@ import './styles.css';
 const medunzBrand = '/medunz-corp-emblem.jpg';
 
 const companies = [
-  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', accent: 'pharma' },
-  { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.', accent: 'jardines' },
-  { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.', accent: 'hupi' },
-  { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.', accent: 'ghost' },
+  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
+  { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.', logo: '/medunz-jardines-logo.jpg', accent: 'jardines' },
+  { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.', logo: '/hupi-baby-gym.jpg', accent: 'hupi' },
+  { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.', logo: '/ghost-logo.jpg', accent: 'ghost' },
   { name: 'MEDRIV Bienes Raíces', tag: 'Inversión · Patrimonio', text: 'Espacios, oportunidades y patrimonio para construir valor a largo plazo.', logo: '/medriv.svg', accent: 'medriv' },
   { name: 'M&R Catering', tag: 'Gastronomía · Eventos', text: 'Catering y experiencias gastronómicas para celebrar, compartir y crear momentos memorables.', logo: '/mr-catering.svg', accent: 'catering' }
 ];
@@ -92,8 +92,8 @@ function App() {
     oldFavicons.forEach((node) => node.remove());
     const favicon = document.createElement('link');
     favicon.rel = 'icon';
-    favicon.type = 'image/svg+xml';
-    favicon.href = '/medunz-medusa.svg';
+    favicon.type = 'image/jpeg';
+    favicon.href = medunzBrand;
     favicon.dataset.medunzFavicon = 'true';
     document.head.appendChild(favicon);
     return () => favicon.remove();
@@ -102,7 +102,7 @@ function App() {
   return (
     <div className="site">
       <header className="nav">
-        <a href="#inicio" className="brand"><img src="/medunz-medusa.svg" alt="Medunz Corp. - Medusa" /></a>
+        <a href="#inicio" className="brand"><img src={medunzBrand} alt="Medunz Corp." /></a>
         <nav>
           <a href="#grupo">El grupo</a>
           <a href="#vision">Visión</a>
@@ -114,8 +114,8 @@ function App() {
 
       <main>
         <section id="inicio" className="hero">
-          <div className="hero-overlay" /><div className="hero-art"><img src={medunzBrand} alt="" /></div>
-          <div className="hero-art" aria-hidden="true"><img src="/medunz-medusa.svg" alt="" /></div>
+          <div className="hero-overlay" />
+          <div className="hero-art" aria-hidden="true"><img src={medunzBrand} alt="" /></div>
           <div className="hero-content">
             <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
             <h1>Una mirada<br/><span>que transforma.</span></h1>
@@ -162,7 +162,7 @@ function App() {
             {companies.map((company, i) => (
               <article className={"company-card card-" + (i + 1) + " " + company.accent + "-card"} key={company.name}>
                 <div className="card-number">0{i+1}</div>
-                {company.logo && <img className="company-logo" src={company.logo} alt={`${company.name} logo`} />}
+                <div className="company-visual"><img src={company.logo} alt={`${company.name} logo`} /></div>
                 <div className="card-content">
                   <span>{company.tag}</span>
                   <h3>{company.name}</h3>

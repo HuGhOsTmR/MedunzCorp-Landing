@@ -3,9 +3,9 @@ import { createRoot } from 'react-dom/client';
 import { ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
-// Imagen corporativa aprobada de Medunz Corp.
-// Se reutiliza en hero, visión y favicon para evitar referencias a gráficos antiguos.
-const medunzEmblem = '/medunz-corp-emblem.jpg?v=20261001';
+// Recurso gráfico corporativo aprobado: isotipo Medunz Corp. en SVG.
+// Se usa directamente para evitar el JPG anterior que estaba renderizando el recurso incorrecto.
+const medunzEmblem = '/medunz-medusa.svg?v=20261001';
 
 const companies = [
   { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
@@ -60,7 +60,7 @@ function App() {
           <div className="hero-art">
             <div className="hero-background" aria-hidden="true" />
             <div className="emblem-frame">
-              <img src={medunzEmblem} alt="Emblema corporativo de Medunz Corp. inspirado en Medusa y sus serpientes" />
+              <img src={medunzEmblem} alt="Isotipo corporativo de Medunz Corp., Medusa estilizada con serpientes doradas" />
             </div>
           </div>
         </section>

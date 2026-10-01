@@ -1,62 +1,18 @@
-.hero-approved{
-  position:relative;
-  width:100%;
-  background:#f7f8fa;
-  overflow:hidden;
-  line-height:0;
-}
-
-.corporate-hero-image{
-  display:block;
-  width:100%;
-  height:auto;
-  object-fit:contain;
-}
-
-.hero-image-hotspot{
-  position:absolute;
-  left:11.5%;
-  bottom:9%;
-  width:20%;
-  height:14%;
-  display:block;
-  border-radius:32px;
-  z-index:4;
-}
-
-.hero-mobile-copy{display:none}
+.hero-approved{position:relative;width:100%;overflow:hidden;background:#f7f8fa;line-height:0}.corporate-hero-image{display:block;width:100%;height:auto;max-width:none;object-fit:contain}.hero-image-hotspot{position:absolute;left:11%;bottom:8%;width:21%;height:14%;display:block;border-radius:32px;z-index:4}.hero-mobile-copy{display:none}
 
 @media(max-width:700px){
-  .hero-approved{
-    min-height:620px;
-    background-image:url('/medunz-corp-hero.webp');
-    background-repeat:no-repeat;
-    background-size:auto 100%;
-    background-position:right center;
-    background-color:#f7f8fa;
-    line-height:normal;
-  }
-
-  .corporate-hero-image{display:none}
+  .hero-approved{line-height:normal;background:#f7f8fa}
+  .corporate-hero-image{width:100%;height:auto;display:block}
   .hero-image-hotspot{display:none}
-
-  .hero-mobile-copy{
-    position:relative;
-    z-index:3;
-    display:flex;
-    min-height:620px;
-    flex-direction:column;
-    justify-content:center;
-    align-items:flex-start;
-    padding:70px 25px 80px;
-    width:100%;
-    background:linear-gradient(90deg,rgba(247,248,250,.98) 0%,rgba(247,248,250,.94) 47%,rgba(247,248,250,.28) 100%);
-  }
-
-  .hero-mobile-copy>.brand{align-items:flex-start;margin-top:18px}
-  .hero-mobile-copy>.brand .brand-word{font-size:58px}
-  .hero-mobile-copy>.brand .brand-corp{font-size:15px;margin-top:8px}
-  .hero-mobile-copy .slogan{font-size:11px;letter-spacing:.25em;margin-top:25px}
-  .hero-mobile-copy p{max-width:330px;margin:24px 0 28px;color:#33445a;font-size:14px;line-height:1.65}
-  .hero-mobile-copy .hero-button{line-height:1.2}
+  .hero-mobile-copy{display:flex;flex-direction:column;align-items:flex-start;padding:42px 24px 48px;background:#f7f8fa}
+  .hero-mobile-copy .eyebrow{font-size:9px;letter-spacing:.28em}
+  .mobile-brand{margin-top:16px}
+  .mobile-brand .brand{align-items:flex-start}
+  .mobile-brand .brand-word{font-size:clamp(48px,14vw,66px);line-height:.82}
+  .mobile-brand .brand-corp{font-size:12px;letter-spacing:.38em;margin-top:8px}
+  .hero-mobile-copy .slogan{font-size:10px;line-height:1.4;letter-spacing:.22em;margin-top:24px}
+  .hero-mobile-copy p{max-width:100%;margin:20px 0 26px;color:#33445a;font-size:14px;line-height:1.7}
+  .hero-mobile-copy .hero-button{line-height:1.2;align-self:flex-start}
 }
+
+@media(min-width:701px){.hero-mobile-copy{display:none!important}}

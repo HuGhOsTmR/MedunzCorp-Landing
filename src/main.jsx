@@ -114,18 +114,12 @@ function App() {
       </header>
 
       <main>
-        <section id="inicio" className="hero">
-          <div className="hero-overlay" />
-          <div className="hero-art hero-corporate-art" aria-hidden="true"><img src={medunzCorporateIdentity} alt="" /></div>
-          <div className="hero-content">
-            <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
-            <h1>Una mirada<br/><span>que transforma.</span></h1>
-            <p className="hero-copy">Estrategia · Innovación · Resultados</p>
-            <p className="quote">Tecnología, visión y propósito para transformar oportunidades en futuro.</p>
-            <a href="#grupo" className="hero-button">Conocer nuestro grupo <ArrowDown size={18}/></a>
-          </div>
-          <div className="hero-bottom"><span>01</span><div className="line"/><span>05</span></div>
-        </section>
+        <section
+          id="inicio"
+          className="hero"
+          style={{ backgroundImage: `url(${medunzCorporateIdentity})` }}
+          aria-label="Medunz Corp. — Una mirada que transforma"
+        />
 
         <section id="grupo" className="manifesto section-dark">
           <div className="section-label">01 / EL GRUPO</div>

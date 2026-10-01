@@ -4,17 +4,22 @@ import { ArrowUpRight } from 'lucide-react';
 import './styles.css';
 import './hero-approved.css';
 
-// Imagen corporativa aprobada para la portada de Medunz Corp.
-const corporateHero = '/medunz-corp-hero.webp';
-const medunzEmblem = '/medunz-medusa.svg';
+import corporateHero from './assets/medunz-hero.png';
+import corporateEmblem from './assets/medunz-logo.png';
+import pharmaLogo from './assets/medunz-pharma-logo.svg';
+import jardinesLogo from './assets/medunz-jardines-logo.svg';
+import hupiLogo from './assets/hupi-baby-gym-logo.svg';
+import ghostLogo from './assets/ghost-logo.svg';
+import medrivLogo from './assets/medriv-logo.svg';
+import cateringLogo from './assets/mr-catering-logo.svg';
 
 const companies = [
-  { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
-  { name: 'Medunz Jardines', category: 'NATURALEZA · ESPACIOS', text: 'Naturaleza que inspira.', logo: '/medunz-jardines-logo.jpg', accent: 'jardines' },
-  { name: 'HUPI Baby Gym', category: 'FAMILIAS · DESARROLLO', text: 'Infancia que desarrolla.', logo: '/hupi-baby-gym.jpg', accent: 'hupi' },
-  { name: 'Ghost Web & Software Designer', category: 'TECNOLOGÍA · DIGITAL', text: 'Tecnología que construye.', logo: '/ghost-logo.jpg', accent: 'ghost' },
-  { name: 'MEDRIV Bienes Raíces', category: 'PATRIMONIO · INVERSIÓN', text: 'Patrimonio que crece.', logo: '/medriv.svg', accent: 'medriv' },
-  { name: 'M&R Catering', category: 'GASTRONOMÍA · EVENTOS', text: 'Experiencias que conectan.', logo: '/mr-catering.svg', accent: 'catering' },
+  { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: pharmaLogo, accent: 'pharma' },
+  { name: 'Medunz Jardines', category: 'NATURALEZA · ESPACIOS', text: 'Naturaleza que inspira.', logo: jardinesLogo, accent: 'jardines' },
+  { name: 'HUPI Baby Gym', category: 'FAMILIAS · DESARROLLO', text: 'Infancia que desarrolla.', logo: hupiLogo, accent: 'hupi' },
+  { name: 'Ghost Web & Software Designer', category: 'TECNOLOGÍA · DIGITAL', text: 'Tecnología que construye.', logo: ghostLogo, accent: 'ghost' },
+  { name: 'MEDRIV Bienes Raíces', category: 'PATRIMONIO · INVERSIÓN', text: 'Patrimonio que crece.', logo: medrivLogo, accent: 'medriv' },
+  { name: 'M&R Catering', category: 'GASTRONOMÍA · EVENTOS', text: 'Experiencias que conectan.', logo: cateringLogo, accent: 'catering' },
 ];
 
 function Logo({ compact = false }) {
@@ -47,24 +52,15 @@ function App() {
 
       <main>
         <section id="inicio" className="hero-approved" aria-label="Medunz Corp. — Una mirada que transforma">
-          <img
-            src={corporateHero}
-            className="corporate-hero-image"
-            alt="Medunz Corp. — Una mirada que transforma"
-          />
-
+          <img src={corporateHero} className="corporate-hero-image" alt="Medunz Corp. — Una mirada que transforma" />
+          <a className="hero-image-hotspot" href="#grupo" aria-label="Conocer nuestro grupo"></a>
           <div className="hero-mobile-copy">
             <span className="eyebrow">MEDUNZ CORP. · BOLIVIA</span>
-            <Logo />
+            <div className="mobile-brand"><Logo /></div>
             <div className="slogan">UNA MIRADA QUE TRANSFORMA</div>
-            <p>
-              Un holding que integra empresas en tecnología, salud, naturaleza,
-              educación, gastronomía y patrimonio para generar un impacto positivo y sostenible.
-            </p>
+            <p>Un holding que integra empresas en tecnología, salud, naturaleza, educación, gastronomía y patrimonio para generar un impacto positivo y sostenible.</p>
             <a className="hero-button" href="#grupo">Conoce nuestro grupo <ArrowUpRight size={18} /></a>
           </div>
-
-          <a className="hero-image-hotspot" href="#grupo" aria-label="Conocer nuestro grupo"></a>
         </section>
 
         <section id="grupo" className="intro section-light">
@@ -101,7 +97,7 @@ function App() {
         </section>
 
         <section id="vision" className="vision">
-          <div className="vision-art"><img src={medunzEmblem} alt="" /></div>
+          <div className="vision-art"><img src={corporateEmblem} alt="Emblema de Medunz Corp." /></div>
           <div className="vision-copy">
             <div className="section-kicker">03 · VISIÓN</div>
             <h2>Miramos<br /><em>más allá.</em></h2>

@@ -158,7 +158,7 @@ function App() {
           <div className="section-heading"><h2>Seis caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
           <div className="company-grid">
             {companies.map((company, i) => (
-              <article className={`company-card card-${i+1} ${company.accent === 'catering' ? 'catering-card' : ''}`} key={company.name}>
+              <article className={`company-card card-${i+1} ${company.accent === 'catering' ? 'catering-card' : ''} ${company.accent === 'medriv' ? 'medriv-card' : ''}`} key={company.name}>
                 <div className="card-number">0{i+1}</div>
                 {company.logo && <img className="company-logo" src={company.logo} alt={`${company.name} logo`} />}
                 <div className="card-content">

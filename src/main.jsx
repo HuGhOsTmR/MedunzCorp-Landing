@@ -158,7 +158,7 @@ function App() {
 
         <section id="empresas" className="companies section-dark">
           <div className="section-label">03 / NUESTRO ECOSISTEMA</div>
-          <div className="section-heading"><h2>Cinco caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
+          <div className="section-heading"><h2>Seis caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
           <div className="company-grid">
             {companies.map((company, i) => (
               <article className={`company-card card-${i+1} ${company.accent === 'catering' ? 'catering-card' : ''}`} key={company.name}>

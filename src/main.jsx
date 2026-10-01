@@ -1,6 +1,6 @@
 import React from 'react';
-import { createRoot } from 'react-dom/client';
 import { ArrowDown, ArrowUpRight, Compass, Lightbulb, ShieldCheck, TrendingUp, Globe2 } from 'lucide-react';
+import { createRoot } from 'react-dom/client';
 import './styles.css';
 import logo from './assets/medunz-logo.png';
 import hero from './assets/medunz-hero.png';
@@ -32,9 +32,9 @@ function App() {
           <div className="hero-overlay" />
           <div className="hero-content">
             <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
-            <h1>La dirección<br/><span>importa.</span></h1>
+            <h1>Una mirada<br/><span>que transforma.</span></h1>
             <p className="hero-copy">Estrategia · Innovación · Resultados</p>
-            <p className="quote">“No controlamos el mar, pero sí la dirección.”</p>
+            <p className="quote">Tecnología, visión y propósito para transformar oportunidades en futuro.</p>
             <a href="#grupo" className="hero-button">Conocer nuestro grupo <ArrowDown size={18}/></a>
           </div>
           <div className="hero-bottom"><span>01</span><div className="line"/><span>05</span></div>
@@ -46,7 +46,7 @@ function App() {
             <h2>Una visión.<br/><em>Diferentes industrias.</em></h2>
             <div className="manifesto-copy">
               <p>Medunz Corp. articula y desarrolla empresas con una visión de largo plazo, conectando oportunidades, talento e innovación.</p>
-              <p>Creemos en la diversificación con propósito: diferentes negocios, capacidades complementarias y una misma dirección estratégica.</p>
+              <p>Creemos en la diversificación con propósito: diferentes negocios, capacidades complementarias y una misma visión de transformación.</p>
             </div>
           </div>
           <div className="values">
@@ -55,18 +55,18 @@ function App() {
         </section>
 
         <section id="vision" className="vision section-black">
-          <div className="section-label">02 / DIRECCIÓN</div>
+          <div className="section-label">02 / VISIÓN</div>
           <div className="vision-center">
             <div className="halo" />
             <p className="small-caps">EL FUTURO SE CONSTRUYE</p>
-            <h2>No seguimos<br/><span>el rumbo.</span></h2>
-            <p>Lo definimos.</p>
+            <h2>Miramos<br/><span>más allá.</span></h2>
+            <p>Transformamos lo que vemos.</p>
           </div>
         </section>
 
         <section id="empresas" className="companies section-dark">
           <div className="section-label">03 / NUESTRO ECOSISTEMA</div>
-          <div className="section-heading"><h2>Cinco caminos.<br/><em>Una dirección.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
+          <div className="section-heading"><h2>Cinco caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
           <div className="company-grid">
             {companies.map((company, i) => <article className={`company-card card-${i+1}`} key={company.name}><div className="card-number">0{i+1}</div><div className="card-content"><span>{company.tag}</span><h3>{company.name}</h3><p>{company.text}</p><a href="#contacto">Conocer más <ArrowUpRight size={16}/></a></div></article>)}
           </div>

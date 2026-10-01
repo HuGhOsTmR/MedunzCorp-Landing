@@ -3,8 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
-const medunzBrand = '/medunz-corp-emblem.jpg';
-const medunzCorporateIdentity = '/medunz-corp-identity.svg';
+const medusaEmblem = '/medunz-medusa.svg';
 
 const companies = [
   { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
@@ -93,8 +92,8 @@ function App() {
     oldFavicons.forEach((node) => node.remove());
     const favicon = document.createElement('link');
     favicon.rel = 'icon';
-    favicon.type = 'image/jpeg';
-    favicon.href = medunzBrand;
+    favicon.type = 'image/svg+xml';
+    favicon.href = medusaEmblem;
     favicon.dataset.medunzFavicon = 'true';
     document.head.appendChild(favicon);
     return () => favicon.remove();
@@ -103,7 +102,7 @@ function App() {
   return (
     <div className="site">
       <header className="nav">
-        <a href="#inicio" className="brand"><img src={medunzBrand} alt="Medunz Corp." /></a>
+        <a href="#inicio" className="brand"><img src={medusaEmblem} alt="Medunz Corp. — Medusa" /></a>
         <nav>
           <a href="#grupo">El grupo</a>
           <a href="#vision">Visión</a>
@@ -114,12 +113,20 @@ function App() {
       </header>
 
       <main>
-        <section
-          id="inicio"
-          className="hero"
-          style={{ backgroundImage: `url(${medunzCorporateIdentity})` }}
-          aria-label="Medunz Corp. — Una mirada que transforma"
-        />
+        <section id="inicio" className="hero" aria-label="Medunz Corp. — Una mirada que transforma">
+          <div className="hero-overlay" />
+          <div className="hero-content">
+            <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
+            <h1>Una mirada<br/><span>que transforma.</span></h1>
+            <p className="hero-copy">Estrategia · Innovación · Resultados</p>
+            <p className="quote">Tecnología, salud, naturaleza, educación y bienestar para transformar realidades.</p>
+            <a href="#grupo" className="hero-button">Conocer nuestro grupo <ArrowDown size={18}/></a>
+          </div>
+          <div className="hero-art" aria-hidden="true">
+            <img src={medusaEmblem} alt="" />
+          </div>
+          <div className="hero-bottom"><span>01</span><div className="line"/><span>05</span></div>
+        </section>
 
         <section id="grupo" className="manifesto section-dark">
           <div className="section-label">01 / EL GRUPO</div>

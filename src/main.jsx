@@ -3,51 +3,17 @@ import { createRoot } from 'react-dom/client';
 import { ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
-const medusaEmblem = '/medunz-medusa.svg';
+// Imagen corporativa aprobada de Medunz Corp.
+// Se reutiliza en hero, visión y favicon para evitar referencias a gráficos antiguos.
+const medunzEmblem = '/medunz-corp-emblem.jpg?v=20261001';
 
 const companies = [
-  {
-    name: 'Medunz Pharma',
-    category: 'SALUD · FARMACÉUTICA',
-    text: 'Salud que impulsa vidas.',
-    logo: '/medunz-pharma-brand.jpg',
-    accent: 'pharma',
-  },
-  {
-    name: 'Medunz Jardines',
-    category: 'NATURALEZA · ESPACIOS',
-    text: 'Naturaleza que inspira.',
-    logo: '/medunz-jardines-logo.jpg',
-    accent: 'jardines',
-  },
-  {
-    name: 'HUPI Baby Gym',
-    category: 'FAMILIAS · DESARROLLO',
-    text: 'Infancia que desarrolla.',
-    logo: '/hupi-baby-gym.jpg',
-    accent: 'hupi',
-  },
-  {
-    name: 'Ghost Web & Software Designer',
-    category: 'TECNOLOGÍA · DIGITAL',
-    text: 'Tecnología que construye.',
-    logo: '/ghost-logo.jpg',
-    accent: 'ghost',
-  },
-  {
-    name: 'MEDRIV Bienes Raíces',
-    category: 'PATRIMONIO · INVERSIÓN',
-    text: 'Patrimonio que crece.',
-    logo: '/medriv.svg',
-    accent: 'medriv',
-  },
-  {
-    name: 'M&R Catering',
-    category: 'GASTRONOMÍA · EVENTOS',
-    text: 'Experiencias que conectan.',
-    logo: '/mr-catering.svg',
-    accent: 'catering',
-  },
+  { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
+  { name: 'Medunz Jardines', category: 'NATURALEZA · ESPACIOS', text: 'Naturaleza que inspira.', logo: '/medunz-jardines-logo.jpg', accent: 'jardines' },
+  { name: 'HUPI Baby Gym', category: 'FAMILIAS · DESARROLLO', text: 'Infancia que desarrolla.', logo: '/hupi-baby-gym.jpg', accent: 'hupi' },
+  { name: 'Ghost Web & Software Designer', category: 'TECNOLOGÍA · DIGITAL', text: 'Tecnología que construye.', logo: '/ghost-logo.jpg', accent: 'ghost' },
+  { name: 'MEDRIV Bienes Raíces', category: 'PATRIMONIO · INVERSIÓN', text: 'Patrimonio que crece.', logo: '/medriv.svg', accent: 'medriv' },
+  { name: 'M&R Catering', category: 'GASTRONOMÍA · EVENTOS', text: 'Experiencias que conectan.', logo: '/mr-catering.svg', accent: 'catering' },
 ];
 
 function Logo({ compact = false }) {
@@ -91,11 +57,10 @@ function App() {
             <a className="hero-button" href="#grupo">Conoce nuestro grupo <ArrowUpRight size={18} /></a>
           </div>
 
-          <div className="hero-art" aria-label="Emblema Medunz Corp.">
-            <div className="hero-glow" />
-            <div className="hero-architecture" />
+          <div className="hero-art">
+            <div className="hero-background" aria-hidden="true" />
             <div className="emblem-frame">
-              <img src={medusaEmblem} alt="Isotipo Medunz Corp. con Medusa y serpientes" />
+              <img src={medunzEmblem} alt="Emblema corporativo de Medunz Corp. inspirado en Medusa y sus serpientes" />
             </div>
           </div>
         </section>
@@ -103,26 +68,17 @@ function App() {
         <section id="grupo" className="intro section-light">
           <div className="section-kicker">01 · NUESTRO GRUPO</div>
           <div className="intro-grid">
-            <div>
-              <h2>Seis empresas.<br /><em>Una misma mirada.</em></h2>
-            </div>
+            <div><h2>Seis empresas.<br /><em>Una misma mirada.</em></h2></div>
             <div className="intro-copy">
-              <p>
-                Medunz Corp. es un holding boliviano que reúne seis unidades de negocio con identidades propias y capacidades complementarias.
-              </p>
-              <p>
-                La diversidad de nuestras empresas nos permite transformar oportunidades en proyectos con visión de largo plazo.
-              </p>
+              <p>Medunz Corp. es un holding boliviano que reúne seis unidades de negocio con identidades propias y capacidades complementarias.</p>
+              <p>La diversidad de nuestras empresas nos permite transformar oportunidades en proyectos con visión de largo plazo.</p>
             </div>
           </div>
         </section>
 
         <section id="empresas" className="companies">
           <div className="companies-heading">
-            <div>
-              <div className="section-kicker">02 · NUESTRO ECOSISTEMA</div>
-              <h2>Nuestras<br /><em>empresas.</em></h2>
-            </div>
+            <div><div className="section-kicker">02 · NUESTRO ECOSISTEMA</div><h2>Nuestras<br /><em>empresas.</em></h2></div>
             <p>Seis unidades de negocio que comparten un mismo propósito, cada una con una personalidad propia.</p>
           </div>
 
@@ -130,9 +86,7 @@ function App() {
             {companies.map((company, index) => (
               <article className={`company-card ${company.accent}`} key={company.name}>
                 <span className="card-number">0{index + 1}</span>
-                <div className="company-logo-wrap">
-                  <img src={company.logo} alt={`${company.name} logo`} />
-                </div>
+                <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>
                 <div className="company-card-body">
                   <span className="company-category">{company.category}</span>
                   <h3>{company.name}</h3>
@@ -145,9 +99,7 @@ function App() {
         </section>
 
         <section id="vision" className="vision">
-          <div className="vision-art">
-            <img src={medusaEmblem} alt="" />
-          </div>
+          <div className="vision-art"><img src={medunzEmblem} alt="" /></div>
           <div className="vision-copy">
             <div className="section-kicker">03 · VISIÓN</div>
             <h2>Miramos<br /><em>más allá.</em></h2>
@@ -159,10 +111,7 @@ function App() {
           <div className="section-kicker">04 · CONTACTO</div>
           <div className="contact-grid">
             <h2>Construyamos<br /><em>lo que sigue.</em></h2>
-            <div>
-              <p>Medunz Corp.<br />Bolivia</p>
-              <a className="contact-link" href="mailto:contacto@medunzcorp.com">contacto@medunzcorp.com <ArrowUpRight size={18} /></a>
-            </div>
+            <div><p>Medunz Corp.<br />Bolivia</p><a className="contact-link" href="mailto:contacto@medunzcorp.com">contacto@medunzcorp.com <ArrowUpRight size={18} /></a></div>
           </div>
         </section>
       </main>

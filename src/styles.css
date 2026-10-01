@@ -71,12 +71,11 @@ body {
 }
 
 .brand img {
-  width: 68px;
-  height: 68px;
-
+  width: 54px;
+  height: 54px;
   object-fit: cover;
   border-radius: 50%;
-
+  border: 1px solid rgba(181, 154, 107, .55);
   filter: none;
 }
 
@@ -456,7 +455,7 @@ nav a:hover {
 }
 
 .company-card {
-  min-height: 390px;
+  min-height: 510px;
 
   position: relative;
 
@@ -492,15 +491,65 @@ nav a:hover {
   grid-column: span 2;
 }
 
-.company-logo {
-  position: absolute;
+.company-visual {
+  position: relative;
   z-index: 2;
-  top: 26px;
-  right: 24px;
-  width: 118px;
-  height: 82px;
+  height: 172px;
+  margin: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 10px;
+  background: rgba(255,255,255,.78);
+}
+
+.company-visual img {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
   object-position: center;
+}
+
+.pharma-card .company-visual {
+  background: linear-gradient(135deg, #edf7fb 0%, #ffffff 60%, #e7f0fb 100%);
+}
+
+.pharma-card .company-visual img {
+  object-fit: cover;
+}
+
+.jardines-card .company-visual {
+  background: #eef7df;
+}
+
+.hupi-card .company-visual {
+  background: #fff6fb;
+}
+
+.ghost-card .company-visual {
+  background: #101010;
+}
+
+.ghost-card .company-visual img {
+  object-fit: contain;
+}
+
+.medriv-card .company-visual {
+  background: #fff;
+}
+
+.catering-card .company-visual {
+  background: #fff8f1;
+}
+
+.card-content {
+  position: relative;
+  z-index: 3;
+  left: auto;
+  right: auto;
+  bottom: auto;
+  margin: 0 28px 28px;
 }
 
 .catering-card {
@@ -576,15 +625,7 @@ nav a:hover {
   letter-spacing: 0.2em;
 }
 
-.card-content {
-  position: absolute;
 
-  z-index: 2;
-
-  left: 28px;
-  right: 28px;
-  bottom: 28px;
-}
 
 .card-content > span {
   font-size: 9px;
@@ -867,15 +908,12 @@ footer .footer-brand span {
     grid-column: span 1;
   }
 
-  .company-logo {
-    top: 22px;
-    right: 20px;
-    width: 100px;
-    height: 70px;
+  .company-visual {
+    height: 180px;
   }
 
   .company-card {
-    min-height: 330px;
+    min-height: 450px;
   }
 
   .vision .section-label {

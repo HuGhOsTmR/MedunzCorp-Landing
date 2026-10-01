@@ -1,44 +1,62 @@
-.hero-approved {
-  margin-top: 82px;
-  position: relative;
-  width: 100%;
-  background: #f7f8fa;
-  overflow: hidden;
-  line-height: 0;
+.hero-approved{
+  position:relative;
+  width:100%;
+  background:#f7f8fa;
+  overflow:hidden;
+  line-height:0;
 }
 
-.corporate-hero-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  min-height: 0;
-  object-fit: contain;
+.corporate-hero-image{
+  display:block;
+  width:100%;
+  height:auto;
+  object-fit:contain;
 }
 
-.hero-image-hotspot {
-  position: absolute;
-  left: 6.2%;
-  bottom: 10.5%;
-  width: 19%;
-  height: 16%;
-  display: block;
-  border-radius: 30px;
+.hero-image-hotspot{
+  position:absolute;
+  left:11.5%;
+  bottom:9%;
+  width:20%;
+  height:14%;
+  display:block;
+  border-radius:32px;
+  z-index:4;
 }
 
-@media (max-width: 700px) {
-  .hero-approved {
-    margin-top: 82px;
+.hero-mobile-copy{display:none}
+
+@media(max-width:700px){
+  .hero-approved{
+    min-height:620px;
+    background-image:url('/medunz-corp-hero.webp');
+    background-repeat:no-repeat;
+    background-size:auto 100%;
+    background-position:right center;
+    background-color:#f7f8fa;
+    line-height:normal;
   }
 
-  .corporate-hero-image {
-    width: 100%;
-    height: auto;
+  .corporate-hero-image{display:none}
+  .hero-image-hotspot{display:none}
+
+  .hero-mobile-copy{
+    position:relative;
+    z-index:3;
+    display:flex;
+    min-height:620px;
+    flex-direction:column;
+    justify-content:center;
+    align-items:flex-start;
+    padding:70px 25px 80px;
+    width:100%;
+    background:linear-gradient(90deg,rgba(247,248,250,.98) 0%,rgba(247,248,250,.94) 47%,rgba(247,248,250,.28) 100%);
   }
 
-  .hero-image-hotspot {
-    left: 6%;
-    bottom: 10%;
-    width: 24%;
-    height: 17%;
-  }
+  .hero-mobile-copy>.brand{align-items:flex-start;margin-top:18px}
+  .hero-mobile-copy>.brand .brand-word{font-size:58px}
+  .hero-mobile-copy>.brand .brand-corp{font-size:15px;margin-top:8px}
+  .hero-mobile-copy .slogan{font-size:11px;letter-spacing:.25em;margin-top:25px}
+  .hero-mobile-copy p{max-width:330px;margin:24px 0 28px;color:#33445a;font-size:14px;line-height:1.65}
+  .hero-mobile-copy .hero-button{line-height:1.2}
 }

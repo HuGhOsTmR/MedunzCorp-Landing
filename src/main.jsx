@@ -13,7 +13,7 @@ import medrivLogo from './assets/medriv-logo.svg';
 import cateringLogo from './assets/mr-catering-logo.svg';
 
 const companies = [
-  { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, accent: 'ghost' },
+  { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, image: '/ghost-card.webp', href: 'https://ghost.medunzcorp.com', accent: 'ghost' },
   { name: 'HUPI Baby Gym', text: 'Infancia que desarrolla', logo: hupiLogo, accent: 'hupi' },
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
@@ -89,12 +89,25 @@ function App() {
 
           <div className="company-strip">
             {companies.map((company) => (
-              <article className={`company-item ${company.accent}`} key={company.name}>
-                <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>
-                <h3>{company.name}</h3>
-                <p>{company.text}</p>
-                <a href="#contacto">Conocer <ArrowUpRight size={14} /></a>
-              </article>
+              company.image ? (
+                <a
+                  className={`company-item ${company.accent} company-feature-link`}
+                  key={company.name}
+                  href={company.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visitar ${company.name}`}
+                >
+                  <img className="company-feature-image" src={company.image} alt={`${company.name} — ${company.text}`} />
+                </a>
+              ) : (
+                <article className={`company-item ${company.accent}`} key={company.name}>
+                  <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>
+                  <h3>{company.name}</h3>
+                  <p>{company.text}</p>
+                  <a href="#contacto">Conocer <ArrowUpRight size={14} /></a>
+                </article>
+              )
             ))}
           </div>
         </section>

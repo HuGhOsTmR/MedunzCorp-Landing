@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="900" height="360" viewBox="0 0 900 360" xmlns="http://www.w3.org/2000/svg">
+  <rect width="900" height="360" rx="24" fill="#FFFFFF"/>
+  <g transform="translate(55 28)">
+    <path d="M0 250 V150 L70 75 L140 150 V250" fill="#FFFFFF" stroke="#C5162E" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M70 75 V250" stroke="#C5162E" stroke-width="14"/>
+    <path d="M140 150 L205 95 L270 150 V250" fill="#FFFFFF" stroke="#C5162E" stroke-width="14" stroke-linejoin="round"/>
+    <path d="M205 95 V250" stroke="#C5162E" stroke-width="14"/>
+    <rect x="265" y="42" width="62" height="208" rx="6" fill="#C5162E"/>
+    <rect x="346" y="94" width="62" height="156" rx="6" fill="#C5162E"/>
+    <path d="M435 250 V132 L505 75 L575 132 V250" fill="#FFFFFF" stroke="#C5162E" stroke-width="14" stroke-linejoin="round"/>
+  </g>
+  <text x="55" y="325" font-family="Georgia, serif" font-size="54" font-weight="700" fill="#151515">MED<tspan fill="#C5162E">RIV</tspan></text>
+</svg>

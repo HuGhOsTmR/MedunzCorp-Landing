@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
 const medunzBrand = '/medunz-corp-emblem.jpg';
+const medunzCorporateIdentity = '/medunz-corp-identity.svg';
 
 const companies = [
   { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
@@ -115,7 +116,7 @@ function App() {
       <main>
         <section id="inicio" className="hero">
           <div className="hero-overlay" />
-          <div className="hero-art" aria-hidden="true"><img src={medunzBrand} alt="" /></div>
+          <div className="hero-art hero-corporate-art" aria-hidden="true"><img src={medunzCorporateIdentity} alt="" /></div>
           <div className="hero-content">
             <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
             <h1>Una mirada<br/><span>que transforma.</span></h1>

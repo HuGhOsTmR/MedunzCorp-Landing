@@ -2,16 +2,14 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
-import logo from './assets/medunz-logo.png';
-import hero from './assets/medunz-hero.png';
 
 const companies = [
   { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.' },
   { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.' },
   { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.' },
-  { name: 'RIHU Bienes Raíces', tag: 'Inversión · Inmobiliario', text: 'Una visión de oportunidades inmobiliarias, inversión y desarrollo.' },
+  { name: 'MEDRIV Bienes Raíces', tag: 'Inversión · Patrimonio', text: 'Espacios, oportunidades y patrimonio para construir valor a largo plazo.', logo: '/medriv.svg', accent: 'medriv' },
   { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.' },
-  { name: 'M&R Catering', tag: 'Gastronomía · Eventos', text: 'Catering y experiencias gastronómicas pensadas para compartir, celebrar y sentirse como en casa.', logo: '/mr-catering.svg', accent: 'catering' }
+  { name: 'M&R Catering', tag: 'Gastronomía · Eventos', text: 'Catering y experiencias gastronómicas para celebrar, compartir y crear momentos memorables.', logo: '/mr-catering.svg', accent: 'catering' }
 ];
 
 const valueItems = [
@@ -90,21 +88,19 @@ function App() {
   React.useEffect(() => {
     const oldFavicons = document.querySelectorAll('link[data-medunz-favicon="true"]');
     oldFavicons.forEach((node) => node.remove());
-
     const favicon = document.createElement('link');
     favicon.rel = 'icon';
-    favicon.type = 'image/png';
-    favicon.href = logo;
+    favicon.type = 'image/svg+xml';
+    favicon.href = '/medunz-medusa.svg';
     favicon.dataset.medunzFavicon = 'true';
     document.head.appendChild(favicon);
-
     return () => favicon.remove();
   }, []);
 
   return (
     <div className="site">
       <header className="nav">
-        <a href="#inicio" className="brand"><img src={logo} alt="Medunz Corp." /></a>
+        <a href="#inicio" className="brand"><img src="/medunz-medusa.svg" alt="Medunz Corp. - Medusa" /></a>
         <nav>
           <a href="#grupo">El grupo</a>
           <a href="#vision">Visión</a>
@@ -115,8 +111,9 @@ function App() {
       </header>
 
       <main>
-        <section id="inicio" className="hero" style={{ backgroundImage: `url(${hero})` }}>
+        <section id="inicio" className="hero">
           <div className="hero-overlay" />
+          <div className="hero-art" aria-hidden="true"><img src="/medunz-medusa.svg" alt="" /></div>
           <div className="hero-content">
             <div className="eyebrow">MEDUNZ CORP. · BOLIVIA</div>
             <h1>Una mirada<br/><span>que transforma.</span></h1>
@@ -176,7 +173,7 @@ function App() {
         </section>
 
         <section className="closing section-black">
-          <div className="closing-art" style={{ backgroundImage: `url(${hero})` }} />
+          <div className="closing-art"><img src="/medunz-medusa.svg" alt="" /></div>
           <div className="closing-overlay" />
           <div className="closing-content"><span className="small-caps">MEDUNZ CORP.</span><h2>El siguiente<br/><em>capítulo.</em></h2><p>Estamos construyendo nuevas oportunidades.</p><a href="#contacto" className="hero-button">Hablar con nosotros <ArrowUpRight size={18}/></a></div>
         </section>

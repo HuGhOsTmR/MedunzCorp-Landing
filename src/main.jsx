@@ -10,7 +10,8 @@ const companies = [
   { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.' },
   { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.' },
   { name: 'RIHU Bienes Raíces', tag: 'Inversión · Inmobiliario', text: 'Una visión de oportunidades inmobiliarias, inversión y desarrollo.' },
-  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.' }
+  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.' },
+  { name: 'M&R Catering', tag: 'Gastronomía · Eventos', text: 'Catering y experiencias gastronómicas pensadas para compartir, celebrar y sentirse como en casa.', logo: '/mr-catering.svg', accent: 'catering' }
 ];
 
 const valueItems = [
@@ -159,7 +160,18 @@ function App() {
           <div className="section-label">03 / NUESTRO ECOSISTEMA</div>
           <div className="section-heading"><h2>Cinco caminos.<br/><em>Una visión.</em></h2><p>Conoce las empresas que forman parte del ecosistema Medunz Corp.</p></div>
           <div className="company-grid">
-            {companies.map((company, i) => <article className={`company-card card-${i+1}`} key={company.name}><div className="card-number">0{i+1}</div><div className="card-content"><span>{company.tag}</span><h3>{company.name}</h3><p>{company.text}</p><a href="#contacto">Conocer más <ArrowUpRight size={16}/></a></div></article>)}
+            {companies.map((company, i) => (
+              <article className={`company-card card-${i+1} ${company.accent === 'catering' ? 'catering-card' : ''}`} key={company.name}>
+                <div className="card-number">0{i+1}</div>
+                {company.logo && <img className="company-logo" src={company.logo} alt={`${company.name} logo`} />}
+                <div className="card-content">
+                  <span>{company.tag}</span>
+                  <h3>{company.name}</h3>
+                  <p>{company.text}</p>
+                  <a href="#contacto">Conocer más <ArrowUpRight size={16}/></a>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
 

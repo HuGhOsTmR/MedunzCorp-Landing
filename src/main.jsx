@@ -4,11 +4,11 @@ import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
 
 const companies = [
-  { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.' },
-  { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.' },
-  { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.' },
+  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.', accent: 'pharma' },
+  { name: 'Medunz Jardines', tag: 'Espacios · Naturaleza', text: 'Una unidad orientada a la creación y desarrollo de espacios con identidad propia.', accent: 'jardines' },
+  { name: 'HUPI Baby Gym', tag: 'Familias · Desarrollo', text: 'Experiencias y propuestas centradas en el desarrollo infantil y las familias.', accent: 'hupi' },
+  { name: 'Ghost Web & Software Designer', tag: 'Tecnología · Digital', text: 'Diseño, software y soluciones digitales para transformar ideas en productos.', accent: 'ghost' },
   { name: 'MEDRIV Bienes Raíces', tag: 'Inversión · Patrimonio', text: 'Espacios, oportunidades y patrimonio para construir valor a largo plazo.', logo: '/medriv.svg', accent: 'medriv' },
-  { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.' },
   { name: 'M&R Catering', tag: 'Gastronomía · Eventos', text: 'Catering y experiencias gastronómicas para celebrar, compartir y crear momentos memorables.', logo: '/mr-catering.svg', accent: 'catering' }
 ];
 

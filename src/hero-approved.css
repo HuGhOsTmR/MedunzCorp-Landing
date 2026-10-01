@@ -1,0 +1,44 @@
+.hero-approved {
+  margin-top: 82px;
+  position: relative;
+  width: 100%;
+  background: #f7f8fa;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.corporate-hero-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 0;
+  object-fit: contain;
+}
+
+.hero-image-hotspot {
+  position: absolute;
+  left: 6.2%;
+  bottom: 10.5%;
+  width: 19%;
+  height: 16%;
+  display: block;
+  border-radius: 30px;
+}
+
+@media (max-width: 700px) {
+  .hero-approved {
+    margin-top: 82px;
+  }
+
+  .corporate-hero-image {
+    width: 100%;
+    height: auto;
+  }
+
+  .hero-image-hotspot {
+    left: 6%;
+    bottom: 10%;
+    width: 24%;
+    height: 17%;
+  }
+}

@@ -1,11 +1,10 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import './styles.css';
-import './hero-approved.css';
 
-import corporateHero from './assets/medunz-hero.png';
-import corporateEmblem from './assets/medunz-logo.png';
+const corporateHero = '/medunz-corp-hero.webp';
+
 import pharmaLogo from './assets/medunz-pharma-logo.svg';
 import jardinesLogo from './assets/medunz-jardines-logo.svg';
 import hupiLogo from './assets/hupi-baby-gym-logo.svg';
@@ -14,17 +13,17 @@ import medrivLogo from './assets/medriv-logo.svg';
 import cateringLogo from './assets/mr-catering-logo.svg';
 
 const companies = [
-  { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: pharmaLogo, accent: 'pharma' },
-  { name: 'Medunz Jardines', category: 'NATURALEZA · ESPACIOS', text: 'Naturaleza que inspira.', logo: jardinesLogo, accent: 'jardines' },
-  { name: 'HUPI Baby Gym', category: 'FAMILIAS · DESARROLLO', text: 'Infancia que desarrolla.', logo: hupiLogo, accent: 'hupi' },
-  { name: 'Ghost Web & Software Designer', category: 'TECNOLOGÍA · DIGITAL', text: 'Tecnología que construye.', logo: ghostLogo, accent: 'ghost' },
-  { name: 'MEDRIV Bienes Raíces', category: 'PATRIMONIO · INVERSIÓN', text: 'Patrimonio que crece.', logo: medrivLogo, accent: 'medriv' },
-  { name: 'M&R Catering', category: 'GASTRONOMÍA · EVENTOS', text: 'Experiencias que conectan.', logo: cateringLogo, accent: 'catering' },
+  { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, accent: 'pharma' },
+  { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
+  { name: 'HUPI Baby Gym', text: 'Infancia que desarrolla', logo: hupiLogo, accent: 'hupi' },
+  { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, accent: 'ghost' },
+  { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
+  { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, accent: 'catering' },
 ];
 
-function Logo({ compact = false }) {
+function Logo() {
   return (
-    <a className={`brand ${compact ? 'brand-compact' : ''}`} href="#inicio" aria-label="Medunz Corp. inicio">
+    <a className="brand" href="#inicio" aria-label="Medunz Corp. inicio">
       <span className="brand-word">MED<span>U</span>NZ</span>
       <span className="brand-corp">CORP.</span>
     </a>
@@ -32,34 +31,43 @@ function Logo({ compact = false }) {
 }
 
 function App() {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+
   React.useEffect(() => {
     document.title = 'Medunz Corp. | Una mirada que transforma';
   }, []);
 
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <div className="site">
       <header className="nav">
-        <Logo compact />
-        <nav aria-label="Navegación principal">
-          <a href="#inicio">Inicio</a>
-          <a href="#grupo">Nuestro grupo</a>
-          <a href="#empresas">Nuestras empresas</a>
-          <a href="#vision">Visión</a>
-          <a href="#contacto">Contacto</a>
+        <Logo />
+        <nav className={menuOpen ? 'nav-links open' : 'nav-links'} aria-label="Navegación principal">
+          <a href="#inicio" onClick={closeMenu}>Inicio</a>
+          <a href="#grupo" onClick={closeMenu}>Nuestro grupo</a>
+          <a href="#empresas" onClick={closeMenu}>Nuestras empresas</a>
+          <a href="#vision" onClick={closeMenu}>Visión</a>
+          <a href="#contacto" onClick={closeMenu}>Contacto</a>
         </nav>
         <a className="nav-cta" href="#contacto">Contáctanos <ArrowUpRight size={15} /></a>
+        <button className="menu-toggle" type="button" aria-label={menuOpen ? 'Cerrar menú' : 'Abrir menú'} aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
       </header>
 
       <main>
-        <section id="inicio" className="hero-approved" aria-label="Medunz Corp. — Una mirada que transforma">
-          <img src={corporateHero} className="corporate-hero-image" alt="Medunz Corp. — Una mirada que transforma" />
-          <a className="hero-image-hotspot" href="#grupo" aria-label="Conocer nuestro grupo"></a>
-          <div className="hero-mobile-copy">
+        <section id="inicio" className="hero" aria-label="Medunz Corp. — Una mirada que transforma">
+          <div className="hero-copy">
             <span className="eyebrow">MEDUNZ CORP. · BOLIVIA</span>
-            <div className="mobile-brand"><Logo /></div>
+            <h1>MED<span>U</span>NZ <small>CORP.</small></h1>
+            <div className="hero-rule" />
             <div className="slogan">UNA MIRADA QUE TRANSFORMA</div>
             <p>Un holding que integra empresas en tecnología, salud, naturaleza, educación, gastronomía y patrimonio para generar un impacto positivo y sostenible.</p>
             <a className="hero-button" href="#grupo">Conoce nuestro grupo <ArrowUpRight size={18} /></a>
+          </div>
+          <div className="hero-visual">
+            <img src={corporateHero} alt="Escultura contemporánea inspirada en Medusa con serpientes doradas" />
           </div>
         </section>
 
@@ -76,32 +84,31 @@ function App() {
 
         <section id="empresas" className="companies">
           <div className="companies-heading">
-            <div><div className="section-kicker">02 · NUESTRO ECOSISTEMA</div><h2>Nuestras<br /><em>empresas.</em></h2></div>
-            <p>Seis unidades de negocio que comparten un mismo propósito, cada una con una personalidad propia.</p>
+            <div>
+              <div className="section-kicker">02 · NUESTRAS EMPRESAS</div>
+              <h2>Nuestro<br /><em>ecosistema.</em></h2>
+            </div>
+            <p>Seis unidades de negocio que comparten un mismo propósito, cada una con una personalidad y especialidad propia.</p>
           </div>
 
-          <div className="company-grid">
-            {companies.map((company, index) => (
-              <article className={`company-card ${company.accent}`} key={company.name}>
-                <span className="card-number">0{index + 1}</span>
+          <div className="company-strip">
+            {companies.map((company) => (
+              <article className={`company-item ${company.accent}`} key={company.name}>
                 <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>
-                <div className="company-card-body">
-                  <span className="company-category">{company.category}</span>
-                  <h3>{company.name}</h3>
-                  <p>{company.text}</p>
-                  <a href="#contacto">Conocer <ArrowUpRight size={15} /></a>
-                </div>
+                <h3>{company.name}</h3>
+                <p>{company.text}</p>
+                <a href="#contacto">Conocer <ArrowUpRight size={14} /></a>
               </article>
             ))}
           </div>
         </section>
 
         <section id="vision" className="vision">
-          <div className="vision-art"><img src={corporateEmblem} alt="Emblema de Medunz Corp." /></div>
+          <div className="vision-mark" aria-hidden="true">M</div>
           <div className="vision-copy">
             <div className="section-kicker">03 · VISIÓN</div>
-            <h2>Miramos<br /><em>más allá.</em></h2>
-            <p>Una mirada que transforma ideas, oportunidades y realidades.</p>
+            <h2>Una mirada<br /><em>que transforma.</em></h2>
+            <p>Integramos capacidades distintas para crear empresas, experiencias y proyectos con propósito, visión de largo plazo y capacidad de transformación.</p>
           </div>
         </section>
 
@@ -115,7 +122,7 @@ function App() {
       </main>
 
       <footer>
-        <Logo compact />
+        <Logo />
         <span>UNA MIRADA QUE TRANSFORMA</span>
         <span>© {new Date().getFullYear()} Medunz Corp.</span>
       </footer>

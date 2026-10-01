@@ -2,10 +2,11 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowUpRight } from 'lucide-react';
 import './styles.css';
+import './hero-approved.css';
 
-// Recurso gráfico corporativo aprobado: isotipo Medunz Corp. en SVG.
-// Se usa directamente para evitar el JPG anterior que estaba renderizando el recurso incorrecto.
-const medunzEmblem = '/medunz-medusa.svg?v=20261001';
+// Imagen corporativa aprobada para la portada de Medunz Corp.
+const corporateHero = '/medunz-corp-hero.webp';
+const medunzEmblem = '/medunz-medusa.svg';
 
 const companies = [
   { name: 'Medunz Pharma', category: 'SALUD · FARMACÉUTICA', text: 'Salud que impulsa vidas.', logo: '/medunz-pharma-brand.jpg', accent: 'pharma' },
@@ -45,24 +46,25 @@ function App() {
       </header>
 
       <main>
-        <section id="inicio" className="hero">
-          <div className="hero-copy">
+        <section id="inicio" className="hero-approved" aria-label="Medunz Corp. — Una mirada que transforma">
+          <img
+            src={corporateHero}
+            className="corporate-hero-image"
+            alt="Medunz Corp. — Una mirada que transforma"
+          />
+
+          <div className="hero-mobile-copy">
             <span className="eyebrow">MEDUNZ CORP. · BOLIVIA</span>
             <Logo />
             <div className="slogan">UNA MIRADA QUE TRANSFORMA</div>
-            <p className="hero-description">
+            <p>
               Un holding que integra empresas en tecnología, salud, naturaleza,
               educación, gastronomía y patrimonio para generar un impacto positivo y sostenible.
             </p>
             <a className="hero-button" href="#grupo">Conoce nuestro grupo <ArrowUpRight size={18} /></a>
           </div>
 
-          <div className="hero-art">
-            <div className="hero-background" aria-hidden="true" />
-            <div className="emblem-frame">
-              <img src={medunzEmblem} alt="Isotipo corporativo de Medunz Corp., Medusa estilizada con serpientes doradas" />
-            </div>
-          </div>
+          <a className="hero-image-hotspot" href="#grupo" aria-label="Conocer nuestro grupo"></a>
         </section>
 
         <section id="grupo" className="intro section-light">

@@ -165,7 +165,7 @@ export default function GhostLanding() {
           <img src={ghostLogo} alt="GHOST" />
         </div>
         <div>WEB · SOFTWARE · DIGITAL</div>
-        <div>© {new Date().getFullYear()} GHOST / MEDUNZ CORP.</div>
+        <div>© {new Date().getFullYear()} GHOST / MEDUNZ CORP. · Created by Ghost W&SD</div>
       </footer>
     </div>
   );

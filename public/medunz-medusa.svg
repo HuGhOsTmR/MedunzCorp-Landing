@@ -1,32 +1,96 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="800" height="800" viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" role="img" aria-labelledby="t d">
+  <title id="t">Medusa — Medunz Corp.</title>
+  <desc id="d">Emblema clásico y elegante de Medusa en azul marino, marfil y dorado.</desc>
   <defs>
-    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#D8BE7A"/>
-      <stop offset="0.5" stop-color="#B59A6B"/>
-      <stop offset="1" stop-color="#E5D29B"/>
+    <radialGradient id="bg" cx="50%" cy="42%" r="62%">
+      <stop offset="0" stop-color="#203a5d"/>
+      <stop offset=".72" stop-color="#102746"/>
+      <stop offset="1" stop-color="#0a1a31"/>
+    </radialGradient>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#8e7040"/>
+      <stop offset=".35" stop-color="#e1c98b"/>
+      <stop offset=".62" stop-color="#b79657"/>
+      <stop offset="1" stop-color="#f0dca6"/>
     </linearGradient>
+    <linearGradient id="skin" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffdf7"/>
+      <stop offset=".55" stop-color="#f2eee5"/>
+      <stop offset="1" stop-color="#d6d0c4"/>
+    </linearGradient>
+    <filter id="shadow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#061223" flood-opacity=".42"/>
+    </filter>
   </defs>
-  <circle cx="400" cy="400" r="365" fill="#0F1D33" stroke="url(#gold)" stroke-width="12"/>
-  <circle cx="400" cy="400" r="332" fill="none" stroke="#D8BE7A" stroke-width="2" opacity=".75"/>
-  <!-- snakes -->
-  <g fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round">
-    <path d="M230 205 C165 125 84 174 126 246 C149 286 201 274 215 232 C231 183 300 172 330 223"/>
-    <path d="M570 205 C635 125 716 174 674 246 C651 286 599 274 585 232 C569 183 500 172 470 223"/>
-    <path d="M195 298 C115 270 77 336 132 371 C173 397 220 368 219 329 C218 286 264 256 314 278"/>
-    <path d="M605 298 C685 270 723 336 668 371 C627 397 580 368 581 329 C582 286 536 256 486 278"/>
-    <path d="M225 492 C135 515 145 610 226 586 C272 572 276 519 242 495 C204 468 222 408 272 382"/>
-    <path d="M575 492 C665 515 655 610 574 586 C528 572 524 519 558 495 C596 468 578 408 528 382"/>
+
+  <circle cx="400" cy="400" r="350" fill="url(#bg)" stroke="url(#metal)" stroke-width="14" filter="url(#shadow)"/>
+  <circle cx="400" cy="400" r="319" fill="none" stroke="#d4b874" stroke-width="2" opacity=".9"/>
+  <circle cx="400" cy="400" r="304" fill="none" stroke="#6d859f" stroke-width="1" opacity=".45"/>
+
+  <!-- Serpents: flowing, symmetrical framing -->
+  <g fill="none" stroke="url(#metal)" stroke-width="25" stroke-linecap="round">
+    <path d="M245 221 C145 150 111 79 171 61 C218 47 247 96 222 126 C197 155 150 139 145 111"/>
+    <path d="M555 221 C655 150 689 79 629 61 C582 47 553 96 578 126 C603 155 650 139 655 111"/>
+    <path d="M173 305 C91 282 62 332 96 369 C130 405 190 379 191 335 C192 291 238 265 278 280"/>
+    <path d="M627 305 C709 282 738 332 704 369 C670 405 610 379 609 335 C608 291 562 265 522 280"/>
+    <path d="M205 471 C123 493 124 557 176 573 C222 587 252 546 226 513 C202 482 217 442 262 415"/>
+    <path d="M595 471 C677 493 676 557 624 573 C578 587 548 546 574 513 C598 482 583 442 538 415"/>
+    <path d="M292 113 C262 64 278 37 308 41 C340 45 350 78 330 105"/>
+    <path d="M508 113 C538 64 522 37 492 41 C460 45 450 78 470 105"/>
   </g>
-  <!-- face -->
-  <path d="M315 235 C330 206 365 188 400 188 C435 188 470 206 485 235 L475 310 C468 374 458 444 400 505 C342 444 332 374 325 310 Z"
-        fill="#F5F3EE" stroke="url(#gold)" stroke-width="8"/>
-  <path d="M334 286 C355 267 379 266 400 278 C421 266 445 267 466 286"
-        fill="none" stroke="#0F1D33" stroke-width="8" stroke-linecap="round"/>
-  <ellipse cx="365" cy="305" rx="19" ry="12" fill="#0F1D33"/>
-  <ellipse cx="435" cy="305" rx="19" ry="12" fill="#0F1D33"/>
-  <path d="M388 318 C382 346 382 368 400 383 C418 368 418 346 412 318"
-        fill="none" stroke="#0F1D33" stroke-width="7" stroke-linecap="round"/>
-  <path d="M365 411 C387 425 413 425 435 411" fill="none" stroke="#0F1D33" stroke-width="8" stroke-linecap="round"/>
-  <path d="M350 442 C377 466 423 466 450 442" fill="none" stroke="#D8BE7A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- Snake heads -->
+  <g fill="#f3ead7" stroke="#9f7f46" stroke-width="5">
+    <path d="M155 61 C139 43 137 20 154 12 C174 3 194 17 195 37 C194 51 177 64 155 61Z"/>
+    <path d="M645 61 C661 43 663 20 646 12 C626 3 606 17 605 37 C606 51 623 64 645 61Z"/>
+    <path d="M96 369 C74 369 58 353 61 334 C64 314 83 304 101 313 C114 320 119 341 110 356Z"/>
+    <path d="M704 369 C726 369 742 353 739 334 C736 314 717 304 699 313 C686 320 681 341 690 356Z"/>
+  </g>
+
+  <!-- Hair mass -->
+  <path d="M264 216 C286 155 347 124 400 124 C453 124 514 155 536 216
+           C558 276 544 334 515 383
+           C498 412 485 438 476 474
+           C444 501 356 501 324 474
+           C315 438 302 412 285 383
+           C256 334 242 276 264 216Z"
+        fill="#132d4f" stroke="#d7bb78" stroke-width="8"/>
+
+  <!-- Medusa face -->
+  <path d="M315 217
+           C334 179 365 160 400 160
+           C435 160 466 179 485 217
+           C493 259 486 319 472 371
+           C459 420 436 456 400 482
+           C364 456 341 420 328 371
+           C314 319 307 259 315 217Z"
+        fill="url(#skin)" stroke="#d7bb78" stroke-width="6"/>
+
+  <!-- Brows and eyes -->
+  <path d="M337 263 C356 246 378 247 395 260" fill="none" stroke="#152943" stroke-width="10" stroke-linecap="round"/>
+  <path d="M405 260 C422 247 444 246 463 263" fill="none" stroke="#152943" stroke-width="10" stroke-linecap="round"/>
+  <path d="M340 286 C356 272 376 273 389 286 C375 301 354 301 340 286Z" fill="#ffffff" stroke="#152943" stroke-width="5"/>
+  <path d="M411 286 C424 273 444 272 460 286 C446 301 425 301 411 286Z" fill="#ffffff" stroke="#152943" stroke-width="5"/>
+  <ellipse cx="367" cy="287" rx="7" ry="8" fill="#152943"/>
+  <ellipse cx="433" cy="287" rx="7" ry="8" fill="#152943"/>
+  <circle cx="369" cy="284" r="2" fill="#d5b76f"/>
+  <circle cx="431" cy="284" r="2" fill="#d5b76f"/>
+
+  <!-- Nose -->
+  <path d="M400 286 C393 318 389 348 399 361 C405 369 414 364 416 355" fill="none" stroke="#152943" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- Lips -->
+  <path d="M365 395 C377 385 391 384 400 390 C409 384 423 385 435 395
+           C423 409 377 409 365 395Z" fill="#b6a898" stroke="#152943" stroke-width="4"/>
+  <path d="M371 430 C388 442 412 442 429 430" fill="none" stroke="#a98a57" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- forehead jewel -->
+  <path d="M400 189 l9 14 -9 14 -9-14Z" fill="#d7bb78"/>
+
+  <!-- Small scales / decorative marks -->
+  <g fill="#d8bd79" opacity=".75">
+    <circle cx="290" cy="232" r="4"/><circle cx="275" cy="258" r="3"/>
+    <circle cx="510" cy="232" r="4"/><circle cx="525" cy="258" r="3"/>
+    <circle cx="292" cy="400" r="3"/><circle cx="508" cy="400" r="3"/>
+  </g>
 </svg>

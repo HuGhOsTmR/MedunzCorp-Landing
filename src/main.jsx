@@ -1,6 +1,6 @@
 import React from 'react';
-import { ArrowDown, ArrowUpRight, Compass, Lightbulb, ShieldCheck, TrendingUp, Globe2 } from 'lucide-react';
 import { createRoot } from 'react-dom/client';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import './styles.css';
 import logo from './assets/medunz-logo.png';
 import hero from './assets/medunz-hero.png';
@@ -13,7 +13,93 @@ const companies = [
   { name: 'Medunz Pharma', tag: 'Farmacéutica · Gestión', text: 'Soluciones y capacidades vinculadas al sector farmacéutico y su cadena de valor.' }
 ];
 
+const valueItems = [
+  ['strategy', 'Estrategia'],
+  ['innovation', 'Innovación'],
+  ['growth', 'Crecimiento'],
+  ['trust', 'Confianza'],
+  ['global', 'Visión global']
+];
+
+function MedusaIcon({ type, size = 42 }) {
+  const common = {
+    width: size,
+    height: size,
+    viewBox: '0 0 64 64',
+    fill: 'none',
+    xmlns: 'http://www.w3.org/2000/svg',
+    'aria-hidden': true
+  };
+
+  if (type === 'strategy') {
+    return (
+      <svg {...common}>
+        <circle cx="32" cy="32" r="25" stroke="currentColor" strokeWidth="1.5" opacity=".35"/>
+        <circle cx="32" cy="32" r="13" stroke="currentColor" strokeWidth="2"/>
+        <path d="M32 8v10M32 46v10M8 32h10M46 32h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+        <path d="M25 38c3-8 7-12 14-16-2 7-6 12-14 16Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M30 38c1-3 3-5 6-7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+
+  if (type === 'innovation') {
+    return (
+      <svg {...common}>
+        <circle cx="32" cy="32" r="25" stroke="currentColor" strokeWidth="1.5" opacity=".35"/>
+        <path d="M22 29c0-6 4-11 10-11s10 5 10 11c0 4-2 7-5 9-2 1-3 3-3 5h-4c0-2-1-4-3-5-3-2-5-5-5-9Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="M28 47h8M28.5 51h7M18 19c-2-2-3-4-3-6M46 19c2-2 3-4 3-6M32 12v-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+      </svg>
+    );
+  }
+
+  if (type === 'growth') {
+    return (
+      <svg {...common}>
+        <circle cx="32" cy="32" r="25" stroke="currentColor" strokeWidth="1.5" opacity=".35"/>
+        <path d="M17 43h30M20 39V27M30 39V21M40 39V16" stroke="currentColor" strokeWidth="3" strokeLinecap="round"/>
+        <path d="M18 20c6 2 11 0 15-5 4 4 8 5 14 2" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+        <path d="m43 15 4 2-2 4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+      </svg>
+    );
+  }
+
+  if (type === 'trust') {
+    return (
+      <svg {...common}>
+        <path d="M32 7 49 13v14c0 12-7 23-17 29C22 50 15 39 15 27V13l17-6Z" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+        <path d="m22 31 6 6 14-15" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M24 13c3 2 6 3 8 3s5-1 8-3" stroke="currentColor" strokeWidth="1.5" opacity=".7"/>
+      </svg>
+    );
+  }
+
+  return (
+    <svg {...common}>
+      <circle cx="32" cy="32" r="25" stroke="currentColor" strokeWidth="1.5" opacity=".35"/>
+      <ellipse cx="32" cy="32" rx="10" ry="22" stroke="currentColor" strokeWidth="1.5"/>
+      <path d="M10 32h44M13 21h38M13 43h38" stroke="currentColor" strokeWidth="1.25" opacity=".8"/>
+      <path d="M18 17c5 5 10 7 14 7s9-2 14-7M18 47c5-5 10-7 14-7s9 2 14 7" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+      <circle cx="32" cy="32" r="3" fill="currentColor"/>
+    </svg>
+  );
+}
+
 function App() {
+  React.useEffect(() => {
+    const oldFavicons = document.querySelectorAll('link[data-medunz-favicon="true"]');
+    oldFavicons.forEach((node) => node.remove());
+
+    const favicon = document.createElement('link');
+    favicon.rel = 'icon';
+    favicon.type = 'image/png';
+    favicon.href = logo;
+    favicon.dataset.medunzFavicon = 'true';
+    document.head.appendChild(favicon);
+
+    return () => favicon.remove();
+  }, []);
+
   return (
     <div className="site">
       <header className="nav">
@@ -50,7 +136,12 @@ function App() {
             </div>
           </div>
           <div className="values">
-            {[[Compass,'Estrategia'],[Lightbulb,'Innovación'],[TrendingUp,'Crecimiento'],[ShieldCheck,'Confianza'],[Globe2,'Visión global']].map(([Icon,label]) => <div className="value" key={label}><Icon size={25}/><span>{label}</span></div>)}
+            {valueItems.map(([type, label]) => (
+              <div className="value" key={label}>
+                <MedusaIcon type={type} size={42}/>
+                <span>{label}</span>
+              </div>
+            ))}
           </div>
         </section>
 

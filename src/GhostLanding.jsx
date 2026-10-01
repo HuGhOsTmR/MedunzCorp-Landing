@@ -1,8 +1,7 @@
 import React from 'react';
+import ghostLogo from './assets/ghost-logo.svg';
 import { ArrowRight, ArrowUpRight, Check, Code2, Layers3, Sparkles, Workflow } from 'lucide-react';
 import './ghost.css';
-
-const ghostLogo = '/src/assets/ghost-logo.svg';
 
 export default function GhostLanding() {
   React.useEffect(() => {
@@ -12,7 +11,7 @@ export default function GhostLanding() {
       link.href = ghostLogo;
       link.type = 'image/svg+xml';
     });
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo(0, 0);
   }, []);
 
   return (

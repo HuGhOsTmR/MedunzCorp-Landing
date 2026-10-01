@@ -124,43 +124,44 @@ nav a:hover {
 
 .hero {
   min-height: 100vh;
-
-  background-size: cover;
-  background-position: center;
-
+  background:
+    radial-gradient(circle at 82% 38%, rgba(181, 154, 107, 0.12), transparent 28%),
+    linear-gradient(135deg, #ffffff 0%, #f7f8fa 58%, #ffffff 100%);
   position: relative;
-
   display: flex;
   align-items: center;
-
   padding: 0 9vw;
+  isolation: isolate;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-
-  /*
-   * Mantiene la imagen visible pero crea una zona clara
-   * para que el texto tenga buena lectura.
-   */
   background:
-    linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.96) 0%,
-      rgba(255, 255, 255, 0.88) 42%,
-      rgba(255, 255, 255, 0.35) 75%,
-      rgba(255, 255, 255, 0.08) 100%
-    ),
-    linear-gradient(
-      0deg,
-      rgba(255, 255, 255, 0.25) 0%,
-      transparent 40%
-    );
+    linear-gradient(90deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.90) 52%, rgba(255,255,255,.30) 100%);
+  z-index: -1;
+}
+
+.hero-art {
+  position: absolute;
+  z-index: 0;
+  right: 4vw;
+  top: 50%;
+  width: min(48vw, 620px);
+  transform: translateY(-50%);
+  opacity: 0.98;
+  filter: drop-shadow(0 25px 45px rgba(15, 29, 51, 0.12));
+}
+
+.hero-art img {
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
 .hero-content {
   position: relative;
+  z-index: 2;
   max-width: 720px;
   padding-top: 7vh;
 }
@@ -508,6 +509,21 @@ nav a:hover {
   border-color: rgba(15, 76, 129, 0.18);
 }
 
+.medriv-card {
+  background:
+    linear-gradient(145deg, #ffffff 0%, #fff8f8 60%, #fff0f2 100%);
+  border-color: rgba(197, 22, 46, 0.18);
+}
+
+.medriv-card .card-content > span,
+.medriv-card .card-content a:hover {
+  color: #C5162E;
+}
+
+.medriv-card .card-content h3 {
+  color: #151515;
+}
+
 .catering-card:before {
   content: '';
   position: absolute;
@@ -645,15 +661,18 @@ nav a:hover {
 
 .closing-art {
   position: absolute;
-
   inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  overflow: hidden;
+  opacity: 0.08;
+}
 
-  background-size: cover;
-  background-position: center;
-
-  filter: grayscale(1);
-
-  opacity: 0.12;
+.closing-art img {
+  width: min(55vw, 650px);
+  margin-right: 6vw;
+  filter: saturate(.8);
 }
 
 .closing-overlay {
@@ -790,8 +809,14 @@ footer .footer-brand span {
 
   .hero {
     padding: 0 7vw;
+    min-height: 92vh;
+  }
 
-    background-position: 62% center;
+  .hero-art {
+    width: 72vw;
+    right: -12vw;
+    top: 58%;
+    opacity: .16;
   }
 
   .hero-overlay {

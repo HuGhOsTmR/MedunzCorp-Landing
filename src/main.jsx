@@ -58,17 +58,13 @@ function App() {
 
       <main>
         <section id="inicio" className="hero" aria-label="Medunz Corp. — Una mirada que transforma">
-          <div className="hero-copy">
-            <span className="eyebrow">MEDUNZ CORP. · BOLIVIA</span>
-            <h1>MED<span>U</span>NZ <small>CORP.</small></h1>
-            <div className="hero-rule" />
-            <div className="slogan">UNA MIRADA QUE TRANSFORMA</div>
-            <p>Un holding que integra empresas en tecnología, salud, naturaleza, educación, gastronomía y patrimonio para generar un impacto positivo y sostenible.</p>
-            <a className="hero-button" href="#grupo">Conoce nuestro grupo <ArrowUpRight size={18} /></a>
-          </div>
-          <div className="hero-visual">
-            <img src={corporateHero} alt="Escultura contemporánea inspirada en Medusa con serpientes doradas" />
-          </div>
+          <a className="hero-link" href="#empresas" aria-label="Conocer nuestro grupo">
+            <img
+              className="hero-image"
+              src={corporateHero}
+              alt="Medunz Corp. — Una mirada que transforma"
+            />
+          </a>
         </section>
 
         <section id="grupo" className="intro section-light">

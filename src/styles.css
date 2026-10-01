@@ -483,17 +483,52 @@ nav a:hover {
 }
 
 .card-1,
-.card-2 {
-  grid-column: span 2;
-}
-
-.card-3 {
-  grid-column: span 2;
-}
-
+.card-2,
+.card-3,
 .card-4,
-.card-5 {
-  grid-column: span 3;
+.card-5,
+.card-6 {
+  grid-column: span 2;
+}
+
+.company-logo {
+  position: absolute;
+  z-index: 2;
+  top: 26px;
+  right: 24px;
+  width: 118px;
+  height: 82px;
+  object-fit: contain;
+  object-position: center;
+}
+
+.catering-card {
+  background:
+    linear-gradient(145deg, #ffffff 0%, #f8fbff 62%, #fff6ef 100%);
+  border-color: rgba(15, 76, 129, 0.18);
+}
+
+.catering-card:before {
+  content: '';
+  position: absolute;
+  width: 135px;
+  height: 135px;
+  top: -50px;
+  right: -40px;
+  border-radius: 50%;
+  background: rgba(249, 115, 22, 0.10);
+}
+
+.catering-card .card-content > span {
+  color: #F97316;
+}
+
+.catering-card .card-content h3 {
+  color: #0F4C81;
+}
+
+.catering-card .card-content a:hover {
+  color: #F97316;
 }
 
 .company-card:after {
@@ -802,8 +837,16 @@ footer .footer-brand span {
   .card-2,
   .card-3,
   .card-4,
-  .card-5 {
+  .card-5,
+  .card-6 {
     grid-column: span 1;
+  }
+
+  .company-logo {
+    top: 22px;
+    right: 20px;
+    width: 100px;
+    height: 70px;
   }
 
   .company-card {

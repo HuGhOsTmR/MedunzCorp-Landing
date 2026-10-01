@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import './styles.css';
+import GhostLanding from './GhostLanding';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -141,4 +142,5 @@ function App() {
   );
 }
 
-createRoot(document.getElementById('root')).render(<App />);
+const isGhostHost = window.location.hostname === 'ghost.medunzcorp.com' || window.location.hostname === 'www.ghost.medunzcorp.com';
+createRoot(document.getElementById('root')).render(isGhostHost ? <GhostLanding /> : <App />);

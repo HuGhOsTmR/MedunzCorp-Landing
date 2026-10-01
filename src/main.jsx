@@ -13,10 +13,10 @@ import medrivLogo from './assets/medriv-logo.svg';
 import cateringLogo from './assets/mr-catering-logo.svg';
 
 const companies = [
+  { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, accent: 'ghost' },
+  { name: 'HUPI Baby Gym', text: 'Infancia que desarrolla', logo: hupiLogo, accent: 'hupi' },
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
-  { name: 'HUPI Baby Gym', text: 'Infancia que desarrolla', logo: hupiLogo, accent: 'hupi' },
-  { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, accent: 'ghost' },
   { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
   { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, accent: 'catering' },
 ];

@@ -9,8 +9,8 @@ export default function GhostLanding() {
     document.title = 'GHOST | Web & Software Designers';
     const links = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
     links.forEach((link) => {
-      link.href = ghostLogo;
-      link.type = 'image/svg+xml';
+      link.href = '/ghost-favicon.png';
+      link.type = 'image/png';
     });
     window.scrollTo(0, 0);
   }, []);

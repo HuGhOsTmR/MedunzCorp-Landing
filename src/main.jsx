@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowUpRight, Check, Menu, Truck, X } from 'lucide-react';
+import { ArrowUpRight, Menu, X } from 'lucide-react';
 import './styles.css';
 import GhostLanding from './GhostLanding';
 import HupiLanding from './HupiLanding';
@@ -18,7 +18,7 @@ import cateringLogo from './assets/mr-catering-logo.svg';
 const companies = [
   { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, image: '/ghost-card.webp', href: 'https://ghost.medunzcorp.com', accent: 'ghost' },
   { name: 'HUPI Baby Gym', text: 'Estimulación adecuada para el mejor desarrollo de nuestros hijos', logo: hupiLogo, image: '/hupi-card.webp', href: 'https://hupi.medunzcorp.com', accent: 'hupi' },
-  { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, accent: 'pharma' },
+  { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, image: '/medunz-pharma-brand.jpg', href: '#contacto', accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
   { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
   { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, accent: 'catering' },
@@ -92,44 +92,13 @@ function App() {
 
           <div className="company-strip">
             {companies.map((company) => (
-              company.accent === 'pharma' ? (
-                <article className="company-item pharma-card" key={company.name}>
-                  <div className="pharma-card-glow pharma-card-glow-one" />
-                  <div className="pharma-card-glow pharma-card-glow-two" />
-                  <div className="pharma-card-visual">
-                    <div className="pharma-medusa-ring">
-                      <div className="pharma-medusa-inner"><span /></div>
-                    </div>
-                    <div className="pharma-card-logo">
-                      <img src={company.logo} alt="Medunz Pharma" />
-                    </div>
-                  </div>
-
-                  <div className="pharma-card-content">
-                    <div className="pharma-card-kicker">MEDUNZ PHARMA · DISTRIBUIDORA</div>
-                    <div className="pharma-card-points">
-                      <span><i><Check size={13} /></i>Calidad garantizada</span>
-                      <span><i><Truck size={13} /></i>Entrega rápida</span>
-                      <span><i><Check size={13} /></i>Atención profesional</span>
-                    </div>
-                  </div>
-
-                  <div className="pharma-card-footer">
-                    <span>Venta al por mayor y menor</span>
-                    <span>•</span>
-                    <span>Cobertura regional</span>
-                    <span>•</span>
-                    <span>Entrega rápida</span>
-                    <a href="#contacto" aria-label="Conocer Medunz Pharma">Conocer <ArrowUpRight size={14} /></a>
-                  </div>
-                </article>
-              ) : company.image ? (
+              company.image ? (
                 <a
                   className={`company-item ${company.accent} company-feature-link`}
                   key={company.name}
                   href={company.href}
-                  target="_blank"
-                  rel="noreferrer"
+                  target={company.href?.startsWith('http') ? '_blank' : undefined}
+                  rel={company.href?.startsWith('http') ? 'noreferrer' : undefined}
                   aria-label={`Visitar ${company.name}`}
                 >
                   <img className="company-feature-image" src={company.image} alt={`${company.name} — ${company.text}`} />
@@ -142,8 +111,7 @@ function App() {
                   <a href="#contacto">Conocer <ArrowUpRight size={14} /></a>
                 </article>
               )
-            ))}
-          </div>
+            ))}         </div>
         </section>
 
         <section id="vision" className="vision">

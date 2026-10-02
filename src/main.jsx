@@ -15,7 +15,7 @@ import cateringLogo from './assets/mr-catering-logo.svg';
 
 const companies = [
   { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, image: '/ghost-card.webp', href: 'https://ghost.medunzcorp.com', accent: 'ghost' },
-  { name: 'HUPI Baby Gym', text: 'Infancia que desarrolla', logo: hupiLogo, accent: 'hupi' },
+  { name: 'HUPI Baby Gym', text: 'Estimulación adecuada para el mejor desarrollo de nuestros hijos', logo: hupiLogo, image: '/hupi-card.webp', href: 'https://hupi.medunzcorp.com', accent: 'hupi' },
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
   { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },

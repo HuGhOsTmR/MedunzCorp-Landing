@@ -1,0 +1,58 @@
+.hupi-site{min-height:100vh;background:#fff;color:#1f2440;font-family:'DM Sans',sans-serif}
+.hupi-site a{text-decoration:none;color:inherit}
+.hupi-nav{min-height:76px;display:flex;align-items:center;padding:0 5vw;gap:30px;background:rgba(255,255,255,.97);border-bottom:1px solid #ecebf2;position:sticky;top:0;z-index:50;backdrop-filter:blur(14px)}
+.hupi-brand img{width:150px;height:54px;object-fit:contain}
+.hupi-nav-links{margin-left:auto;display:flex;align-items:center;gap:28px}
+.hupi-nav-links a{font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:#343750}
+.hupi-nav-links a:hover{color:#e70087}
+.hupi-nav-cta{display:inline-flex;align-items:center;gap:8px;background:#e70087;color:#fff!important;padding:13px 19px;border-radius:999px;font-size:10px;letter-spacing:.12em;text-transform:uppercase}
+.hupi-menu-toggle{display:none;border:0;background:transparent;color:#343750}
+.hupi-hero{display:grid;grid-template-columns:1fr 1fr;min-height:650px;align-items:center;gap:5vw;padding:72px 8vw 78px;position:relative;overflow:hidden;background:linear-gradient(135deg,#fff 0%,#fffaff 50%,#f7fff8 100%)}
+.hupi-hero-copy{position:relative;z-index:2;max-width:680px}
+.hupi-kicker{font-size:9px;letter-spacing:.23em;text-transform:uppercase;color:#8b8190;margin-bottom:24px}
+.hupi-hero h1,.hupi-section h2,.hupi-contact h2{font-family:'Playfair Display',serif;font-weight:500;letter-spacing:-.035em}
+.hupi-hero h1{font-size:clamp(46px,5vw,76px);line-height:1.02;margin:0;color:#2d2b40}
+.hupi-hero h1 em,.hupi-section h2 em,.hupi-contact h2 em{font-style:italic;color:#e70087}
+.hupi-hero-lead{max-width:580px;color:#6d7082;font-size:17px;line-height:1.8;margin:28px 0 30px}
+.hupi-actions{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.hupi-button{display:inline-flex;align-items:center;gap:10px;padding:14px 21px;border-radius:999px;background:#e70087;color:#fff!important;font-size:10px;letter-spacing:.12em;text-transform:uppercase;box-shadow:0 10px 26px rgba(231,0,135,.18)}
+.hupi-text-link{font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:#343750;border-bottom:1px solid #e6c5da;padding-bottom:5px}
+.hupi-hero-visual{min-height:520px;position:relative;display:flex;align-items:center;justify-content:center}
+.hupi-blob{position:absolute;border-radius:50%;filter:blur(1px)}
+.hupi-blob-pink{width:420px;height:420px;background:#ffe0f2;right:4%;top:4%;opacity:.85}
+.hupi-blob-yellow{width:190px;height:190px;background:#fff1a8;left:5%;bottom:6%;opacity:.9}
+.hupi-image-card{position:relative;z-index:2;width:min(560px,92%);border-radius:34px;overflow:hidden;background:#fff;box-shadow:0 30px 70px rgba(78,44,74,.14);transform:rotate(1deg)}
+.hupi-image-card img{width:100%;display:block;aspect-ratio:4 / 3;object-fit:cover;object-position:center}
+.hupi-floating-note{position:absolute;z-index:3;left:4%;bottom:7%;display:flex;align-items:center;gap:10px;max-width:215px;padding:15px 18px;border-radius:18px;background:#fff;box-shadow:0 15px 40px rgba(59,34,52,.13);font-size:11px;line-height:1.45;color:#5f6171}
+.hupi-floating-note svg{color:#f0c900;flex:0 0 auto}
+.hupi-section{padding:105px 8vw}
+.hupi-proposal{background:#fbfbfd}
+.hupi-section-heading{max-width:760px}
+.hupi-section-heading.centered{margin:0 auto;text-align:center}
+.hupi-section h2{font-size:clamp(44px,5vw,68px);line-height:1.02;color:#2d2b40;margin:0}
+.hupi-proposal-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:8vw;margin-top:52px;align-items:center}
+.hupi-proposal-copy{max-width:670px}
+.hupi-proposal-copy p{font-size:17px;line-height:1.85;color:#6d7082;margin:0 0 20px}
+.hupi-stat-card{padding:48px;border-radius:30px;background:linear-gradient(145deg,#fff4a7,#ffe3f3);text-align:center;box-shadow:0 18px 50px rgba(115,81,103,.08)}
+.hupi-stat-number{display:block;font-family:'Playfair Display',serif;font-size:92px;line-height:.9;color:#e70087}
+.hupi-stat-label{display:block;margin:18px auto 0;max-width:220px;font-size:12px;line-height:1.6;color:#5d5a6c}
+.hupi-development{background:#fff}
+.hupi-card-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:54px}
+.hupi-service-card{padding:28px 24px;border:1px solid #ececf2;border-radius:26px;min-height:260px;transition:transform .2s ease,box-shadow .2s ease}
+.hupi-service-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(56,43,67,.08)}
+.hupi-yellow-card{background:#fffdf2}.hupi-pink-card{background:#fff8fc}.hupi-green-card{background:#f8fff9}.hupi-purple-card{background:#faf8ff}
+.hupi-icon{width:54px;height:54px;border-radius:17px;display:grid;place-items:center;margin-bottom:24px;background:#fff}
+.hupi-yellow-card .hupi-icon{color:#e3b600}.hupi-pink-card .hupi-icon{color:#e70087}.hupi-green-card .hupi-icon{color:#49ad61}.hupi-purple-card .hupi-icon{color:#8d68d9}
+.hupi-service-card h3{font-size:16px;margin:0 0 12px;color:#363548}.hupi-service-card p{font-size:13px;line-height:1.7;color:#747789;margin:0}
+.hupi-family-banner{padding:110px 8vw;min-height:480px;display:flex;align-items:center;background:linear-gradient(115deg,#ea0088 0%,#a600c9 45%,#44bf6b 100%);position:relative;overflow:hidden}
+.hupi-family-banner:after{content:"";position:absolute;width:520px;height:520px;border-radius:50%;border:1px solid rgba(255,255,255,.2);right:-130px;bottom:-220px}
+.hupi-family-copy{max-width:850px;position:relative;z-index:2}.hupi-family-copy .hupi-kicker{color:rgba(255,255,255,.72)}.hupi-family-copy h2{font-size:clamp(42px,5vw,68px);color:#fff;margin:0}.hupi-family-copy h2 em{color:#ffe878}.hupi-family-copy p{max-width:620px;color:rgba(255,255,255,.85);font-size:17px;line-height:1.8;margin:26px 0 32px}.hupi-button.light{background:#fff;color:#8e0d6f!important;box-shadow:none}
+.hupi-contact{padding:110px 8vw;background:#fff}
+.hupi-contact-grid{display:grid;grid-template-columns:1fr .8fr;gap:8vw;align-items:end}
+.hupi-contact-info{padding-bottom:7px}.hupi-contact-info p{color:#6d7082;line-height:1.8;font-size:15px}.hupi-contact-info a{display:inline-flex;align-items:center;gap:8px;color:#e70087;font-size:11px;letter-spacing:.13em;text-transform:uppercase;border-bottom:1px solid #f2bfdc;padding-bottom:6px}
+.hupi-footer{display:flex;align-items:center;gap:30px;padding:40px 5vw;background:#22243a;color:rgba(255,255,255,.68);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
+.hupi-footer img{width:135px;height:44px;object-fit:contain;filter:brightness(0) invert(1)}
+.hupi-footer span:nth-child(2){margin-right:auto}
+@media(max-width:1050px){.hupi-card-grid{grid-template-columns:repeat(2,1fr)}.hupi-hero{padding-left:6vw;padding-right:6vw}}
+@media(max-width:820px){.hupi-nav{padding:0 20px;min-height:70px}.hupi-nav-links{display:none;position:absolute;left:0;right:0;top:70px;background:#fff;padding:20px;flex-direction:column;align-items:flex-start;border-bottom:1px solid #ecebf2;box-shadow:0 15px 30px rgba(35,30,50,.08)}.hupi-nav-links.open{display:flex}.hupi-nav-cta{margin-left:auto}.hupi-menu-toggle{display:block}.hupi-hero{grid-template-columns:1fr;min-height:auto;padding:65px 24px 75px}.hupi-hero-copy{max-width:none}.hupi-hero-visual{min-height:390px;margin-top:10px}.hupi-proposal-grid,.hupi-contact-grid{grid-template-columns:1fr;gap:35px}.hupi-section,.hupi-contact{padding-left:24px;padding-right:24px}.hupi-family-banner{padding-left:24px;padding-right:24px}.hupi-footer{flex-direction:column;align-items:flex-start}.hupi-footer span:nth-child(2){margin-right:0}}
+@media(max-width:560px){.hupi-brand img{width:120px}.hupi-nav-cta{font-size:8px;padding:10px 13px}.hupi-hero h1{font-size:clamp(40px,13vw,56px)}.hupi-hero-lead{font-size:15px}.hupi-hero-visual{min-height:300px}.hupi-blob-pink{width:280px;height:280px}.hupi-image-card{width:100%;border-radius:24px}.hupi-floating-note{font-size:9px;left:-2%;bottom:1%}.hupi-section{padding-top:78px;padding-bottom:78px}.hupi-card-grid{grid-template-columns:1fr}.hupi-service-card{min-height:220px}.hupi-stat-card{padding:36px 20px}.hupi-stat-number{font-size:76px}.hupi-family-banner{min-height:430px;padding-top:78px;padding-bottom:78px}.hupi-family-copy p{font-size:15px}.hupi-contact{padding-top:80px;padding-bottom:80px}}

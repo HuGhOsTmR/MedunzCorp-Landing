@@ -142,5 +142,32 @@ function App() {
   );
 }
 
-const isGhostHost = window.location.hostname === 'ghost.medunzcorp.com' || window.location.hostname === 'www.ghost.medunzcorp.com';
-createRoot(document.getElementById('root')).render(isGhostHost ? <GhostLanding /> : <App />);
+const isGhostHost =
+  window.location.hostname === 'ghost.medunzcorp.com' ||
+  window.location.hostname === 'www.ghost.medunzcorp.com';
+
+function setSiteIcon() {
+  const iconHref = isGhostHost
+    ? '/ghost-favicon.png?v=20261002'
+    : '/medunz-favicon.png?v=20261002';
+
+  document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
+    .forEach((link) => link.remove());
+
+  const icon = document.createElement('link');
+  icon.rel = 'icon';
+  icon.type = 'image/png';
+  icon.href = iconHref;
+  document.head.appendChild(icon);
+
+  const apple = document.createElement('link');
+  apple.rel = 'apple-touch-icon';
+  apple.href = iconHref;
+  document.head.appendChild(apple);
+}
+
+setSiteIcon();
+
+createRoot(document.getElementById('root')).render(
+  isGhostHost ? <GhostLanding /> : <App />
+);

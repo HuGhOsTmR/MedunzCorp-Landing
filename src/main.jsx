@@ -110,7 +110,13 @@ function App() {
                   <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>
                   <h3>{company.name}</h3>
                   <p>{company.text}</p>
-                  <a href="#contacto">Conocer <ArrowUpRight size={14} /></a>
+                  <a
+                    href={company.href || '#contacto'}
+                    target={company.href?.startsWith('http') ? '_blank' : undefined}
+                    rel={company.href?.startsWith('http') ? 'noreferrer' : undefined}
+                  >
+                    Conocer <ArrowUpRight size={14} />
+                  </a>
                 </article>
               )
             ))}         </div>

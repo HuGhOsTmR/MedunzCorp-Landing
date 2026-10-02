@@ -158,7 +158,7 @@ function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
     : isHupiHost
-      ? '/hupi-favicon.png?v=20261002'
+      ? '/hupi-favicon.svg?v=20261002'
       : '/medunz-favicon.png?v=20261002';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')

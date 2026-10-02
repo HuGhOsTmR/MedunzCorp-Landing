@@ -1,0 +1,31 @@
+name: Install HUPI card asset
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  install:
+    if: contains(github.event.head_commit.message, 'Add HUPI card source for deployment')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Decode HUPI card
+        shell: bash
+        run: |
+          base64 -d public/hupi-card.webp.b64 > public/hupi-card.webp
+          rm public/hupi-card.webp.b64
+
+      - name: Commit asset
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/hupi-card.webp public/hupi-card.webp.b64
+          git commit -m "Install HUPI Baby Gym card image"
+          git push

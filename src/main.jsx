@@ -5,6 +5,7 @@ import './styles.css';
 import GhostLanding from './GhostLanding';
 import HupiLanding from './HupiLanding';
 import PharmaLanding from './PharmaLanding';
+import JardinesLanding from './JardinesLanding';
 import './hupi.css';
 
 const corporateHero = '/medunz-corp-hero.webp';
@@ -20,7 +21,7 @@ const companies = [
   { name: 'Ghost Web & Software', text: 'Tecnología que construye', logo: ghostLogo, image: '/ghost-card.webp', href: 'https://ghost.medunzcorp.com', accent: 'ghost' },
   { name: 'HUPI Baby Gym', text: 'Estimulación adecuada para el mejor desarrollo de nuestros hijos', logo: hupiLogo, image: '/hupi-card.webp', href: 'https://hupi.medunzcorp.com', accent: 'hupi' },
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, image: '/medunz-pharma-brand.jpg', href: 'https://pharma.medunzcorp.com', accent: 'pharma' },
-  { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, accent: 'jardines' },
+  { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, href: 'https://jardines.medunzcorp.com', accent: 'jardines' },
   { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
   { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, accent: 'catering' },
 ];
@@ -158,6 +159,10 @@ const isPharmaHost =
   hostname === 'pharma.medunzcorp.com' ||
   hostname === 'www.pharma.medunzcorp.com';
 
+const isJardinesHost =
+  hostname === 'jardines.medunzcorp.com' ||
+  hostname === 'www.jardines.medunzcorp.com';
+
 function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
@@ -165,7 +170,9 @@ function setSiteIcon() {
       ? '/hupi-favicon.svg?v=20261002'
       : isPharmaHost
         ? '/pharma-favicon.svg?v=20261002'
-        : '/medunz-favicon.png?v=20261002';
+        : isJardinesHost
+          ? '/jardines-favicon.svg?v=20261002'
+          : '/medunz-favicon.png?v=20261002';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
     .forEach((link) => link.remove());
@@ -191,5 +198,7 @@ createRoot(document.getElementById('root')).render(
       ? <HupiLanding />
       : isPharmaHost
         ? <PharmaLanding />
-        : <App />
+        : isJardinesHost
+          ? <JardinesLanding />
+          : <App />
 );

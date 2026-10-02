@@ -7,11 +7,6 @@ import './ghost.css';
 export default function GhostLanding() {
   React.useEffect(() => {
     document.title = 'GHOST | Web & Software Designers';
-    const links = document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"]');
-    links.forEach((link) => {
-      link.href = '/ghost-favicon.png';
-      link.type = 'image/png';
-    });
     window.scrollTo(0, 0);
   }, []);
 

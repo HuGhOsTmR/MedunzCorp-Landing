@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowUpRight, Brain, Heart, Sparkles, Users, Menu, X } from 'lucide-react';
 
-const hupiLogo = '/src/assets/hupi-baby-gym-logo.svg';
+import hupiLogo from './assets/hupi-baby-gym-logo.svg';
 
 export default function HupiLanding() {
   const [menuOpen, setMenuOpen] = React.useState(false);

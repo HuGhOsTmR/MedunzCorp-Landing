@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   install:
-    if: contains(github.event.head_commit.message, 'Add HUPI card source for deployment')
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

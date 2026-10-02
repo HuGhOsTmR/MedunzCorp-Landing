@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+<defs>
+  <linearGradient id="g" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse"><stop stop-color="#dce8ae"/><stop offset=".58" stop-color="#edf4d1"/><stop offset="1" stop-color="#9ab63a"/></linearGradient>
+</defs>
+<rect width="1200" height="630" rx="36" fill="url(#g)"/>
+<circle cx="1070" cy="90" r="180" fill="#f4f7e6" opacity=".55"/>
+<circle cx="140" cy="580" r="230" fill="#7ca000" opacity=".16"/>
+<path d="M0 455C180 390 260 515 420 480s270-110 420-33 240 18 360-43v226H0Z" fill="#8bad00" opacity=".28"/>
+<path d="M92 110C94 165 110 212 148 255c30 33 66 53 111 68" stroke="#397b2c" stroke-width="12" fill="none" stroke-linecap="round"/>
+<path d="M148 255c-52-27-72-79-61-136 57 10 86 46 92 101M180 300c58-47 112-61 164-36-19 62-71 91-143 82" stroke="#397b2c" stroke-width="11" fill="none" stroke-linecap="round"/>
+<text x="420" y="245" font-family="Georgia,serif" font-size="104" font-weight="700" fill="#397b2c">MEDUNZ</text>
+<text x="424" y="340" font-family="Arial,sans-serif" font-size="72" font-weight="700" fill="#397b2c" letter-spacing="5">JARDINES</text>
+<rect x="424" y="370" width="520" height="5" fill="#171717"/>
+<text x="424" y="420" font-family="Arial,sans-serif" font-size="27" letter-spacing="5" fill="#222">ESPACIOS QUE INSPIRAN</text>
+<text x="424" y="500" font-family="Georgia,serif" font-size="34" font-style="italic" fill="#4c6132">Cuidamos la naturaleza. Creamos equilibrio.</text>
+</svg>

@@ -62,6 +62,22 @@ const SITE_CONFIG = {
     siteName: "Medunz Jardines",
     locale: "es_BO",
     url: "https://jardines.medunzcorp.com/"
+  },
+  "mrcatering.medunzcorp.com": {
+    title: "M&R Catering | Es como comer en casa...",
+    description: "M&R Catering | Servicio de catering con el sabor, calidad y calidez de siempre.",
+    image: "https://mrcatering.medunzcorp.com/mrcatering-card.webp",
+    siteName: "M&R Catering",
+    locale: "es_BO",
+    url: "https://mrcatering.medunzcorp.com/"
+  },
+  "www.mrcatering.medunzcorp.com": {
+    title: "M&R Catering | Es como comer en casa...",
+    description: "M&R Catering | Servicio de catering con el sabor, calidad y calidez de siempre.",
+    image: "https://mrcatering.medunzcorp.com/mrcatering-card.webp",
+    siteName: "M&R Catering",
+    locale: "es_BO",
+    url: "https://mrcatering.medunzcorp.com/"
   }
 };
 

@@ -6,6 +6,7 @@ import GhostLanding from './GhostLanding';
 import HupiLanding from './HupiLanding';
 import PharmaLanding from './PharmaLanding';
 import JardinesLanding from './JardinesLanding';
+import MrCateringLanding from './MrCateringLanding';
 import './hupi.css';
 
 const corporateHero = '/medunz-corp-hero.webp';
@@ -23,7 +24,7 @@ const companies = [
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, image: '/medunz-pharma-brand.jpg', href: 'https://pharma.medunzcorp.com', accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, image: '/jardines-card.webp', href: 'https://jardines.medunzcorp.com', accent: 'jardines' },
   { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
-  { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, accent: 'catering' },
+  { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, image: '/mrcatering-card.webp', href: 'https://mrcatering.medunzcorp.com', accent: 'catering' },
 ];
 
 function Logo() {
@@ -202,6 +203,10 @@ const isJardinesHost =
   hostname === 'jardines.medunzcorp.com' ||
   hostname === 'www.jardines.medunzcorp.com';
 
+const isCateringHost =
+  hostname === 'mrcatering.medunzcorp.com' ||
+  hostname === 'www.mrcatering.medunzcorp.com';
+
 function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
@@ -211,7 +216,9 @@ function setSiteIcon() {
         ? '/pharma-favicon.svg?v=20261002'
         : isJardinesHost
           ? '/jardines-favicon.svg?v=20261002'
-          : '/medunz-favicon.png?v=20261002';
+          : isCateringHost
+            ? '/mrcatering-favicon.svg?v=20261002'
+            : '/medunz-favicon.png?v=20261002';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
     .forEach((link) => link.remove());
@@ -239,5 +246,7 @@ createRoot(document.getElementById('root')).render(
         ? <PharmaLanding />
         : isJardinesHost
           ? <JardinesLanding />
-          : <App />
+          : isCateringHost
+            ? <MrCateringLanding />
+            : <App />
 );

@@ -46,6 +46,22 @@ const SITE_CONFIG = {
     siteName: "Medunz Pharma",
     locale: "es_BO",
     url: "https://pharma.medunzcorp.com/"
+  },
+  "jardines.medunzcorp.com": {
+    title: "Medunz Jardines | Naturaleza que inspira",
+    description: "Medunz Jardines | Mantenimiento, diseño, construcción y paisajismo para crear espacios en armonía con la naturaleza.",
+    image: "https://jardines.medunzcorp.com/jardines-social.svg",
+    siteName: "Medunz Jardines",
+    locale: "es_BO",
+    url: "https://jardines.medunzcorp.com/"
+  },
+  "www.jardines.medunzcorp.com": {
+    title: "Medunz Jardines | Naturaleza que inspira",
+    description: "Medunz Jardines | Mantenimiento, diseño, construcción y paisajismo para crear espacios en armonía con la naturaleza.",
+    image: "https://jardines.medunzcorp.com/jardines-social.svg",
+    siteName: "Medunz Jardines",
+    locale: "es_BO",
+    url: "https://jardines.medunzcorp.com/"
   }
 };
 
@@ -87,7 +103,9 @@ function buildSocialTags(site) {
       "og:image:type",
       site.image.toLowerCase().endsWith(".jpg") || site.image.toLowerCase().endsWith(".jpeg")
         ? "image/jpeg"
-        : "image/webp"
+        : site.image.toLowerCase().endsWith(".svg")
+          ? "image/svg+xml"
+          : "image/webp"
     ),
     metaProperty("og:image:alt", encoded(site.siteName)),
     metaName("twitter:card", "summary_large_image"),

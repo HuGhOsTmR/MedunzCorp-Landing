@@ -49,7 +49,7 @@
 .hupi-family-copy{max-width:850px;position:relative;z-index:2}.hupi-family-copy .hupi-kicker{color:rgba(255,255,255,.72)}.hupi-family-copy h2{font-size:clamp(42px,5vw,68px);color:#fff;margin:0}.hupi-family-copy h2 em{color:#ffe878}.hupi-family-copy p{max-width:620px;color:rgba(255,255,255,.85);font-size:17px;line-height:1.8;margin:26px 0 32px}.hupi-button.light{background:#fff;color:#8e0d6f!important;box-shadow:none}
 .hupi-contact{padding:110px 8vw;background:#fff}
 .hupi-contact-grid{display:grid;grid-template-columns:1fr .8fr;gap:8vw;align-items:end}
-.hupi-contact-info{padding-bottom:7px}.hupi-contact-info p{color:#6d7082;line-height:1.8;font-size:15px}.hupi-contact-info a{display:inline-flex;align-items:center;gap:8px;color:#e70087;font-size:11px;letter-spacing:.13em;text-transform:uppercase;border-bottom:1px solid #f2bfdc;padding-bottom:6px}
+.hupi-contact-info{padding-bottom:7px}.hupi-contact-info p{color:#6d7082;line-height:1.8;font-size:15px}.hupi-contact-actions{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:18px}.hupi-contact-info a{display:inline-flex;align-items:center;gap:8px;color:#e70087;font-size:11px;letter-spacing:.13em;text-transform:uppercase;border-bottom:1px solid #f2bfdc;padding-bottom:6px}
 .hupi-footer{display:flex;align-items:center;gap:30px;padding:40px 5vw;background:#22243a;color:rgba(255,255,255,.68);font-size:9px;letter-spacing:.16em;text-transform:uppercase}
 .hupi-footer img{width:135px;height:44px;object-fit:contain;filter:brightness(0) invert(1)}
 .hupi-footer span:nth-child(2){margin-right:auto}

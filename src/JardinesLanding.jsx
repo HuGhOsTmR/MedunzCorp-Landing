@@ -191,7 +191,7 @@ export default function JardinesLanding() {
                 <a href="tel:+59170745349">(591) 70745349 <ArrowUpRight size={15} /></a>
                 <a href="mailto:medunz.jardines@gmail.com">medunz.jardines@gmail.com <ArrowUpRight size={15} /></a>
               </div>
-              <a className="jardines-facebook" href="https://www.facebook.com/" target="_blank" rel="noreferrer">Facebook <ArrowUpRight size={15} /></a>
+              <span className="jardines-facebook">Facebook: Medunz Jardines</span>
             </div>
           </div>
         </section>

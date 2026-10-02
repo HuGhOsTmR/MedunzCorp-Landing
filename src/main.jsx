@@ -105,6 +105,39 @@ function App() {
                 >
                   <img className="company-feature-image" src={company.image} alt={`${company.name} — ${company.text}`} />
                 </a>
+              ) : company.accent === 'jardines' ? (
+                <a
+                  className="company-item jardines-feature-card"
+                  key={company.name}
+                  href={company.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={`Visitar ${company.name}`}
+                >
+                  <div className="jardines-card-backdrop" aria-hidden="true">
+                    <span className="jardines-leaf leaf-one" />
+                    <span className="jardines-leaf leaf-two" />
+                    <span className="jardines-leaf leaf-three" />
+                    <span className="jardines-leaf leaf-four" />
+                  </div>
+                  <div className="jardines-card-main">
+                    <div className="jardines-card-brand">
+                      <img src={company.logo} alt="Medunz Jardines" />
+                    </div>
+                    <div className="jardines-card-title">MANTENIMIENTO Y DISEÑO DE JARDINES</div>
+                    <h3>Naturaleza que inspira</h3>
+                    <div className="jardines-card-services">
+                      <span>Áreas verdes</span>
+                      <span>Jardines</span>
+                      <span>Paisajismo</span>
+                      <span>Piscinas</span>
+                    </div>
+                  </div>
+                  <div className="jardines-card-footer">
+                    <span>Cuidando la naturaleza</span>
+                    <span>Conocer <ArrowUpRight size={14} /></span>
+                  </div>
+                </a>
               ) : (
                 <article className={`company-item ${company.accent}`} key={company.name}>
                   <div className="company-logo-wrap"><img src={company.logo} alt={`${company.name} logo`} /></div>

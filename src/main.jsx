@@ -3,6 +3,8 @@ import { createRoot } from 'react-dom/client';
 import { ArrowUpRight, Menu, X } from 'lucide-react';
 import './styles.css';
 import GhostLanding from './GhostLanding';
+import HupiLanding from './HupiLanding';
+import './hupi.css';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -142,14 +144,22 @@ function App() {
   );
 }
 
+const hostname = window.location.hostname;
+
 const isGhostHost =
-  window.location.hostname === 'ghost.medunzcorp.com' ||
-  window.location.hostname === 'www.ghost.medunzcorp.com';
+  hostname === 'ghost.medunzcorp.com' ||
+  hostname === 'www.ghost.medunzcorp.com';
+
+const isHupiHost =
+  hostname === 'hupi.medunzcorp.com' ||
+  hostname === 'www.hupi.medunzcorp.com';
 
 function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
-    : '/medunz-favicon.png?v=20261002';
+    : isHupiHost
+      ? '/hupi-favicon.png?v=20261002'
+      : '/medunz-favicon.png?v=20261002';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
     .forEach((link) => link.remove());
@@ -169,5 +179,9 @@ function setSiteIcon() {
 setSiteIcon();
 
 createRoot(document.getElementById('root')).render(
-  isGhostHost ? <GhostLanding /> : <App />
+  isGhostHost
+    ? <GhostLanding />
+    : isHupiHost
+      ? <HupiLanding />
+      : <App />
 );

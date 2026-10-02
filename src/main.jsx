@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { ArrowUpRight, Menu, X } from 'lucide-react';
+import { ArrowUpRight, Check, Menu, Truck, X } from 'lucide-react';
 import './styles.css';
 import GhostLanding from './GhostLanding';
 import HupiLanding from './HupiLanding';
@@ -92,7 +92,38 @@ function App() {
 
           <div className="company-strip">
             {companies.map((company) => (
-              company.image ? (
+              company.accent === 'pharma' ? (
+                <article className="company-item pharma-card" key={company.name}>
+                  <div className="pharma-card-glow pharma-card-glow-one" />
+                  <div className="pharma-card-glow pharma-card-glow-two" />
+                  <div className="pharma-card-visual">
+                    <div className="pharma-medusa-ring">
+                      <div className="pharma-medusa-inner"><span /></div>
+                    </div>
+                    <div className="pharma-card-logo">
+                      <img src={company.logo} alt="Medunz Pharma" />
+                    </div>
+                  </div>
+
+                  <div className="pharma-card-content">
+                    <div className="pharma-card-kicker">MEDUNZ PHARMA · DISTRIBUIDORA</div>
+                    <div className="pharma-card-points">
+                      <span><i><Check size={13} /></i>Calidad garantizada</span>
+                      <span><i><Truck size={13} /></i>Entrega rápida</span>
+                      <span><i><Check size={13} /></i>Atención profesional</span>
+                    </div>
+                  </div>
+
+                  <div className="pharma-card-footer">
+                    <span>Venta al por mayor y menor</span>
+                    <span>•</span>
+                    <span>Cobertura regional</span>
+                    <span>•</span>
+                    <span>Entrega rápida</span>
+                    <a href="#contacto" aria-label="Conocer Medunz Pharma">Conocer <ArrowUpRight size={14} /></a>
+                  </div>
+                </article>
+              ) : company.image ? (
                 <a
                   className={`company-item ${company.accent} company-feature-link`}
                   key={company.name}

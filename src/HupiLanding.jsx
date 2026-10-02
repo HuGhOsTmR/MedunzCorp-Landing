@@ -50,9 +50,35 @@ export default function HupiLanding() {
           <div className="hupi-hero-visual">
             <div className="hupi-blob hupi-blob-pink" />
             <div className="hupi-blob hupi-blob-yellow" />
-            <div className="hupi-image-card">
-              <img src="/hupi-baby-gym.jpg" alt="HUPI Baby Gym" />
+
+            <div className="hupi-hero-card">
+              <div className="hupi-card-accent hupi-card-accent-one" />
+              <div className="hupi-card-accent hupi-card-accent-two" />
+
+              <div className="hupi-card-logo">
+                <img src={hupiLogo} alt="HUPI Baby Gym" />
+              </div>
+
+              <div className="hupi-card-eyebrow">HUPI BABY GYM · 0–7 AÑOS</div>
+              <h2>Crecer, jugar<br /><em>y descubrir.</em></h2>
+              <p>
+                Un espacio pensado para acompañar cada etapa del desarrollo
+                mediante el juego, el movimiento y experiencias significativas.
+              </p>
+
+              <div className="hupi-card-pills">
+                <span><Brain size={15} /> Cognitivo</span>
+                <span><Heart size={15} /> Socioemocional</span>
+                <span><Sparkles size={15} /> Sensorial</span>
+                <span><Users size={15} /> Psicomotricidad</span>
+              </div>
+
+              <div className="hupi-card-bottom">
+                <span>Estimulación adecuada</span>
+                <a href="#propuesta">Conocer propuesta <ArrowUpRight size={15} /></a>
+              </div>
             </div>
+
             <div className="hupi-floating-note">
               <Sparkles size={17} />
               <span>Aprender también puede ser jugar.</span>

@@ -2,7 +2,7 @@ const SITE_CONFIG = {
   "hupi.medunzcorp.com": {
     title: "HUPI Baby Gym | Estimulación adecuada para el mejor desarrollo",
     description: "Un espacio pensado para acompañar a bebés y niños a través del juego, el movimiento y experiencias que favorecen su desarrollo integral.",
-    image: "https://hupi.medunzcorp.com/hupi-card.webp?v=20261002",
+    image: "https://hupi.medunzcorp.com/hupi-card.webp",
     siteName: "HUPI Baby Gym",
     locale: "es_BO",
     url: "https://hupi.medunzcorp.com/"
@@ -18,7 +18,7 @@ const SITE_CONFIG = {
   "ghost.medunzcorp.com": {
     title: "GHOST Web & Software | We design. We build solutions. We drive your digital future",
     description: "GHOST Web & Software Designer. Software, web, ERP, CRM y soluciones digitales.",
-    image: "https://ghost.medunzcorp.com/ghost-card.webp?v=20261002",
+    image: "https://ghost.medunzcorp.com/ghost-card.webp",
     siteName: "GHOST Web & Software",
     locale: "en_US",
     url: "https://ghost.medunzcorp.com/"
@@ -36,7 +36,7 @@ const SITE_CONFIG = {
 const DEFAULT_SITE = {
   title: "MedUnz Corp. | Una mirada que transforma",
   description: "MedUnz Corp. | Una mirada que transforma.",
-  image: "https://medunzcorp.com/medunz-corp-hero.webp?v=20261002",
+  image: "https://medunzcorp.com/medunz-corp-hero.webp",
   siteName: "MedUnz Corp.",
   locale: "es_BO",
   url: "https://medunzcorp.com/"

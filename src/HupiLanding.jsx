@@ -68,12 +68,12 @@ export default function HupiLanding() {
           <div className="hupi-proposal-grid">
             <div className="hupi-proposal-copy">
               <p>
-                La estimulación temprana busca ofrecer al bebé y al niño oportunidades de desarrollo
-                físico, intelectual y social mediante experiencias y actividades adecuadas a cada etapa.
+                En HUPI acompañamos el crecimiento de bebés y niños mediante experiencias y actividades
+                adecuadas a cada etapa, donde el juego se convierte en una herramienta para aprender y descubrir.
               </p>
               <p>
-                En HUPI, el juego se convierte en una herramienta para acompañar la psicomotricidad,
-                las habilidades cognitivas, sensoriales, de lenguaje y la autonomía.
+                Nuestra propuesta pone atención al desarrollo psicomotor, cognitivo, sensorial, del lenguaje,
+                la autonomía y las habilidades sociales.
               </p>
             </div>
             <div className="hupi-stat-card">
@@ -120,7 +120,7 @@ export default function HupiLanding() {
           <div className="hupi-family-copy">
             <div className="hupi-kicker">03 · PARA LAS FAMILIAS</div>
             <h2>El desarrollo de nuestros hijos<br /><em>también se construye en familia.</em></h2>
-            <p>Un acompañamiento cercano permite convertir cada etapa en una oportunidad para descubrir nuevas capacidades.</p>
+            <p>Queremos que cada familia encuentre un espacio cercano para acompañar el desarrollo, aprender y disfrutar juntos.</p>
             <a className="hupi-button light" href="#contacto">Conversemos <ArrowUpRight size={16} /></a>
           </div>
         </section>
@@ -132,8 +132,12 @@ export default function HupiLanding() {
               <h2>Hagamos del desarrollo<br /><em>una experiencia feliz.</em></h2>
             </div>
             <div className="hupi-contact-info">
-              <p><strong>HUPI Baby Gym</strong><br />Avenida Circunvalación Esq. Los Cedros<br />Cochabamba, Bolivia</p>
-              <a href="https://www.google.com/maps/search/?api=1&query=Hupi+Baby+Gym+Cochabamba" target="_blank" rel="noreferrer">Ver ubicación <ArrowUpRight size={16} /></a>
+              <p><strong>HUPI Baby Gym</strong><br />Av. Oquendo 525, entre Federico Blanco y Paccieri<br />Cochabamba, Bolivia<br />+591 79760818</p>
+              <div className="hupi-contact-actions">
+                <a href="https://wa.me/59179760818" target="_blank" rel="noreferrer">WhatsApp <ArrowUpRight size={16} /></a>
+                <a href="https://www.google.com/maps/search/?api=1&query=Av.+Oquendo+525,+Cochabamba,+Bolivia" target="_blank" rel="noreferrer">Ver ubicación <ArrowUpRight size={16} /></a>
+                <a href="https://www.facebook.com/hupi.babygym" target="_blank" rel="noreferrer">Facebook <ArrowUpRight size={16} /></a>
+              </div>
             </div>
           </div>
         </section>
@@ -142,6 +146,7 @@ export default function HupiLanding() {
       <footer className="hupi-footer">
         <img src={hupiLogo} alt="HUPI Baby Gym" />
         <span>Estimulación adecuada para el mejor desarrollo de nuestros hijos</span>
+        <span><a href="https://www.facebook.com/hupi.babygym" target="_blank" rel="noreferrer">Facebook</a> · <a href="https://wa.me/59179760818" target="_blank" rel="noreferrer">WhatsApp</a></span>
         <span>© {new Date().getFullYear()} HUPI Baby Gym · Created by Ghost W&SD</span>
       </footer>
     </div>

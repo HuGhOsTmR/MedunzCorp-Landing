@@ -43,17 +43,12 @@ export default function GhostLanding() {
               </div>
             </div>
 
-            <div className="ghost-visual" aria-hidden="true">
-              <div className="ghost-orbit orbit-1" />
-              <div className="ghost-orbit orbit-2" />
-              <div className="ghost-orbit orbit-3" />
-              <div className="ghost-core">
-                <span className="ghost-core-mark">G</span>
-                <small>BUILD / SHIP / GROW</small>
-              </div>
-              <div className="ghost-floating ghost-floating-top">01 / STRATEGY</div>
-              <div className="ghost-floating ghost-floating-right">02 / PRODUCT</div>
-              <div className="ghost-floating ghost-floating-bottom">03 / SCALE</div>
+            <div className="ghost-visual">
+              <img
+                className="ghost-hero-visual-image"
+                src="/ghost-hero-visual.webp"
+                alt="GHOST — Build, Ship, Grow"
+              />
             </div>
           </div>
         </section>

@@ -13,6 +13,7 @@ import {
 } from 'lucide-react';
 import pharmaLogo from './assets/medunz-pharma-logo.svg';
 import './pharma.css';
+import BrandSwitcher from './BrandSwitcher';
 
 export default function PharmaLanding() {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -30,6 +31,7 @@ export default function PharmaLanding() {
           <img src={pharmaLogo} alt="Medunz Pharma" />
         </a>
 
+        <BrandSwitcher current="Medunz Pharma" />
         <nav className={menuOpen ? 'pharma-nav-links open' : 'pharma-nav-links'} aria-label="Navegación principal">
           <a href="#inicio" onClick={closeMenu}>Inicio</a>
           <a href="#propuesta" onClick={closeMenu}>Propuesta</a>

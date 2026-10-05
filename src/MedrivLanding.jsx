@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Building2, CheckCircle2, Handshake, KeyRound, MapPin, Menu, TrendingUp, X } from 'lucide-react';
 import medrivLogo from './assets/medriv-logo.svg';
 import './medriv.css';
+import BrandSwitcher from './BrandSwitcher';
 
 const services = [
   { icon: Building2, title: 'Compra y venta', text: 'Acompañamiento en operaciones de compra y venta de inmuebles.' },
@@ -27,6 +28,7 @@ export default function MedrivLanding() {
           <img src={medrivLogo} alt="MedRiv Bienes Raíces" />
         </a>
 
+        <BrandSwitcher current="MedRiv Bienes Raíces" />
         <nav className={menuOpen ? 'medriv-nav-links open' : 'medriv-nav-links'} aria-label="Navegación principal">
           <a href="#inicio" onClick={closeMenu}>Inicio</a>
           <a href="#propuesta" onClick={closeMenu}>Propuesta</a>

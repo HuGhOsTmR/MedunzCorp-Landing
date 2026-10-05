@@ -3,6 +3,7 @@ import { ArrowUpRight, Brain, Heart, Sparkles, Users, Menu, X } from 'lucide-rea
 
 import hupiLogo from './assets/hupi-baby-gym-logo.svg';
 import hupiHeroArt from './assets/hupi-hero-art.svg';
+import BrandSwitcher from './BrandSwitcher';
 
 export default function HupiLanding() {
   const [menuOpen, setMenuOpen] = React.useState(false);
@@ -19,6 +20,7 @@ export default function HupiLanding() {
           <img src={hupiLogo} alt="HUPI Baby Gym" />
         </a>
 
+        <BrandSwitcher current="HUPI Baby Gym" />
         <nav className={menuOpen ? 'hupi-nav-links open' : 'hupi-nav-links'}>
           <a href="#inicio" onClick={closeMenu}>Inicio</a>
           <a href="#propuesta" onClick={closeMenu}>Nuestra propuesta</a>

@@ -1,6 +1,7 @@
 import React from 'react';
 import ghostLogo from './assets/ghost-logo.svg';
 import ghostNavbarLogo from './assets/ghost-navbar-logo.svg';
+import BrandSwitcher from './BrandSwitcher';
 import { ArrowRight, ArrowUpRight, Check, Code2, Layers3, Sparkles, Workflow } from 'lucide-react';
 import './ghost.css';
 
@@ -16,6 +17,7 @@ export default function GhostLanding() {
         <a href="#ghost-home" className="ghost-brand" aria-label="GHOST home">
           <img src={ghostNavbarLogo} alt="GHOST Web & Software Designers" />
         </a>
+        <BrandSwitcher current="GHOST Web & Software" />
         <nav className="ghost-nav-links" aria-label="Ghost navigation">
           <a href="#services">Services</a>
           <a href="#approach">Approach</a>

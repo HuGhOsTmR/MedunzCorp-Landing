@@ -31,8 +31,11 @@ const companies = [
 function Logo() {
   return (
     <a className="brand" href="#inicio" aria-label="Medunz Corp. inicio">
-      <span className="brand-word">MED<span>U</span>NZ</span>
-      <span className="brand-corp">CORP.</span>
+      <img className="brand-isotype" src="/medunz-isotipo.svg" alt="" aria-hidden="true" />
+      <span className="brand-lockup">
+        <span className="brand-word">MED<span>U</span>NZ</span>
+        <span className="brand-corp">CORP.</span>
+      </span>
     </a>
   );
 }
@@ -225,14 +228,14 @@ function setSiteIcon() {
             ? '/mrcatering-favicon.svg?v=20261002'
             : isMedrivHost
               ? '/medriv-favicon.svg?v=20261005'
-              : '/medunz-favicon.png?v=20261002';
+              : '/medunz-favicon.svg?v=20261005';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
     .forEach((link) => link.remove());
 
   const icon = document.createElement('link');
   icon.rel = 'icon';
-  icon.type = 'image/png';
+  icon.type = iconHref.endsWith('.svg') ? 'image/svg+xml' : 'image/png';
   icon.href = iconHref;
   document.head.appendChild(icon);
 

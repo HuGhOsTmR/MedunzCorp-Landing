@@ -78,6 +78,22 @@ const SITE_CONFIG = {
     siteName: "M&R Catering",
     locale: "es_BO",
     url: "https://mrcatering.medunzcorp.com/"
+  },
+  "medriv.medunzcorp.com": {
+    title: "MedRiv Bienes Raíces | Espacios para tu futuro",
+    description: "MedRiv Bienes Raíces | Compra, venta y asesoría inmobiliaria con confianza, respaldo y visión.",
+    image: "https://medriv.medunzcorp.com/medriv-card.webp",
+    siteName: "MedRiv Bienes Raíces",
+    locale: "es_BO",
+    url: "https://medriv.medunzcorp.com/"
+  },
+  "www.medriv.medunzcorp.com": {
+    title: "MedRiv Bienes Raíces | Espacios para tu futuro",
+    description: "MedRiv Bienes Raíces | Compra, venta y asesoría inmobiliaria con confianza, respaldo y visión.",
+    image: "https://medriv.medunzcorp.com/medriv-card.webp",
+    siteName: "MedRiv Bienes Raíces",
+    locale: "es_BO",
+    url: "https://medriv.medunzcorp.com/"
   }
 };
 

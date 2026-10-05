@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight, Leaf, Menu, Droplets, Scissors, Sparkles, Waves, Trees, X } from 'lucide-react';
 import jardinesLogo from './assets/medunz-jardines-logo.svg';
 import './jardines.css';
+import BrandSwitcher from './BrandSwitcher';
 
 const services = [
   { icon: Trees, title: 'Mantenimiento de Áreas Verdes', text: 'Conservación de áreas verdes para condominios, empresas y hoteles.' },
@@ -49,6 +50,7 @@ export default function JardinesLanding() {
           <img src={jardinesLogo} alt="Medunz Jardines" />
         </a>
 
+        <BrandSwitcher current="Medunz Jardines" />
         <nav className={menuOpen ? 'jardines-nav-links open' : 'jardines-nav-links'} aria-label="Navegación principal">
           <a href="#inicio" onClick={closeMenu}>Inicio</a>
           <a href="#nosotros" onClick={closeMenu}>Nosotros</a>

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import cateringLogo from './assets/mr-catering-logo.svg';
 import './mrcatering.css';
+import BrandSwitcher from './BrandSwitcher';
 
 const services = [
   { icon: CalendarDays, title: 'Eventos corporativos', text: 'Catering pensado para reuniones, celebraciones y actividades de empresa.' },
@@ -39,6 +40,7 @@ export default function MrCateringLanding() {
           <img src={cateringLogo} alt="M&R Catering" />
         </a>
 
+        <BrandSwitcher current="M&R Catering" />
         <nav className={menuOpen ? 'mrc-nav-links open' : 'mrc-nav-links'} aria-label="Navegación principal">
           <a href="#inicio" onClick={closeMenu}>Inicio</a>
           <a href="#propuesta" onClick={closeMenu}>Propuesta</a>

@@ -7,6 +7,7 @@ import HupiLanding from './HupiLanding';
 import PharmaLanding from './PharmaLanding';
 import JardinesLanding from './JardinesLanding';
 import MrCateringLanding from './MrCateringLanding';
+import MedrivLanding from './MedrivLanding';
 import './hupi.css';
 
 const corporateHero = '/medunz-corp-hero.webp';
@@ -23,7 +24,7 @@ const companies = [
   { name: 'HUPI Baby Gym', text: 'Estimulación adecuada para el mejor desarrollo de nuestros hijos', logo: hupiLogo, image: '/hupi-card.webp', href: 'https://hupi.medunzcorp.com', accent: 'hupi' },
   { name: 'Medunz Pharma', text: 'Salud que impulsa vidas', logo: pharmaLogo, image: '/medunz-pharma-brand.jpg', href: 'https://pharma.medunzcorp.com', accent: 'pharma' },
   { name: 'Medunz Jardines', text: 'Naturaleza que inspira', logo: jardinesLogo, image: '/jardines-card.webp', href: 'https://jardines.medunzcorp.com', accent: 'jardines' },
-  { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, accent: 'medriv' },
+  { name: 'MEDRIV Bienes Raíces', text: 'Patrimonio que crece', logo: medrivLogo, image: '/medriv-card.webp', href: 'https://medriv.medunzcorp.com', accent: 'medriv' },
   { name: 'M&R Catering', text: 'Experiencias que conectan', logo: cateringLogo, image: '/mrcatering-card.webp', href: 'https://mrcatering.medunzcorp.com', accent: 'catering' },
 ];
 
@@ -207,6 +208,10 @@ const isCateringHost =
   hostname === 'mrcatering.medunzcorp.com' ||
   hostname === 'www.mrcatering.medunzcorp.com';
 
+const isMedrivHost =
+  hostname === 'medriv.medunzcorp.com' ||
+  hostname === 'www.medriv.medunzcorp.com';
+
 function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
@@ -218,7 +223,9 @@ function setSiteIcon() {
           ? '/jardines-favicon.svg?v=20261002'
           : isCateringHost
             ? '/mrcatering-favicon.svg?v=20261002'
-            : '/medunz-favicon.png?v=20261002';
+            : isMedrivHost
+              ? '/medriv-favicon.svg?v=20261005'
+              : '/medunz-favicon.png?v=20261002';
 
   document.querySelectorAll('link[rel="icon"], link[rel="shortcut icon"], link[rel="apple-touch-icon"]')
     .forEach((link) => link.remove());
@@ -248,5 +255,7 @@ createRoot(document.getElementById('root')).render(
           ? <JardinesLanding />
           : isCateringHost
             ? <MrCateringLanding />
-            : <App />
+            : isMedrivHost
+              ? <MedrivLanding />
+              : <App />
 );

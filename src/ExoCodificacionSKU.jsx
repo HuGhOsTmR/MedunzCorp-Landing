@@ -1,4 +1,5 @@
 import React from 'react';
+import GhostLogo from './assets/ghost-logo.svg';
 import { ArrowLeft, Download, Edit3, Package, Plus, Printer, Search, Trash2 } from 'lucide-react';
 import './exo-codificacion-sku.css';
 
@@ -133,7 +134,7 @@ export default function ExoCodificacionSKU() {
     <div className="exo-app">
       <header className="exo-header">
         <a className="exo-brand" href="https://ghost.medunzcorp.com" aria-label="Volver a Ghost">
-          <img src="/ghost-logo.svg" alt="Ghost Web & Software Designer" />
+          <img src={GhostLogo} alt="Ghost Web & Software Designer" />
         </a>
         <div className="exo-header-title">
           <span>GHOST W&amp;SD</span>

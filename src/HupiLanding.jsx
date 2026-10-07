@@ -2,7 +2,6 @@ import React from 'react';
 import { ArrowUpRight, Brain, Heart, Sparkles, Users, Menu, X } from 'lucide-react';
 
 import hupiLogo from './assets/hupi-baby-gym-logo.svg';
-import hupiHeroArt from './assets/hupi-hero-art.svg';
 import BrandSwitcher from './BrandSwitcher';
 
 export default function HupiLanding() {
@@ -59,10 +58,7 @@ export default function HupiLanding() {
                 <img src={hupiLogo} alt="HUPI Baby Gym" />
                 <span>JUGAR · EXPLORAR · CRECER</span>
               </div>
-              <div className="hupi-hero-art-wrap">
-                <img src={hupiHeroArt} alt="Ilustración de juego, estimulación y desarrollo infantil" />
-              </div>
-              <div className="hupi-graphic-caption">
+<div className="hupi-graphic-caption">
                 <span className="hupi-dot dot-pink" />
                 <span className="hupi-dot dot-yellow" />
                 <span className="hupi-dot dot-green" />

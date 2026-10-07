@@ -49,6 +49,7 @@ function applyOrderInventory(previous,next,inventory,movements){
  const willReserve=next.status==='Confirmado';
  const willRelease=['Borrador','Cancelado','Rechazado'].includes(next.status);
  const willDeliver=next.status==='Entregado';
+ if(['Preparando','Listo para entrega','En entrega','Entregado'].includes(next.status)&&!wasReserved&&!willReserve)throw new Error('El pedido debe pasar por Confirmado para reservar stock antes de avanzar a preparación o entrega.');
  if(!wasReserved&&!willReserve&&!willDeliver)return {inventory,movements,order:next};
  let nextInv=inventory.map(x=>({...x}));
  const newMov=[...movements];
@@ -71,7 +72,7 @@ export default function ExoPedidos(){
  const filtered=orders.filter(o=>(filter==='Todos'||o.status===filter)&&(!q.trim()||[o.id,o.customer,o.phone,o.status].join(' ').toLowerCase().includes(q.toLowerCase())));
  const selected=orders.find(o=>o.id===selectedId)||filtered[0];
  const save=o=>{try{const previous=orders.find(a=>a.id===o.id);const result=applyOrderInventory(previous,o,inventory,movements);setInventory(result.inventory);setMovements(result.movements);setOrders(x=>x.some(a=>a.id===result.order.id)?x.map(a=>a.id===result.order.id?result.order:a):[result.order,...x]);setSelectedId(result.order.id);setModal(false);setEditing(null)}catch(error){alert(error.message)}};
- const del=id=>{if(confirm('¿Eliminar este pedido?')){setOrders(x=>x.filter(o=>o.id!==id));setSelectedId('')}};
+ const del=id=>{if(!confirm('¿Eliminar este pedido?'))return;const order=orders.find(o=>o.id===id);if(order?.reservationApplied){try{const result=applyOrderInventory(order,{...order,status:'Cancelado'},inventory,movements);setInventory(result.inventory);setMovements(result.movements)}catch(error){alert(error.message);return}}setOrders(x=>x.filter(o=>o.id!==id));setSelectedId('')};
  const counts=STATUS.reduce((a,s)=>(a[s]=orders.filter(o=>o.status===s).length,a),{});
  return <div className="exo-orders">
   <header className="exo-orders-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / PEDIDOS</strong></div><a className="exo-orders-back" href="https://ghost.medunzcorp.com/exo/presentaciones"><ArrowLeft size={15}/> Presentaciones</a></header>

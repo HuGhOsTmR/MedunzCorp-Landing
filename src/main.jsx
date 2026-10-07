@@ -217,7 +217,7 @@ const isMedrivHost =
   hostname === 'www.medriv.medunzcorp.com';
 
 const isExoSkuPath =
-  isGhostHost && window.location.pathname.replace(/\\/+$/, '') === '/exo/codificacionSKU';
+  isGhostHost && window.location.pathname.replace(/\/+$/, '').toLowerCase() === '/exo/codificacionsku';
 
 function setSiteIcon() {
   const iconHref = isGhostHost

@@ -1,6 +1,7 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
-import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound } from 'lucide-react';
+import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound, Truck } from 'lucide-react';
+import { LOT_INV_KEY, ensureLotInventory, allocateFEFO } from './exo-lot-utils';
 import './exo-pedidos.css';
 
 const PRICES = {
@@ -23,6 +24,7 @@ const STATUS=['Borrador','Confirmado','Preparando','Listo para entrega','En entr
 const KEY='exo_orders_v1';
 const INVENTORY_KEY='exo_inventory_v1';
 const MOVEMENTS_KEY='exo_movements_v1';
+const LOTS_KEY='exo_lots_v1';
 const CUSTOMER_KEY='exo_customers_v1';
 const CUSTOMER_SEED=[
 {id:'EXO-CLI-0001',type:'Empresa',name:'Distribuidora Norte',nit:'10293847',phone:'70000001',email:'ventas@distribuidoranorte.bo',address:'Cochabamba',status:'Activo'},
@@ -39,26 +41,107 @@ const seed=[
 ];
 
 function load(customers=loadCustomers()){try{const x=JSON.parse(localStorage.getItem(KEY));if(Array.isArray(x)&&x.length)return normalizeOrders(x,customers)}catch{}return normalizeOrders(seed,customers)}
+function loadLots(){try{const x=JSON.parse(localStorage.getItem(LOTS_KEY));if(Array.isArray(x)&&x.length)return x}catch{}return [{id:'EXO-2026-001',lot:'EXO-2026-001',productCode:'SHA',product:'Shampoo',size:'1 L',sku:'EXO-SHA-001',manufactured:'2026-10-01',expires:'2028-10-01',quantity:500,status:'Liberado'},{id:'EXO-2026-002',lot:'EXO-2026-002',productCode:'VAJ',product:'Vajillero',size:'1 L',sku:'EXO-VAJ-001',manufactured:'2026-10-03',expires:'2028-10-03',quantity:350,status:'En producción'},{id:'EXO-2026-003',lot:'EXO-2026-003',productCode:'LVR',product:'Lava Ropa',size:'3 L',sku:'EXO-LVR-003',manufactured:'2026-10-05',expires:'2028-10-05',quantity:250,status:'En cuarentena'},{id:'EXO-2026-004',lot:'EXO-2026-004',productCode:'CWS',product:'Car Wash',size:'500 ml',sku:'EXO-CWS-500',manufactured:'2026-10-06',expires:'2028-10-06',quantity:420,status:'Planificado'}]}
 function money(n){return `Bs ${Number(n||0).toFixed(2)}`}
 function total(o){return o.lines.reduce((s,l)=>s+l.qty*l.price,0)-Number(o.discount||0)}
 const INVENTORY_SEED=CATALOG.map((x,i)=>({...{sku:SKU(x[0],x[2][0]),code:x[0],product:x[1],presentation:x[2][0]},stock:0,reserved:0}));
 function readArray(key,fallback=[]){try{const x=JSON.parse(localStorage.getItem(key));return Array.isArray(x)?x:fallback}catch{return fallback}}
-function applyOrderInventory(previous,next,inventory,movements){
+function applyOrderInventory(previous,next,inventory,movements,lotInventory,lots){
  const oldRes=previous?.reservationLines||[];
+ const oldAlloc=previous?.reservationAllocations||[];
  const wasReserved=Boolean(previous?.reservationApplied&&oldRes.length);
  const willReserve=next.status==='Confirmado';
  const willRelease=['Borrador','Cancelado','Rechazado'].includes(next.status);
  const willDeliver=next.status==='Entregado';
- if(['Preparando','Listo para entrega','En entrega','Entregado'].includes(next.status)&&!wasReserved&&!willReserve)throw new Error('El pedido debe pasar por Confirmado para reservar stock antes de avanzar a preparación o entrega.');
- if(!wasReserved&&!willReserve&&!willDeliver)return {inventory,movements,order:next};
+
+ if(previous?.status==='Entregado'&&next.status!=='Entregado') throw new Error('Un pedido ya entregado no puede volver a un estado anterior.');
+ if(['Preparando','Listo para entrega','En entrega','Entregado'].includes(next.status)&&!wasReserved&&!willReserve) throw new Error('El pedido debe pasar por Confirmado para reservar stock y asignar lotes antes de avanzar a preparación o entrega.');
+ if(!wasReserved&&!willReserve&&!willDeliver) return {inventory,movements,lotInventory,order:next};
+
  let nextInv=inventory.map(x=>({...x}));
+ let nextLotInv=lotInventory.map(x=>({...x}));
  const newMov=[...movements];
- const addMovement=(type,line,qty,ref,updated)=>newMov.unshift({id:`MOV-${Date.now()}-${newMov.length}`,date:new Date().toISOString(),type,sku:line.sku,product:line.product,presentation:line.presentation,lot:'',quantity:qty,reference:ref,balanceStock:updated.stock,balanceReserved:updated.reserved,orderId:next.id});
- const restoreReservations=()=>{oldRes.forEach(line=>{const item=nextInv.find(x=>x.sku===line.sku);if(item){item.reserved=Math.max(0,item.reserved-line.qty);addMovement('Liberación',line,line.qty,`Pedido ${next.id} · liberación`,item)}})};
- if(wasReserved&&(willRelease||willDeliver||willReserve)){restoreReservations();}
- if(willDeliver){for(const line of oldRes){const item=nextInv.find(x=>x.sku===line.sku);if(!item||item.stock<line.qty){throw new Error(`No hay stock físico suficiente para entregar ${line.product} · ${line.presentation}.`)}item.stock-=line.qty;addMovement('Salida',line,line.qty,`Pedido ${next.id} · entrega`,item)}return {inventory:nextInv,movements:newMov,order:{...next,reservationApplied:false,reservationLines:[]}};}
- if(willReserve){const requested=next.lines.map(l=>({...l,qty:Number(l.qty)||0})).filter(l=>l.qty>0);const totals=requested.reduce((a,l)=>(a[l.sku]=(a[l.sku]||0)+l.qty,a),{});const missing=Object.entries(totals).map(([sku,qty])=>{const item=nextInv.find(x=>x.sku===sku);const available=Math.max(0,(item?.stock||0)-(item?.reserved||0));return {sku,qty,available}}).filter(l=>l.qty>l.available);if(missing.length){const msg=missing.map(l=>`${l.sku}: necesita ${l.qty}, disponible ${l.available}`).join('\\n');throw new Error(`No hay stock suficiente para confirmar el pedido:\\n${msg}`)}requested.forEach(line=>{const item=nextInv.find(x=>x.sku===line.sku);item.reserved+=line.qty;addMovement('Reserva',line,line.qty,`Pedido ${next.id} · reserva`,item)});return {inventory:nextInv,movements:newMov,order:{...next,reservationApplied:true,reservationLines:requested.map(l=>({sku:l.sku,product:l.product,presentation:l.presentation,qty:l.qty}))}};}
- return {inventory:nextInv,movements:newMov,order:{...next,reservationApplied:false,reservationLines:[]}};
+ const addMovement=(type,line,qty,ref,updated,lot='')=>{
+  newMov.unshift({
+   id:'MOV-'+Date.now()+'-'+newMov.length,
+   date:new Date().toISOString(),type,sku:line.sku,product:line.product,presentation:line.presentation,
+   lot,quantity:qty,reference:ref,balanceStock:updated?.stock||0,balanceReserved:updated?.reserved||0,orderId:next.id
+  });
+ };
+ const releaseReservations=()=>{
+  oldRes.forEach(line=>{
+   const item=nextInv.find(x=>x.sku===line.sku);
+   if(item){ item.reserved=Math.max(0,item.reserved-line.qty); addMovement('Liberación',line,line.qty,'Pedido '+next.id+' · liberación',item); }
+  });
+  oldAlloc.forEach(a=>{
+   const li=nextLotInv.find(x=>(x.lotId||x.id)===a.lotId||x.lot===a.lot);
+   if(li) li.reserved=Math.max(0,li.reserved-a.qty);
+  });
+ };
+ if(wasReserved&&(willRelease||willDeliver||willReserve)) releaseReservations();
+
+ if(willDeliver){
+  if(!wasReserved) throw new Error('No se puede entregar un pedido que no tiene una reserva activa.');
+  if(oldAlloc.length){
+   for(const a of oldAlloc){
+    const li=nextLotInv.find(x=>(x.lotId||x.id)===a.lotId||x.lot===a.lot);
+    const item=nextInv.find(x=>x.sku===a.sku);
+    if(!li||!item||Number(li.stock||0)<a.qty) throw new Error('El lote '+a.lot+' no tiene stock físico suficiente para completar la entrega.');
+   }
+   for(const a of oldAlloc){
+    const li=nextLotInv.find(x=>(x.lotId||x.id)===a.lotId||x.lot===a.lot);
+    const item=nextInv.find(x=>x.sku===a.sku);
+    li.stock-=a.qty; item.stock-=a.qty; item.reserved=Math.max(0,item.reserved-a.qty);
+    addMovement('Salida',a,a.qty,'Pedido '+next.id+' · entrega FEFO',item,a.lot);
+   }
+  }else{
+   for(const line of oldRes){
+    const item=nextInv.find(x=>x.sku===line.sku);
+    if(!item||item.stock<line.qty) throw new Error('No hay stock físico suficiente para entregar '+line.product+' · '+line.presentation+'.');
+    item.stock-=line.qty; item.reserved=Math.max(0,item.reserved-line.qty);
+    addMovement('Salida',line,line.qty,'Pedido '+next.id+' · entrega',item,'');
+   }
+  }
+  return {inventory:nextInv,movements:newMov,lotInventory:nextLotInv,order:{...next,reservationApplied:false,reservationLines:[],reservationAllocations:[],deliveredAt:new Date().toISOString()}};
+ }
+
+ if(willReserve){
+  const requested=next.lines.map(l=>({...l,qty:Number(l.qty)||0})).filter(l=>l.qty>0);
+  const totals=requested.reduce((a,l)=>(a[l.sku]=(a[l.sku]||0)+l.qty,a),{});
+  const allAllocations=[]; const missing=[];
+  for(const [sku,qty] of Object.entries(totals)){
+   const allocations=allocateFEFO(lots,nextLotInv,sku,qty);
+   if(!allocations) missing.push({sku,qty}); else allAllocations.push(...allocations);
+  }
+  if(missing.length){
+   const msg=missing.map(x=>x.sku+': necesita '+x.qty+' unidades en lotes liberados').join('\n');
+   throw new Error('No hay stock por lote suficiente para confirmar el pedido.\n'+msg+'\n\nRegistra o libera el lote correspondiente antes de confirmar.');
+  }
+  for(const line of requested){
+   const item=nextInv.find(x=>x.sku===line.sku);
+   if(!item) throw new Error('SKU no encontrado en inventario: '+line.sku);
+  }
+  allAllocations.forEach(a=>{
+   const li=nextLotInv.find(x=>(x.lotId||x.id)===a.lotId||x.lot===a.lot);
+   if(li) li.reserved+=a.qty;
+  });
+  requested.forEach(line=>{
+   const item=nextInv.find(x=>x.sku===line.sku);
+   item.reserved+=line.qty;
+  });
+  allAllocations.forEach(a=>{
+   const item=nextInv.find(x=>x.sku===a.sku);
+   addMovement('Reserva',a,a.qty,'Pedido '+next.id+' · reserva FEFO',item,a.lot);
+  });
+  return {
+   inventory:nextInv,movements:newMov,lotInventory:nextLotInv,
+   order:{...next,reservationApplied:true,
+    reservationLines:Object.entries(totals).map(([sku,qty])=>{const line=requested.find(x=>x.sku===sku);return {sku,product:line?.product||'',presentation:line?.presentation||'',qty};}),
+    reservationAllocations:allAllocations
+   }
+  };
+ }
+ return {inventory:nextInv,movements:newMov,lotInventory:nextLotInv,order:{...next,reservationApplied:false,reservationLines:[],reservationAllocations:[]}};
 }
 
 export default function ExoPedidos(){
@@ -69,19 +152,20 @@ export default function ExoPedidos(){
  React.useEffect(()=>{localStorage.setItem(KEY,JSON.stringify(orders));document.title='EXO · Pedidos | Ghost W&SD'},[orders]);
  React.useEffect(()=>{localStorage.setItem(INVENTORY_KEY,JSON.stringify(inventory))},[inventory]);
  React.useEffect(()=>{localStorage.setItem(MOVEMENTS_KEY,JSON.stringify(movements))},[movements]);
+ React.useEffect(()=>{localStorage.setItem(LOT_INV_KEY,JSON.stringify(lotInventory))},[lotInventory]);
  const filtered=orders.filter(o=>(filter==='Todos'||o.status===filter)&&(!q.trim()||[o.id,o.customer,o.phone,o.status].join(' ').toLowerCase().includes(q.toLowerCase())));
  const selected=orders.find(o=>o.id===selectedId)||filtered[0];
- const save=o=>{try{const previous=orders.find(a=>a.id===o.id);const result=applyOrderInventory(previous,o,inventory,movements);setInventory(result.inventory);setMovements(result.movements);setOrders(x=>x.some(a=>a.id===result.order.id)?x.map(a=>a.id===result.order.id?result.order:a):[result.order,...x]);setSelectedId(result.order.id);setModal(false);setEditing(null)}catch(error){alert(error.message)}};
- const del=id=>{if(!confirm('¿Eliminar este pedido?'))return;const order=orders.find(o=>o.id===id);if(order?.reservationApplied){try{const result=applyOrderInventory(order,{...order,status:'Cancelado'},inventory,movements);setInventory(result.inventory);setMovements(result.movements)}catch(error){alert(error.message);return}}setOrders(x=>x.filter(o=>o.id!==id));setSelectedId('')};
+ const save=o=>{try{const previous=orders.find(a=>a.id===o.id);const result=applyOrderInventory(previous,o,inventory,movements,lotInventory,lots);setInventory(result.inventory);setMovements(result.movements);setLotInventory(result.lotInventory);setOrders(x=>x.some(a=>a.id===result.order.id)?x.map(a=>a.id===result.order.id?result.order:a):[result.order,...x]);setSelectedId(result.order.id);setModal(false);setEditing(null)}catch(error){alert(error.message)}};
+ const del=id=>{if(!confirm('¿Eliminar este pedido?'))return;const order=orders.find(o=>o.id===id);if(order?.status==='Entregado'){alert('Los pedidos entregados forman parte de la trazabilidad y no deben eliminarse.');return}if(order?.reservationApplied){try{const result=applyOrderInventory(order,{...order,status:'Cancelado'},inventory,movements,lotInventory,lots);setInventory(result.inventory);setMovements(result.movements);setLotInventory(result.lotInventory)}catch(error){alert(error.message);return}}setOrders(x=>x.filter(o=>o.id!==id));setSelectedId('')};
  const counts=STATUS.reduce((a,s)=>(a[s]=orders.filter(o=>o.status===s).length,a),{});
  return <div className="exo-orders">
   <header className="exo-orders-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / PEDIDOS</strong></div><a className="exo-orders-back" href="https://ghost.medunzcorp.com/exo/presentaciones"><ArrowLeft size={15}/> Presentaciones</a></header>
   <main className="exo-orders-main">
-   <section className="exo-orders-hero"><div><span className="exo-kicker">EXO · VENTAS Y CONTROL</span><h1>Pedidos.<br/><em>De la solicitud a la entrega.</em></h1><p>Registra, confirma y controla cada pedido comercial. El precio aplicado pertenece al pedido, mientras el SKU permanece estable como identificador de la presentación.</p></div><div className="exo-orders-mark"><ShoppingCart size={38}/><span>{orders.length}<br/>PEDIDOS</span></div></section>
+   <section className="exo-orders-hero"><div><span className="exo-kicker">EXO · VENTAS Y CONTROL</span><h1>Pedidos.<br/><em>De la solicitud a la entrega.</em></h1><p>Registra, confirma y controla cada pedido comercial. Al confirmar, el sistema reserva stock y asigna automáticamente los lotes por FEFO; la entrega descuenta físicamente esos mismos lotes.</p></div><div className="exo-orders-mark"><ShoppingCart size={38}/><span>{orders.length}<br/>PEDIDOS</span></div></section>
    <section className="exo-order-stats">{[['Nuevos','Borrador'],['Confirmados','Confirmado'],['En preparación','Preparando'],['En entrega','En entrega'],['Entregados','Entregado']].map(([label,s])=><div key={s}><strong>{counts[s]||0}</strong><span>{label}</span></div>)}</section>
    <section className="exo-orders-toolbar"><div className="exo-orders-search"><Search size={17}/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Buscar pedido, cliente o teléfono..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option>{STATUS.map(s=><option key={s}>{s}</option>)}</select><button className="exo-orders-button primary" onClick={()=>{setEditing(null);setModal(true)}}><Plus size={16}/> Nuevo pedido</button></section>
    <section className="exo-orders-layout"><div className="exo-orders-list"><div className="exo-list-head"><div><span>PEDIDOS REGISTRADOS</span><h2>{filtered.length} registros</h2></div><ShoppingCart size={20}/></div>{filtered.map(o=><button key={o.id} className={selected?.id===o.id?'exo-order-row active':'exo-order-row'} onClick={()=>setSelectedId(o.id)}><span><b>{o.id}</b><small>{o.date} · {o.customer}</small></span><strong>{money(total(o))}</strong><span className="exo-status">{o.status}</span><ChevronRight size={17}/></button>)}</div>
-   <aside className="exo-order-detail">{selected?<><div className="exo-detail-top"><span>FICHA DE PEDIDO</span><span className="exo-status large">{selected.status}</span></div><div className="exo-order-id">{selected.id}</div><div className="exo-customer"><UserRound size={20}/><div><strong>{selected.customer}</strong><span>{selected.phone||'Sin teléfono'}</span></div></div><div className="exo-lines"><div className="exo-lines-head"><span>DETALLE</span><span>IMPORTE</span></div>{selected.lines.map((l,i)=><div className="exo-line" key={i}><div><b>{l.product}</b><span>{l.presentation} · {l.sku} · {l.qty} un.</span></div><strong>{money(l.qty*l.price)}</strong></div>)}</div><div className="exo-total"><span>Total</span><strong>{money(total(selected))}</strong></div><div className="exo-detail-actions"><button className="exo-orders-button primary" onClick={()=>{setEditing(selected);setModal(true)}}><Edit3 size={15}/> Editar</button><button className="exo-danger" onClick={()=>del(selected.id)}><Trash2 size={15}/> Eliminar</button></div></>:<div className="exo-empty">Selecciona un pedido.</div>}</aside></section>
+   <aside className="exo-order-detail">{selected?<><div className="exo-detail-top"><span>FICHA DE PEDIDO</span><span className="exo-status large">{selected.status}</span></div><div className="exo-order-id">{selected.id}</div><div className="exo-customer"><UserRound size={20}/><div><strong>{selected.customer}</strong><span>{selected.phone||'Sin teléfono'}</span></div></div><div className="exo-lines"><div className="exo-lines-head"><span>DETALLE</span><span>IMPORTE</span></div>{selected.lines.map((l,i)=><div className="exo-line" key={i}><div><b>{l.product}</b><span>{l.presentation} · {l.sku} · {l.qty} un.</span></div><strong>{money(l.qty*l.price)}</strong></div>)}</div>{selected.reservationAllocations?.length>0&&<div className="exo-detail-note"><strong><Truck size={15}/> Asignación FEFO</strong><p>{selected.reservationAllocations.map((a,i)=><span key={i}>{a.lot} · {a.sku} · {a.qty} u.</span>)}</p></div>}<div className="exo-total"><span>Total</span><strong>{money(total(selected))}</strong></div><div className="exo-detail-actions"><button className="exo-orders-button primary" onClick={()=>{setEditing(selected);setModal(true)}}><Edit3 size={15}/> Editar</button><button className="exo-danger" onClick={()=>del(selected.id)}><Trash2 size={15}/> Eliminar</button></div></>:<div className="exo-empty">Selecciona un pedido.</div>}</aside></section>
   </main>
   {modal&&<OrderModal initial={editing} customers={customers} inventory={inventory} onClose={()=>setModal(false)} onSave={save}/>}
   <footer className="exo-orders-footer"><span>EXO · Pedidos</span><span>Ghost Web &amp; Software Designer · Medunz Corp.</span></footer>

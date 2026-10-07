@@ -1,0 +1,46 @@
+import React from 'react';
+import { ArrowLeft, Edit3, Plus, Search, Trash2, CalendarDays, Package } from 'lucide-react';
+import './exo-lotes.css';
+
+const DEFAULT_LOTS=[
+ {id:'EXO-2026-001',lot:'EXO-2026-001',productCode:'SHA',product:'Shampoo',size:'1 L',sku:'EXO-SHA-001',manufactured:'2026-10-01',expires:'2028-10-01',quantity:500,status:'Liberado'},
+ {id:'EXO-2026-002',lot:'EXO-2026-002',productCode:'VAJ',product:'Vajillero',size:'1 L',sku:'EXO-VAJ-001',manufactured:'2026-10-03',expires:'2028-10-03',quantity:350,status:'En producción'},
+ {id:'EXO-2026-003',lot:'EXO-2026-003',productCode:'LVR',product:'Lava Ropa',size:'3 L',sku:'EXO-LVR-003',manufactured:'2026-10-05',expires:'2028-10-05',quantity:250,status:'En cuarentena'},
+ {id:'EXO-2026-004',lot:'EXO-2026-004',productCode:'CWS',product:'Car Wash',size:'500 ml',sku:'EXO-CWS-500',manufactured:'2026-10-06',expires:'2028-10-06',quantity:420,status:'Planificado'}
+];
+const STORAGE_KEY='exo_lots_v1';
+const PRODUCTS=[
+ ['VAJ','Vajillero',['1 L','3 L','10 L']],['LPI','Limpia Piso',['1 L','3 L','10 L']],
+ ['SHA','Shampoo',['500 ml','1 L','3 L','10 L']],['SGR','Saca Grasa',['1 L','3 L','10 L']],
+ ['LVR','Lava Ropa',['3 L','5 L','10 L']],['JLI','Jabón Líquido',['1 L','3 L','10 L']],
+ ['CWS','Car Wash',['500 ml','1 L','3 L','10 L']]
+].map(([code,name,sizes])=>({code,name,sizes}));
+
+function loadLots(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY));if(Array.isArray(x)&&x.length)return x}catch{}return DEFAULT_LOTS}
+const fmt=d=>d?new Intl.DateTimeFormat('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(d+'T12:00:00')):'—';
+
+export default function ExoLotes(){
+ const [lots,setLots]=React.useState(loadLots),[selectedId,setSelectedId]=React.useState(DEFAULT_LOTS[0].id),[query,setQuery]=React.useState(''),[filter,setFilter]=React.useState('Todos'),[modal,setModal]=React.useState(false),[editing,setEditing]=React.useState(null);
+ React.useEffect(()=>{document.title='EXO · Lotes';localStorage.setItem(STORAGE_KEY,JSON.stringify(lots))},[lots]);
+ const filtered=lots.filter(x=>{const q=query.trim().toLowerCase();return (filter==='Todos'||x.status===filter)&&(!q||[x.lot,x.product,x.productCode,x.size,x.sku,x.status].join(' ').toLowerCase().includes(q))});
+ const selected=lots.find(x=>x.id===selectedId)||filtered[0];
+ const save=x=>{setLots(a=>a.some(y=>y.id===x.id)?a.map(y=>y.id===x.id?x:y):[...a,x]);setSelectedId(x.id);setModal(false);setEditing(null)};
+ const remove=id=>{if(window.confirm('¿Eliminar este lote?')){setLots(a=>a.filter(x=>x.id!==id));setSelectedId('')}};
+ return <div className="exo-lots">
+  <header className="exo-lots-header"><a href="https://ghost.medunzcorp.com" className="exo-lots-brand"><img src="/ghost-logo.svg" alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>GESTIÓN DE LOTES</strong></div><a href="https://ghost.medunzcorp.com/exo/presentaciones" className="exo-lots-back"><ArrowLeft size={15}/> Presentaciones</a></header>
+  <main className="exo-lots-main">
+   <section className="exo-lots-hero"><div><span className="exo-lots-kicker">EXO CLEAN · TRAZABILIDAD</span><h1>Lotes.<br/><em>Cada producción cuenta.</em></h1><p>Registra y controla los lotes de fabricación para mantener identificados el producto, la presentación, el SKU, las fechas y las cantidades producidas.</p></div><div className="exo-lots-mark"><Package size={40}/><strong>{lots.length}</strong><span>LOTES REGISTRADOS</span></div></section>
+   <section className="exo-lots-toolbar"><div className="exo-lots-search"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Buscar lote, producto o SKU..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option><option>Planificado</option><option>En producción</option><option>En cuarentena</option><option>Liberado</option><option>Bloqueado</option><option>Agotado</option></select><button className="exo-lots-btn primary" onClick={()=>{setEditing(null);setModal(true)}}><Plus size={16}/> Nuevo lote</button></section>
+   <section className="exo-lots-layout"><div className="exo-lots-list"><div className="exo-lots-list-head"><div><span>REGISTRO DE PRODUCCIÓN</span><h2>{filtered.length} lotes</h2></div><b>EXO</b></div>{filtered.map(x=><button key={x.id} className={selected?.id===x.id?'exo-lot-row active':'exo-lot-row'} onClick={()=>setSelectedId(x.id)}><span className="lot-number">{x.lot}</span><span className="lot-info"><strong>{x.product} · {x.size}</strong><small>{x.sku} · {x.quantity.toLocaleString('es-BO')} unidades</small></span><span className="lot-status">{x.status}</span></button>)}</div>
+   <aside className="exo-lots-detail">{selected?<><div className="exo-lots-detail-top"><span>FICHA DEL LOTE</span><span className={'status '+selected.status.toLowerCase().replace(/\s/g,'-')}>{selected.status}</span></div><div className="lot-big-number">{selected.lot}</div><h2>{selected.product}</h2><div className="lot-size">{selected.size}</div><div className="lot-grid"><div><span>SKU</span><strong>{selected.sku}</strong></div><div><span>CANTIDAD</span><strong>{selected.quantity.toLocaleString('es-BO')} u.</strong></div><div><span>FABRICACIÓN</span><strong>{fmt(selected.manufactured)}</strong></div><div><span>VENCIMIENTO</span><strong>{fmt(selected.expires)}</strong></div></div><div className="lot-trace"><CalendarDays size={18}/><div><strong>Identificación trazable</strong><p>Este lote queda asociado a una presentación concreta. Producción, calidad e inventario podrán utilizar este identificador en las siguientes etapas.</p></div></div><div className="exo-lots-actions"><button className="exo-lots-btn primary" onClick={()=>{setEditing(selected);setModal(true)}}><Edit3 size={15}/> Editar</button><button className="exo-lots-danger" onClick={()=>remove(selected.id)}><Trash2 size={15}/> Eliminar</button></div></>:<p>No hay lotes para mostrar.</p>}</aside></section>
+  </main><footer className="exo-lots-footer"><span>EXO CLEAN · Gestión de lotes</span><span>Ghost Web & Software Designer · Medunz Corp.</span></footer>
+  {modal&&<LotModal initial={editing} lots={lots} onClose={()=>{setModal(false);setEditing(null)}} onSave={save}/>}
+ </div>
+}
+
+function LotModal({initial,lots,onClose,onSave}){
+ const [lot,setLot]=React.useState(initial?.lot||'EXO-2026-'),[productCode,setProductCode]=React.useState(initial?.productCode||'SHA'),[size,setSize]=React.useState(initial?.size||'1 L'),[manufactured,setManufactured]=React.useState(initial?.manufactured||''),[expires,setExpires]=React.useState(initial?.expires||''),[quantity,setQuantity]=React.useState(initial?.quantity||''),[status,setStatus]=React.useState(initial?.status||'Planificado');
+ const product=PRODUCTS.find(x=>x.code===productCode)||PRODUCTS[0]; React.useEffect(()=>{if(!product.sizes.includes(size))setSize(product.sizes[0])},[productCode]);
+ const save=e=>{e.preventDefault();const clean=lot.trim().toUpperCase();if(!clean||!manufactured||!expires||Number(quantity)<=0)return;if(lots.some(x=>x.lot===clean&&x.id!==initial?.id)){alert('El número de lote ya existe.');return}const sku='EXO-'+product.code+'-'+size.replace(/[^0-9]/g,'').padStart(3,'0');onSave({id:initial?.id||clean,lot:clean,productCode:product.code,product:product.name,size,sku,manufactured,expires,quantity:Number(quantity),status})};
+ return <div className="exo-lots-modal-bg" onMouseDown={e=>e.target===e.currentTarget&&onClose()}><form className="exo-lots-modal" onSubmit={save}><div className="exo-lots-modal-head"><div><span>NUEVO REGISTRO</span><h2>{initial?'Editar lote':'Nuevo lote'}</h2></div><button type="button" onClick={onClose}>×</button></div><label>Número de lote<input value={lot} onChange={e=>setLot(e.target.value)} placeholder="EXO-2026-005"/></label><label>Producto<select value={productCode} onChange={e=>setProductCode(e.target.value)}>{PRODUCTS.map(x=><option key={x.code} value={x.code}>{x.name} ({x.code})</option>)}</select></label><label>Presentación<select value={size} onChange={e=>setSize(e.target.value)}>{product.sizes.map(x=><option key={x}>{x}</option>)}</select></label><div className="date-grid"><label>Fabricación<input type="date" value={manufactured} onChange={e=>setManufactured(e.target.value)}/></label><label>Vencimiento<input type="date" value={expires} onChange={e=>setExpires(e.target.value)}/></label></div><label>Cantidad producida<input type="number" min="1" value={quantity} onChange={e=>setQuantity(e.target.value)} placeholder="500"/></label><label>Estado<select value={status} onChange={e=>setStatus(e.target.value)}><option>Planificado</option><option>En producción</option><option>En cuarentena</option><option>Liberado</option><option>Bloqueado</option><option>Agotado</option></select></label><div className="exo-lots-modal-foot"><button type="button" className="exo-lots-btn light" onClick={onClose}>Cancelar</button><button className="exo-lots-btn primary">Guardar lote</button></div></form></div>
+}

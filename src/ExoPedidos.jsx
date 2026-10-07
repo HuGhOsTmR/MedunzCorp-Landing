@@ -151,8 +151,10 @@ function applyOrderInventory(previous,next,inventory,movements,lotInventory,lots
 export default function ExoPedidos(){
  const customers=React.useMemo(()=>loadCustomers(),[]);
  const initialOrders=React.useMemo(()=>load(customers),[customers]);
+ const lots=React.useMemo(()=>loadLots(),[]);
  const [orders,setOrders]=React.useState(initialOrders),[selectedId,setSelectedId]=React.useState(initialOrders[0]?.id),[q,setQ]=React.useState(''),[filter,setFilter]=React.useState('Todos'),[modal,setModal]=React.useState(false),[editing,setEditing]=React.useState(null),[inventory,setInventory]=React.useState(()=>readArray(INVENTORY_KEY, CATALOG.flatMap(([code,product,sizes])=>sizes.map(size=>({sku:SKU(code,size),code,product,presentation:size,stock:0,reserved:0})))));
  const [movements,setMovements]=React.useState(()=>readArray(MOVEMENTS_KEY));
+ const [lotInventory,setLotInventory]=React.useState(()=>ensureLotInventory(lots,readArray(LOT_INV_KEY)));
  React.useEffect(()=>{localStorage.setItem(KEY,JSON.stringify(orders));document.title='EXO · Pedidos | Ghost W&SD'},[orders]);
  React.useEffect(()=>{localStorage.setItem(INVENTORY_KEY,JSON.stringify(inventory))},[inventory]);
  React.useEffect(()=>{localStorage.setItem(MOVEMENTS_KEY,JSON.stringify(movements))},[movements]);

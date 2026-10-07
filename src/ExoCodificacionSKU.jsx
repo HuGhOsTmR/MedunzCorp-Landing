@@ -1,15 +1,15 @@
 import React from 'react';
-import { ArrowLeft, Download, Edit3, Package, Plus, Printer, Search, ShieldCheck, Trash2 } from 'lucide-react';
+import { ArrowLeft, Download, Edit3, Package, Plus, Printer, Search, Trash2 } from 'lucide-react';
 import './exo-codificacion-sku.css';
 
 const PRODUCTS = [
-  { name: 'Vajillero', code: 'VAJ', sizes: ['1 L', '3 L', '10 L'], prices: { '1 L': 13, '3 L': 30.5, '10 L': 101 } },
-  { name: 'Limpia Piso', code: 'LPI', sizes: ['1 L', '3 L', '10 L'], prices: { '1 L': 11, '3 L': 25.5, '10 L': 81 } },
-  { name: 'Shampoo', code: 'SHA', sizes: ['500 ml', '1 L', '3 L', '10 L'], prices: { '500 ml': 11.5, '1 L': 20.5, '3 L': 55.5, '10 L': 176 } },
-  { name: 'Saca Grasa', code: 'SGR', sizes: ['1 L', '3 L', '10 L'], prices: { '1 L': 18, '3 L': 40.5, '10 L': 126 } },
-  { name: 'Lava Ropa', code: 'LVR', sizes: ['3 L', '5 L', '10 L'], prices: { '3 L': 45.5, '5 L': 75.5, '10 L': 151 } },
-  { name: 'Jabón Líquido', code: 'JLI', sizes: ['1 L', '3 L', '10 L'], prices: { '1 L': 13, '3 L': 30.5, '10 L': 101 } },
-  { name: 'Car Wash', code: 'CWS', sizes: ['500 ml', '1 L', '3 L', '10 L'], prices: { '500 ml': 11.5, '1 L': 20.5, '3 L': 55.5, '10 L': 176 } },
+  { name: 'Vajillero', code: 'VAJ', sizes: ['1 L', '3 L', '10 L'] },
+  { name: 'Limpia Piso', code: 'LPI', sizes: ['1 L', '3 L', '10 L'] },
+  { name: 'Shampoo', code: 'SHA', sizes: ['500 ml', '1 L', '3 L', '10 L'] },
+  { name: 'Saca Grasa', code: 'SGR', sizes: ['1 L', '3 L', '10 L'] },
+  { name: 'Lava Ropa', code: 'LVR', sizes: ['3 L', '5 L', '10 L'] },
+  { name: 'Jabón Líquido', code: 'JLI', sizes: ['1 L', '3 L', '10 L'] },
+  { name: 'Car Wash', code: 'CWS', sizes: ['500 ml', '1 L', '3 L', '10 L'] },
 ];
 
 const STORAGE_KEY = 'ghost_exo_sku_catalog_v1';
@@ -35,7 +35,6 @@ function buildCatalog() {
       presentation: size,
       sku: `EXO-${product.code}-${size === '500 ml' ? '500' : size.replace(' L', '').padStart(3, '0')}`,
       provisionalCode: provisionalCode(index++),
-      price: product.prices[size],
       status: 'Activo',
       officialGtin: '',
       lot: '',
@@ -120,8 +119,8 @@ export default function ExoCodificacionSKU() {
   };
 
   const exportCsv = () => {
-    const headers = ['Producto','Presentación','SKU','Código provisional','GTIN oficial','Precio','Lote','Estado'];
-    const rows = catalog.map((x) => [x.product,x.presentation,x.sku,x.provisionalCode,x.officialGtin,x.price,x.lot,x.status]);
+    const headers = ['Producto','Presentación','SKU','Código provisional','GTIN oficial','Lote','Estado'];
+    const rows = catalog.map((x) => [x.product,x.presentation,x.sku,x.provisionalCode,x.officialGtin,x.lot,x.status]);
     const csv = [headers, ...rows].map((r) => r.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -153,11 +152,6 @@ export default function ExoCodificacionSKU() {
           <div className="exo-hero-mark"><Package size={38} strokeWidth={1.2} /><span>23<br />PRESENTACIONES</span></div>
         </section>
 
-        <section className="exo-notice">
-          <ShieldCheck size={19} />
-          <div><strong>Código provisional interno</strong><span>El código de 13 dígitos utiliza el algoritmo de dígito verificador EAN-13, pero <b>no es un GTIN/EAN oficial</b> ni sustituye el registro GS1.</span></div>
-        </section>
-
         <section className="exo-toolbar">
           <div className="exo-search"><Search size={17} /><input value={query} onChange={(e) => setQuery(e.target.value)} placeholder="Buscar producto, SKU o código..." /></div>
           <select value={filterProduct} onChange={(e) => setFilterProduct(e.target.value)}><option>Todos</option>{PRODUCTS.map((p) => <option key={p.code}>{p.name}</option>)}</select>
@@ -170,11 +164,11 @@ export default function ExoCodificacionSKU() {
             <div className="exo-table-head"><div><span className="exo-label">CATÁLOGO MAESTRO</span><h2>{filtered.length} registros</h2></div><span className="exo-status">● PROVISIONAL</span></div>
             <div className="exo-table-scroll">
               <table>
-                <thead><tr><th>Producto</th><th>Presentación</th><th>SKU</th><th>Código provisional</th><th>Precio</th><th></th></tr></thead>
+                <thead><tr><th>Producto</th><th>Presentación</th><th>SKU</th><th>Código provisional</th><th></th></tr></thead>
                 <tbody>
                   {filtered.map((item) => (
                     <tr key={item.id} className={selected?.id === item.id ? 'active' : ''} onClick={() => setSelectedId(item.id)}>
-                      <td><strong>{item.product}</strong></td><td>{item.presentation}</td><td><code>{item.sku}</code></td><td><code>{item.provisionalCode}</code></td><td>Bs {Number(item.price).toFixed(2)}</td><td><button className="icon-button" onClick={(e) => { e.stopPropagation(); setEditing(item); setModalOpen(true); }} aria-label="Editar"><Edit3 size={15} /></button></td>
+                      <td><strong>{item.product}</strong></td><td>{item.presentation}</td><td><code>{item.sku}</code></td><td><code>{item.provisionalCode}</code></td><td><button className="icon-button" onClick={(e) => { e.stopPropagation(); setEditing(item); setModalOpen(true); }} aria-label="Editar"><Edit3 size={15} /></button></td>
                     </tr>
                   ))}
                 </tbody>
@@ -190,7 +184,7 @@ export default function ExoCodificacionSKU() {
                 <div className="exo-sku-block"><span>SKU</span><strong>{selected.sku}</strong></div>
                 <Barcode value={selected.provisionalCode} />
                 <div className="exo-code-note">CÓDIGO PROVISIONAL · 13 DÍGITOS</div>
-                <div className="exo-meta-grid"><div><span>Precio actual</span><strong>Bs {Number(selected.price).toFixed(2)}</strong></div><div><span>GTIN oficial</span><strong>{selected.officialGtin || 'Pendiente GS1'}</strong></div><div><span>Lote</span><strong>{selected.lot || 'Sin asignar'}</strong></div><div><span>Estado</span><strong>{selected.status}</strong></div></div>
+                <div className="exo-meta-grid"><div><span>GTIN oficial</span><strong>{selected.officialGtin || 'Pendiente'}</strong></div><div><span>Lote</span><strong>{selected.lot || 'Sin asignar'}</strong></div><div><span>Estado</span><strong>{selected.status}</strong></div></div>
                 <div className="exo-detail-actions"><button className="exo-button dark" onClick={() => window.print()}><Printer size={15} /> Imprimir</button><button className="exo-button light" onClick={() => { setEditing(selected); setModalOpen(true); }}><Edit3 size={15} /> Editar</button></div>
               </>
             ) : <div className="exo-empty">Selecciona un producto para ver su ficha.</div>}
@@ -212,8 +206,6 @@ function SkuModal({ initial, catalog, onClose, onSave, onDelete }) {
   React.useEffect(() => {
     if (!currentProduct.sizes.includes(presentation)) setPresentation(currentProduct.sizes[0]);
   }, [product]);
-
-  const base = currentProduct.prices[presentation] ?? 0;
   const item = initial || {
     id: `${currentProduct.code}-${presentation.replace(/\\s/g, '')}-${Date.now()}`,
     productCode: currentProduct.code,
@@ -227,7 +219,7 @@ function SkuModal({ initial, catalog, onClose, onSave, onDelete }) {
   const save = (e) => {
     e.preventDefault();
     const data = new FormData(e.currentTarget);
-    onSave({ ...item, product, productCode: currentProduct.code, presentation, price: Number(data.get('price')) || base, officialGtin: String(data.get('gtin') || '').trim(), lot: String(data.get('lot') || '').trim(), status: data.get('status') });
+    onSave({ ...item, product, productCode: currentProduct.code, presentation, officialGtin: String(data.get('gtin') || '').trim(), lot: String(data.get('lot') || '').trim(), status: data.get('status') });
   };
 
   return (
@@ -236,8 +228,7 @@ function SkuModal({ initial, catalog, onClose, onSave, onDelete }) {
         <div className="exo-modal-head"><div><span className="exo-label">{initial ? 'EDITAR REGISTRO' : 'NUEVO REGISTRO'}</span><h2>{initial ? 'Actualizar SKU' : 'Crear SKU'}</h2></div><button type="button" onClick={onClose}>×</button></div>
         <label>Producto<select value={product} onChange={(e) => setProduct(e.target.value)}>{PRODUCTS.map((p) => <option key={p.code}>{p.name}</option>)}</select></label>
         <label>Presentación<select value={presentation} onChange={(e) => setPresentation(e.target.value)}>{currentProduct.sizes.map((s) => <option key={s}>{s}</option>)}</select></label>
-        <label>Precio de lista (Bs)<input name="price" type="number" min="0" step="0.01" defaultValue={initial?.price ?? base} /></label>
-        <label>GTIN oficial <input name="gtin" placeholder="Pendiente de registro GS1" defaultValue={initial?.officialGtin || ''} /></label>
+        <label>GTIN oficial <input name="gtin" placeholder="Pendiente" defaultValue={initial?.officialGtin || ''} /></label>
         <label>Lote <input name="lot" placeholder="Se asignará en producción" defaultValue={initial?.lot || ''} /></label>
         <label>Estado<select name="status" defaultValue={initial?.status || 'Activo'}><option>Activo</option><option>Inactivo</option><option>En desarrollo</option></select></label>
         <div className="exo-modal-foot">{initial && <button type="button" className="exo-danger" onClick={() => { onDelete(initial.id); onClose(); }}><Trash2 size={15} /> Eliminar</button>}<span /><button type="button" className="exo-button light" onClick={onClose}>Cancelar</button><button className="exo-button dark" type="submit">Guardar SKU</button></div>

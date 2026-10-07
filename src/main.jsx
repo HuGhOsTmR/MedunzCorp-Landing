@@ -11,6 +11,7 @@ import MedrivLanding from './MedrivLanding';
 import './hupi.css';
 import ExoCodificacionSKU from './ExoCodificacionSKU';
 import ExoProductos from './ExoProductos';
+import ExoPresentaciones from './ExoPresentaciones';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -217,8 +218,10 @@ const isMedrivHost =
   hostname === 'medriv.medunzcorp.com' ||
   hostname === 'www.medriv.medunzcorp.com';
 
-const isExoSkuPath =
-  isGhostHost && window.location.pathname.replace(/\/+$/, '').toLowerCase() === '/exo/codificacionsku';
+const normalizedPath = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+const isExoSkuPath = isGhostHost && normalizedPath === '/exo/codificacionsku';
+const isExoProductsPath = isGhostHost && normalizedPath === '/exo/productos';
+const isExoPresentationsPath = isGhostHost && normalizedPath === '/exo/presentaciones';
 
 function setSiteIcon() {
   const iconHref = isGhostHost
@@ -257,6 +260,8 @@ createRoot(document.getElementById('root')).render(
     ? <ExoCodificacionSKU />
     : isExoProductsPath
     ? <ExoProductos />
+    : isExoPresentationsPath
+    ? <ExoPresentaciones />
     : isGhostHost
     ? <GhostLanding />
     : isHupiHost

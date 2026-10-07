@@ -79,6 +79,9 @@ function applyOrderInventory(previous,next,inventory,movements,lotInventory,lots
   });
  };
  if(wasReserved&&(willRelease||willDeliver||willReserve)) releaseReservations();
+ if(wasReserved&&!willRelease&&!willDeliver&&!willReserve){
+  return {inventory:nextInv,movements:newMov,lotInventory:nextLotInv,order:{...next,reservationApplied:true,reservationLines:oldRes,reservationAllocations:oldAlloc}};
+ }
 
  if(willDeliver){
   if(!wasReserved) throw new Error('No se puede entregar un pedido que no tiene una reserva activa.');

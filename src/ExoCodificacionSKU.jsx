@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { ArrowLeft, Download, Edit3, Package, Plus, Printer, Search, Trash2 } from 'lucide-react';
 import './exo-codificacion-sku.css';
 
@@ -143,6 +144,7 @@ export default function ExoCodificacionSKU() {
         <a className="exo-back" href="https://ghost.medunzcorp.com"><ArrowLeft size={15} /> Ghost</a>
       </header>
 
+      <ExoNav active="sku" />
       <main className="exo-main">
         <section className="exo-hero">
           <div>

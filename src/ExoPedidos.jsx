@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound, Truck } from 'lucide-react';
 import { LOT_INV_KEY, ensureLotInventory, allocateFEFO } from './exo-lot-utils';
 import './exo-pedidos.css';
@@ -163,7 +164,8 @@ export default function ExoPedidos(){
  const counts=STATUS.reduce((a,s)=>(a[s]=orders.filter(o=>o.status===s).length,a),{});
  return <div className="exo-orders">
   <header className="exo-orders-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / PEDIDOS</strong></div><a className="exo-orders-back" href="https://ghost.medunzcorp.com/exo/presentaciones"><ArrowLeft size={15}/> Presentaciones</a></header>
-  <main className="exo-orders-main">
+  <ExoNav active="pedidos" />
+      <main className="exo-orders-main">
    <section className="exo-orders-hero"><div><span className="exo-kicker">EXO · VENTAS Y CONTROL</span><h1>Pedidos.<br/><em>De la solicitud a la entrega.</em></h1><p>Registra, confirma y controla cada pedido comercial. Al confirmar, el sistema reserva stock y asigna automáticamente los lotes por FEFO; la entrega descuenta físicamente esos mismos lotes.</p></div><div className="exo-orders-mark"><ShoppingCart size={38}/><span>{orders.length}<br/>PEDIDOS</span></div></section>
    <section className="exo-order-stats">{[['Nuevos','Borrador'],['Confirmados','Confirmado'],['En preparación','Preparando'],['En entrega','En entrega'],['Entregados','Entregado']].map(([label,s])=><div key={s}><strong>{counts[s]||0}</strong><span>{label}</span></div>)}</section>
    <section className="exo-orders-toolbar"><div className="exo-orders-search"><Search size={17}/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Buscar pedido, cliente o teléfono..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option>{STATUS.map(s=><option key={s}>{s}</option>)}</select><button className="exo-orders-button primary" onClick={()=>{setEditing(null);setModal(true)}}><Plus size={16}/> Nuevo pedido</button></section>

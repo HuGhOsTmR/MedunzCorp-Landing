@@ -22,7 +22,7 @@ const corporateHero = '/medunz-corp-hero.webp';
 import pharmaLogo from './assets/medunz-pharma-logo.svg';
 import jardinesLogo from './assets/medunz-jardines-logo.svg';
 import hupiLogo from './assets/hupi-baby-gym-logo.svg';
-import ghostLogo from './assets/ghost-logo.svg';
+import ghostLogo from './assets/ghost-navbar-logo.svg';
 import medrivLogo from './assets/medriv-logo.svg';
 import cateringLogo from './assets/mr-catering-logo.svg';
 

@@ -9,6 +9,7 @@ import JardinesLanding from './JardinesLanding';
 import MrCateringLanding from './MrCateringLanding';
 import MedrivLanding from './MedrivLanding';
 import './hupi.css';
+import ExoCodificacionSKU from './ExoCodificacionSKU';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -215,6 +216,9 @@ const isMedrivHost =
   hostname === 'medriv.medunzcorp.com' ||
   hostname === 'www.medriv.medunzcorp.com';
 
+const isExoSkuPath =
+  isGhostHost && window.location.pathname.replace(/\\/+$/, '') === '/exo/codificacionSKU';
+
 function setSiteIcon() {
   const iconHref = isGhostHost
     ? '/ghost-favicon.png?v=20261002'
@@ -248,7 +252,9 @@ function setSiteIcon() {
 setSiteIcon();
 
 createRoot(document.getElementById('root')).render(
-  isGhostHost
+  isExoSkuPath
+    ? <ExoCodificacionSKU />
+    : isGhostHost
     ? <GhostLanding />
     : isHupiHost
       ? <HupiLanding />

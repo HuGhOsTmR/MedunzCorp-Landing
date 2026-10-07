@@ -229,7 +229,7 @@ const isExoPresentationsPath = isGhostHost && normalizedPath === '/exo/presentac
 const isExoLotsPath = isGhostHost && normalizedPath === '/exo/lotes';
 const isExoOrdersPath = isGhostHost && normalizedPath === '/exo/pedidos';
 const isExoCustomersPath = isGhostHost && normalizedPath === '/exo/clientes';
-const isExoInventoryPath = isGhostHost && normalizedPath === '/exo/inventario';
+const isExoInventoryPath = isGhostHost && (normalizedPath === '/exo/inventario' || normalizedPath === '/inventario');
 
 function setSiteIcon() {
   const iconHref = isGhostHost

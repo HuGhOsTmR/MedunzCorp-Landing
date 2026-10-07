@@ -30,10 +30,7 @@ const TYPES=[
 ];
 const read=(key,fallback)=>{try{const x=JSON.parse(localStorage.getItem(key));return Array.isArray(x)&&x.length?x:fallback}catch{return fallback}};
 const fmtDate=d=>new Intl.DateTimeFormat('es-BO',{day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'}).format(new Date(d));
-const initialMovements=[
- {id:'MOV-000001',date:'2026-10-01T09:15:00',type:'Entrada',sku:'EXO-SHA-001',product:'Shampoo',presentation:'1 L',lot:'EXO-2026-001',quantity:500,reference:'Producción inicial',balanceStock:500,balanceReserved:0},
- {id:'MOV-000002',date:'2026-10-02T10:30:00',type:'Reserva',sku:'EXO-SHA-001',product:'Shampoo',presentation:'1 L',lot:'EXO-2026-001',quantity:24,reference:'Pedido EXO-PED-0001',balanceStock:500,balanceReserved:24}
-];
+const initialMovements=[];
 
 export default function ExoMovimientos(){
  const [inventory,setInventory]=React.useState(()=>read(INVENTORY_KEY,SEED_INVENTORY));

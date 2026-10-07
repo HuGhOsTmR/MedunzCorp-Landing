@@ -1,5 +1,5 @@
 import React from 'react';
-import GhostLogo from './assets/ghost-logo.svg';
+import GhostLogo from './assets/ghost-navbar-logo.svg';
 import { ArrowLeft, Edit3, Plus, Search, Trash2, CalendarDays, Package } from 'lucide-react';
 import './exo-lotes.css';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import GhostLogo from './assets/ghost-logo.svg';
+import GhostLogo from './assets/ghost-navbar-logo.svg';
 import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound } from 'lucide-react';
 import './exo-pedidos.css';
 

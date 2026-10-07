@@ -1,6 +1,7 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
 import { ArrowLeft, ArrowDownToLine, ArrowUpFromLine, RefreshCw, Lock, Unlock, Plus, Search, Package, CalendarDays } from 'lucide-react';
+import { LOT_INV_KEY, ensureLotInventory, availableLot } from './exo-lot-utils';
 import './exo-movimientos.css';
 
 const INVENTORY_KEY='exo_inventory_v1';
@@ -35,18 +36,21 @@ const initialMovements=[];
 export default function ExoMovimientos(){
  const [inventory,setInventory]=React.useState(()=>read(INVENTORY_KEY,SEED_INVENTORY));
  const [lots]=React.useState(()=>read(LOTS_KEY,SEED_LOTS));
+ const [lotInventory,setLotInventory]=React.useState(()=>ensureLotInventory(lots,read(LOT_INV_KEY,[])));
  const [movements,setMovements]=React.useState(()=>read(MOVEMENTS_KEY,initialMovements));
  const [query,setQuery]=React.useState('');
  const [filter,setFilter]=React.useState('Todos');
  const [modal,setModal]=React.useState(false);
  React.useEffect(()=>{localStorage.setItem(INVENTORY_KEY,JSON.stringify(inventory))},[inventory]);
  React.useEffect(()=>{localStorage.setItem(MOVEMENTS_KEY,JSON.stringify(movements));document.title='EXO · Movimientos de inventario'},[movements]);
+ React.useEffect(()=>{localStorage.setItem(LOT_INV_KEY,JSON.stringify(lotInventory))},[lotInventory]);
  const filtered=movements.filter(m=>{const q=query.toLowerCase().trim();return (filter==='Todos'||m.type===filter)&&(!q||[m.id,m.type,m.sku,m.product,m.presentation,m.lot,m.reference].join(' ').toLowerCase().includes(q))}).sort((a,b)=>new Date(b.date)-new Date(a.date));
  const totalIn=movements.filter(x=>x.type==='Entrada').reduce((s,x)=>s+x.quantity,0);
  const totalOut=movements.filter(x=>x.type==='Salida').reduce((s,x)=>s+x.quantity,0);
  const totalRes=movements.filter(x=>x.type==='Reserva').reduce((s,x)=>s+x.quantity,0);
  const saveMovement=m=>{
    setInventory(current=>current.map(item=>item.sku===m.sku?m.updatedItem:item));
+   if(m.updatedLotItem){setLotInventory(current=>current.map(item=>(item.lotId||item.id)===m.updatedLotItem.lotId?m.updatedLotItem:item));}
    setMovements(current=>[{...m,id:`MOV-${String(current.length+1).padStart(6,'0')}`,date:new Date().toISOString()},...current]);
    setModal(false);
  };
@@ -62,13 +66,68 @@ export default function ExoMovimientos(){
    </section>
   </main>
   <footer className="exo-movements-footer"><span>EXO CLEAN · Movimientos</span><span>Ghost Web & Software Designer · Medunz Corp.</span></footer>
-  {modal&&<MovementModal inventory={inventory} lots={lots} onClose={()=>setModal(false)} onSave={saveMovement}/>}
+  {modal&&<MovementModal inventory={inventory} lots={lots} lotInventory={lotInventory} onClose={()=>setModal(false)} onSave={saveMovement}/>}
  </div>
 }
 
-function MovementModal({inventory,lots,onClose,onSave}){
- const [type,setType]=React.useState('Entrada'),[sku,setSku]=React.useState(inventory[0]?.sku||''),[quantity,setQuantity]=React.useState(''),[lot,setLot]=React.useState(''),[reference,setReference]=React.useState(''),[reason,setReason]=React.useState('');
- const item=inventory.find(x=>x.sku===sku);const available=Math.max(0,(item?.stock||0)-(item?.reserved||0));const selectedLots=lots.filter(x=>x.sku===sku);
- const save=e=>{e.preventDefault();const qty=Math.floor(Number(quantity));if(!item||!qty||qty<1){alert('Ingresa una cantidad válida.');return}let updated={...item};if(type==='Entrada')updated.stock+=qty;if(type==='Salida'){if(qty>available){alert(`No hay stock disponible suficiente. Disponible: ${available} unidades.`);return}updated.stock-=qty}if(type==='Ajuste'){const delta=Number(quantity);if(!Number.isInteger(delta)||delta===0){alert('Para un ajuste usa una cantidad entera distinta de cero.');return}if(updated.stock+delta<updated.reserved){alert('El ajuste no puede dejar el stock físico por debajo del stock reservado.');return}updated.stock+=delta}if(type==='Reserva'){if(qty>available){alert(`No hay stock disponible suficiente para reservar. Disponible: ${available} unidades.`);return}updated.reserved+=qty}if(type==='Liberación'){if(qty>updated.reserved){alert(`No puedes liberar más de lo reservado: ${updated.reserved} unidades.`);return}updated.reserved-=qty}onSave({type,sku,product:item.product,presentation:item.presentation,lot,quantity:Math.abs(type==='Ajuste'?Number(quantity):qty),reference:reference||reason,updatedItem:updated,balanceStock:updated.stock,balanceReserved:updated.reserved})};
- return <div className="exo-movement-modal-bg" onMouseDown={e=>e.target===e.currentTarget&&onClose()}><form className="exo-movement-modal" onSubmit={save}><div className="exo-modal-head"><div><span>CONTROL DE EXISTENCIAS</span><h2>Nuevo movimiento</h2></div><button type="button" onClick={onClose}>×</button></div><div className="exo-movement-types">{TYPES.map(t=>{const I=t.icon;return <button type="button" key={t.id} className={type===t.id?'selected':''} onClick={()=>setType(t.id)}><I size={16}/>{t.label}</button>})}</div><label>SKU<select value={sku} onChange={e=>{setSku(e.target.value);setLot('')}}>{inventory.map(x=><option key={x.sku} value={x.sku}>{x.sku} · {x.product} · {x.presentation}</option>)}</select></label><label>Lote<select value={lot} onChange={e=>setLot(e.target.value)}><option value="">Sin lote</option>{selectedLots.map(x=><option key={x.id} value={x.lot}>{x.lot} · {x.status}</option>)}</select></label><div className="exo-movement-current"><span>Disponible</span><strong>{available.toLocaleString('es-BO')} u.</strong><span>Físico</span><strong>{(item?.stock||0).toLocaleString('es-BO')} u.</strong><span>Reservado</span><strong>{(item?.reserved||0).toLocaleString('es-BO')} u.</strong></div><label>Cantidad{type==='Ajuste'&&<small>Usa positivo para aumentar y negativo para disminuir.</small>}<input type="number" step="1" value={quantity} onChange={e=>setQuantity(e.target.value)} placeholder={type==='Ajuste'?'+/- cantidad':'Cantidad'} required/></label><label>Referencia / motivo<input value={reference} onChange={e=>setReference(e.target.value)} placeholder={type==='Entrada'?'Producción, compra...':type==='Salida'?'Pedido, entrega...':'Motivo del movimiento'}/></label><div className="exo-modal-foot"><button type="button" className="exo-movement-btn light" onClick={onClose}>Cancelar</button><button className="exo-movement-btn primary">Registrar movimiento</button></div></form></div>
+function MovementModal({inventory,lots,lotInventory,onClose,onSave}){
+ const [type,setType]=React.useState('Entrada'),[sku,setSku]=React.useState(inventory[0]?.sku||''),[quantity,setQuantity]=React.useState(''),[lot,setLot]=React.useState(''),[reference,setReference]=React.useState('');
+ const item=inventory.find(x=>x.sku===sku);
+ const selectedLots=lots.filter(x=>x.sku===sku);
+ const selectedLot=selectedLots.find(x=>x.lot===lot);
+ const lotItem=selectedLot?lotInventory.find(x=>(x.lotId||x.id)===(selectedLot.id||selectedLot.lot)):null;
+ const available=Math.max(0,(item?.stock||0)-(item?.reserved||0));
+ const lotAvailable=availableLot(lotItem);
+ const save=e=>{
+  e.preventDefault();
+  const qtyRaw=Number(quantity);
+  const qty=Math.floor(Math.abs(qtyRaw));
+  if(!item||!qty||qty<1){alert('Ingresa una cantidad válida.');return}
+  if(type!=='Ajuste'&&!selectedLot){alert('Selecciona un lote para registrar un movimiento trazable.');return}
+  let updated={...item};
+  let updatedLotItem=lotItem?{...lotItem}:null;
+  if(type==='Entrada'){
+   updated.stock+=qty;
+   if(!updatedLotItem){alert('El lote seleccionado no tiene inventario asociado.');return}
+   updatedLotItem.stock+=qty;
+  }
+  if(type==='Salida'){
+   if(qty>available){alert('No hay stock disponible suficiente. Disponible: '+available+' unidades.');return}
+   if(!updatedLotItem||qty>lotAvailable){alert('El lote no tiene stock disponible suficiente. Disponible en lote: '+lotAvailable+' unidades.');return}
+   updated.stock-=qty; updatedLotItem.stock-=qty;
+  }
+  if(type==='Ajuste'){
+   if(!Number.isInteger(qtyRaw)||qtyRaw===0){alert('Para un ajuste usa una cantidad entera distinta de cero.');return}
+   if(updated.stock+qtyRaw<updated.reserved){alert('El ajuste no puede dejar el stock físico por debajo del stock reservado.');return}
+   if(updatedLotItem&&updatedLotItem.stock+qtyRaw<updatedLotItem.reserved){alert('El ajuste no puede dejar el stock del lote por debajo de lo reservado.');return}
+   updated.stock+=qtyRaw;
+   if(updatedLotItem)updatedLotItem.stock+=qtyRaw;
+  }
+  if(type==='Reserva'){
+   if(qty>available){alert('No hay stock disponible suficiente para reservar. Disponible: '+available+' unidades.');return}
+   if(!updatedLotItem||qty>lotAvailable){alert('El lote no tiene stock disponible suficiente para reservar. Disponible: '+lotAvailable+' unidades.');return}
+   updated.reserved+=qty; updatedLotItem.reserved+=qty;
+  }
+  if(type==='Liberación'){
+   if(qty>updated.reserved){alert('No puedes liberar más de lo reservado global: '+updated.reserved+' unidades.');return}
+   if(!updatedLotItem||qty>updatedLotItem.reserved){alert('No puedes liberar más de lo reservado en el lote: '+(updatedLotItem?.reserved||0)+' unidades.');return}
+   updated.reserved-=qty; updatedLotItem.reserved-=qty;
+  }
+  onSave({
+   type,sku,product:item.product,presentation:item.presentation,lot:selectedLot?.lot||'',
+   quantity:qty,reference:reference||'Movimiento manual',
+   updatedItem:updated,updatedLotItem,
+   balanceStock:updated.stock,balanceReserved:updated.reserved
+  });
+ };
+ return <div className="exo-movement-modal-bg" onMouseDown={e=>e.target===e.currentTarget&&onClose()}><form className="exo-movement-modal" onSubmit={save}>
+  <div className="exo-modal-head"><div><span>CONTROL DE EXISTENCIAS</span><h2>Nuevo movimiento</h2></div><button type="button" onClick={onClose}>×</button></div>
+  <div className="exo-movement-types">{TYPES.map(t=>{const I=t.icon;return <button type="button" key={t.id} className={type===t.id?'selected':''} onClick={()=>{setType(t.id);setLot('')}}><I size={16}/>{t.label}</button>})}</div>
+  <label>SKU<select value={sku} onChange={e=>{setSku(e.target.value);setLot('')}}>{inventory.map(x=><option key={x.sku} value={x.sku}>{x.sku} · {x.product} · {x.presentation}</option>)}</select></label>
+  <label>Lote<select value={lot} onChange={e=>setLot(e.target.value)}><option value="">{type==='Ajuste'?'Sin lote':'Selecciona un lote'}</option>{selectedLots.map(x=><option key={x.id} value={x.lot}>{x.lot} · {x.status}{x.expires?' · vence '+x.expires:''}</option>)}</select></label>
+  <div className="exo-movement-current"><span>Disponible SKU</span><strong>{available.toLocaleString('es-BO')} u.</strong><span>Disponible lote</span><strong>{lotItem?lotAvailable.toLocaleString('es-BO')+' u.':'—'}</strong><span>Reservado lote</span><strong>{lotItem?Number(lotItem.reserved||0).toLocaleString('es-BO')+' u.':'—'}</strong></div>
+  <label>Cantidad{type==='Ajuste'&&<small>Usa positivo para aumentar y negativo para disminuir.</small>}<input type="number" step="1" value={quantity} onChange={e=>setQuantity(e.target.value)} placeholder={type==='Ajuste'?'+/- cantidad':'Cantidad'} required/></label>
+  <label>Referencia / motivo<input value={reference} onChange={e=>setReference(e.target.value)} placeholder={type==='Entrada'?'Producción, compra...':type==='Salida'?'Pedido, entrega...':'Motivo del movimiento'}/></label>
+  <div className="exo-modal-foot"><button type="button" className="exo-movement-btn light" onClick={onClose}>Cancelar</button><button className="exo-movement-btn primary">Registrar movimiento</button></div>
+ </form></div>;
 }

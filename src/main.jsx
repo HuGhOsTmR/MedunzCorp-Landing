@@ -218,8 +218,10 @@ const isMedrivHost =
   hostname === 'medriv.medunzcorp.com' ||
   hostname === 'www.medriv.medunzcorp.com';
 
-const isExoSkuPath =
-  isGhostHost && window.location.pathname.replace(/\/+$/, '').toLowerCase() === '/exo/codificacionsku';
+const normalizedPath = window.location.pathname.replace(/\/+$/, '').toLowerCase();
+const isExoSkuPath = isGhostHost && normalizedPath === '/exo/codificacionsku';
+const isExoProductsPath = isGhostHost && normalizedPath === '/exo/productos';
+const isExoPresentationsPath = isGhostHost && normalizedPath === '/exo/presentaciones';
 
 function setSiteIcon() {
   const iconHref = isGhostHost

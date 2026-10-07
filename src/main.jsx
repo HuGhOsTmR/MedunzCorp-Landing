@@ -10,6 +10,7 @@ import MrCateringLanding from './MrCateringLanding';
 import MedrivLanding from './MedrivLanding';
 import './hupi.css';
 import ExoCodificacionSKU from './ExoCodificacionSKU';
+import ExoProductos from './ExoProductos';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -254,6 +255,8 @@ setSiteIcon();
 createRoot(document.getElementById('root')).render(
   isExoSkuPath
     ? <ExoCodificacionSKU />
+    : isExoProductsPath
+    ? <ExoProductos />
     : isGhostHost
     ? <GhostLanding />
     : isHupiHost

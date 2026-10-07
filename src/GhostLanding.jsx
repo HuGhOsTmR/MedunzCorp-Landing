@@ -1,5 +1,4 @@
 import React from 'react';
-import ghostLogo from './assets/ghost-logo.svg';
 import ghostNavbarLogo from './assets/ghost-navbar-logo.svg';
 import BrandSwitcher from './BrandSwitcher';
 import { ArrowRight, ArrowUpRight, Check, Code2, Layers3, Sparkles, Workflow } from 'lucide-react';

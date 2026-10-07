@@ -12,6 +12,7 @@ import './hupi.css';
 import ExoCodificacionSKU from './ExoCodificacionSKU';
 import ExoProductos from './ExoProductos';
 import ExoPresentaciones from './ExoPresentaciones';
+import ExoLotes from './ExoLotes';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -222,6 +223,7 @@ const normalizedPath = window.location.pathname.replace(/\/+$/, '').toLowerCase(
 const isExoSkuPath = isGhostHost && normalizedPath === '/exo/codificacionsku';
 const isExoProductsPath = isGhostHost && normalizedPath === '/exo/productos';
 const isExoPresentationsPath = isGhostHost && normalizedPath === '/exo/presentaciones';
+const isExoLotsPath = isGhostHost && normalizedPath === '/exo/lotes';
 
 function setSiteIcon() {
   const iconHref = isGhostHost
@@ -262,6 +264,8 @@ createRoot(document.getElementById('root')).render(
     ? <ExoProductos />
     : isExoPresentationsPath
     ? <ExoPresentaciones />
+    : isExoLotsPath
+    ? <ExoLotes />
     : isGhostHost
     ? <GhostLanding />
     : isHupiHost

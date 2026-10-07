@@ -1,4 +1,5 @@
 import React from 'react';
+import GhostLogo from './assets/ghost-logo.svg';
 import { ArrowLeft, Edit3, Package, Plus, Search, Trash2 } from 'lucide-react';
 import './exo-productos.css';
 
@@ -58,7 +59,7 @@ export default function ExoProductos() {
   return <div className="exo-products">
     <header className="exo-products-header">
       <a href="https://ghost.medunzcorp.com" className="exo-products-brand">
-        <img src="/ghost-logo.svg" alt="Ghost Web & Software Designer" />
+        <img src={GhostLogo} alt="Ghost Web & Software Designer" />
       </a>
       <div><span>GHOST W&amp;SD</span><strong>EXO / PRODUCTOS</strong></div>
       <a href="https://ghost.medunzcorp.com/exo/codificacionSKU" className="exo-products-back"><ArrowLeft size={15}/> SKU</a>

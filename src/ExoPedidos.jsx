@@ -1,4 +1,5 @@
 import React from 'react';
+import GhostLogo from './assets/ghost-logo.svg';
 import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound } from 'lucide-react';
 import './exo-pedidos.css';
 
@@ -50,7 +51,7 @@ export default function ExoPedidos(){
  const del=id=>{if(confirm('¿Eliminar este pedido?')){setOrders(x=>x.filter(o=>o.id!==id));setSelectedId('')}};
  const counts=STATUS.reduce((a,s)=>(a[s]=orders.filter(o=>o.status===s).length,a),{});
  return <div className="exo-orders">
-  <header className="exo-orders-header"><a href="https://ghost.medunzcorp.com"><img src="/ghost-logo.svg" alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / PEDIDOS</strong></div><a className="exo-orders-back" href="https://ghost.medunzcorp.com/exo/presentaciones"><ArrowLeft size={15}/> Presentaciones</a></header>
+  <header className="exo-orders-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / PEDIDOS</strong></div><a className="exo-orders-back" href="https://ghost.medunzcorp.com/exo/presentaciones"><ArrowLeft size={15}/> Presentaciones</a></header>
   <main className="exo-orders-main">
    <section className="exo-orders-hero"><div><span className="exo-kicker">EXO · VENTAS Y CONTROL</span><h1>Pedidos.<br/><em>De la solicitud a la entrega.</em></h1><p>Registra, confirma y controla cada pedido comercial. El precio aplicado pertenece al pedido, mientras el SKU permanece estable como identificador de la presentación.</p></div><div className="exo-orders-mark"><ShoppingCart size={38}/><span>{orders.length}<br/>PEDIDOS</span></div></section>
    <section className="exo-order-stats">{[['Nuevos','Borrador'],['Confirmados','Confirmado'],['En preparación','Preparando'],['En entrega','En entrega'],['Entregados','Entregado']].map(([label,s])=><div key={s}><strong>{counts[s]||0}</strong><span>{label}</span></div>)}</section>

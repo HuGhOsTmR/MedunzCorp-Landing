@@ -1,4 +1,5 @@
 import React from 'react';
+import GhostLogo from './assets/ghost-logo.svg';
 import { ArrowLeft, Edit3, Package, Plus, Search, SlidersHorizontal, Trash2, AlertTriangle } from 'lucide-react';
 import './exo-inventario.css';
 
@@ -34,7 +35,7 @@ export default function ExoInventario(){
  const low=items.filter(x=>available(x)>0&&available(x)<=LOW).length;
  const empty=items.filter(x=>available(x)===0).length;
  return <div className="exo-inventory">
-  <header className="exo-inventory-header"><a href="https://ghost.medunzcorp.com"><img src="/ghost-logo.svg" alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>GESTIÓN DE INVENTARIO</strong></div><a className="exo-inventory-back" href="https://ghost.medunzcorp.com/exo/lotes"><ArrowLeft size={15}/> Lotes</a></header>
+  <header className="exo-inventory-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>GESTIÓN DE INVENTARIO</strong></div><a className="exo-inventory-back" href="https://ghost.medunzcorp.com/exo/lotes"><ArrowLeft size={15}/> Lotes</a></header>
   <main className="exo-inventory-main">
    <section className="exo-inventory-hero"><div><span className="exo-kicker">EXO CLEAN · EXISTENCIAS</span><h1>Inventario.<br/><em>Lo que tenemos, disponible.</em></h1><p>Controla las existencias por SKU, separando el stock físico del stock reservado para pedidos. El inventario es la base para preparar, entregar y vender.</p></div><div className="exo-inventory-mark"><Package size={38}/><strong>{items.length}</strong><span>SKU CONTROLADOS</span></div></section>
    <section className="exo-inventory-stats">

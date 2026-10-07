@@ -16,6 +16,7 @@ import ExoLotes from './ExoLotes';
 import ExoPedidos from './ExoPedidos';
 import ExoClientes from './ExoClientes';
 import ExoInventario from './ExoInventario';
+import ExoMovimientos from './ExoMovimientos';
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -230,6 +231,7 @@ const isExoLotsPath = isGhostHost && normalizedPath === '/exo/lotes';
 const isExoOrdersPath = isGhostHost && normalizedPath === '/exo/pedidos';
 const isExoCustomersPath = isGhostHost && normalizedPath === '/exo/clientes';
 const isExoInventoryPath = isGhostHost && (normalizedPath === '/exo/inventario' || normalizedPath === '/inventario');
+const isExoMovementsPath = isGhostHost && normalizedPath === '/exo/movimientos';
 
 function setSiteIcon() {
   const iconHref = isGhostHost
@@ -278,6 +280,8 @@ createRoot(document.getElementById('root')).render(
     ? <ExoClientes />
     : isExoInventoryPath
     ? <ExoInventario />
+    : isExoMovementsPath
+    ? <ExoMovimientos />
     : isGhostHost
     ? <GhostLanding />
     : isHupiHost

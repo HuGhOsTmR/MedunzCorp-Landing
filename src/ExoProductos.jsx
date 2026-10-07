@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { ArrowLeft, Edit3, Package, Plus, Search, Trash2 } from 'lucide-react';
 import './exo-productos.css';
 
@@ -65,7 +66,8 @@ export default function ExoProductos() {
       <a href="https://ghost.medunzcorp.com/exo/codificacionSKU" className="exo-products-back"><ArrowLeft size={15}/> SKU</a>
     </header>
 
-    <main className="exo-products-main">
+    <ExoNav active="productos" />
+      <main className="exo-products-main">
       <section className="exo-products-hero">
         <div>
           <span className="exo-products-kicker">EXO · CATÁLOGO MAESTRO</span>

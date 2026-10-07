@@ -3,7 +3,7 @@ import GhostLogo from './assets/ghost-navbar-logo.svg';
 import { Activity, AlertTriangle, ArrowUpRight, Boxes, CheckCircle2, ChevronRight, ClipboardList, Clock3, Package, ShoppingCart, TrendingUp, Users, Warehouse, XCircle } from 'lucide-react';
 import './exo-dashboard.css';
 
-const KEYS={products:'exo_products_v1',presentations:'exo_presentations_v1',sku:'exo_sku_catalog_v1',customers:'exo_customers_v1',orders:'exo_orders_v1',inventory:'exo_inventory_v1',lots:'exo_lots_v1',movements:'exo_movements_v1',lotInventory:'exo_lot_inventory_v1'};
+const KEYS={products:'exo_products_v1',presentations:'exo_presentations_v1',sku:'ghost_exo_sku_catalog_v1',customers:'exo_customers_v1',orders:'exo_orders_v1',inventory:'exo_inventory_v1',lots:'exo_lots_v1',movements:'exo_movements_v1',lotInventory:'exo_lot_inventory_v1'};
 const PRODUCT_SEED=[['VAJ','Vajillero'],['LPI','Limpia Piso'],['SHA','Shampoo'],['SGR','Saca Grasa'],['LVR','Lava Ropa'],['JLI','Jabón Líquido'],['CWS','Car Wash']].map(([id,name])=>({id,name,status:'Activo'}));
 const PRESENTATION_SEED=[['VAJ','Vajillero',['1 L','3 L','10 L']],['LPI','Limpia Piso',['1 L','3 L','10 L']],['SHA','Shampoo',['500 ml','1 L','3 L','10 L']],['SGR','Saca Grasa',['1 L','3 L','10 L']],['LVR','Lava Ropa',['3 L','5 L','10 L']],['JLI','Jabón Líquido',['1 L','3 L','10 L']],['CWS','Car Wash',['500 ml','1 L','3 L','10 L']]].flatMap(([code,product,sizes])=>sizes.map(size=>({id:code+'-'+size.replace(/\s/g,''),productCode:code,product,size,status:'Activo'})));
 const SKU_SEED=PRESENTATION_SEED.map(x=>({sku:'EXO-'+x.productCode+'-'+(x.size==='500 ml'?'500':x.size.replace(' L','').padStart(3,'0')),product:x.product,presentation:x.size,status:'Activo'}));

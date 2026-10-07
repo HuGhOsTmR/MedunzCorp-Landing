@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { ArrowLeft, ArrowDownToLine, ArrowUpFromLine, RefreshCw, Lock, Unlock, Plus, Search, Package, CalendarDays } from 'lucide-react';
 import { LOT_INV_KEY, ensureLotInventory, availableLot } from './exo-lot-utils';
 import './exo-movimientos.css';
@@ -56,7 +57,8 @@ export default function ExoMovimientos(){
  };
  return <div className="exo-movements">
   <header className="exo-movements-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>MOVIMIENTOS DE INVENTARIO</strong></div><a className="exo-movements-back" href="https://ghost.medunzcorp.com/exo/inventario"><ArrowLeft size={15}/> Inventario</a></header>
-  <main className="exo-movements-main">
+  <ExoNav active="movimientos" />
+      <main className="exo-movements-main">
    <section className="exo-movements-hero"><div><span className="exo-kicker">EXO CLEAN · KARDEX</span><h1>Movimientos.<br/><em>Todo lo que entra y sale.</em></h1><p>Registra entradas, salidas, ajustes y reservas para mantener una trazabilidad clara de las existencias.</p></div><div className="exo-movements-mark"><Package size={34}/><strong>{movements.length}</strong><span>MOVIMIENTOS</span></div></section>
    <section className="exo-movement-stats"><div><span>ENTRADAS</span><strong>{totalIn.toLocaleString('es-BO')}</strong><small>unidades registradas</small></div><div><span>SALIDAS</span><strong>{totalOut.toLocaleString('es-BO')}</strong><small>unidades registradas</small></div><div><span>RESERVAS</span><strong>{totalRes.toLocaleString('es-BO')}</strong><small>unidades acumuladas</small></div><div><span>REGISTROS</span><strong>{movements.length}</strong><small>movimientos</small></div></section>
    <section className="exo-movements-toolbar"><div className="exo-movements-search"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Buscar movimiento, SKU, lote, pedido..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option>{TYPES.map(t=><option key={t.id}>{t.label}</option>)}</select><button className="exo-movement-btn primary" onClick={()=>setModal(true)}><Plus size={16}/> Nuevo movimiento</button></section>

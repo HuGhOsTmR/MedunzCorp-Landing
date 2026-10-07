@@ -1,6 +1,7 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
 import { ArrowLeft, Edit3, Plus, Search, Trash2, CalendarDays, Package } from 'lucide-react';
+import { LOT_INV_KEY, ensureLotInventory, availableLot } from './exo-lot-utils';
 import './exo-lotes.css';
 
 const DEFAULT_LOTS=[
@@ -18,11 +19,14 @@ const PRODUCTS=[
 ].map(([code,name,sizes])=>({code,name,sizes}));
 
 function loadLots(){try{const x=JSON.parse(localStorage.getItem(STORAGE_KEY));if(Array.isArray(x)&&x.length)return x}catch{}return DEFAULT_LOTS}
+function readLotInventory(){try{const x=JSON.parse(localStorage.getItem(LOT_INV_KEY));return Array.isArray(x)?x:[]}catch{return []}}
 const fmt=d=>d?new Intl.DateTimeFormat('es-BO',{day:'2-digit',month:'2-digit',year:'numeric'}).format(new Date(d+'T12:00:00')):'—';
 
 export default function ExoLotes(){
  const [lots,setLots]=React.useState(loadLots),[selectedId,setSelectedId]=React.useState(DEFAULT_LOTS[0].id),[query,setQuery]=React.useState(''),[filter,setFilter]=React.useState('Todos'),[modal,setModal]=React.useState(false),[editing,setEditing]=React.useState(null);
+ const [lotInventory,setLotInventory]=React.useState(()=>ensureLotInventory(loadLots(),readLotInventory()));
  React.useEffect(()=>{document.title='EXO · Lotes';localStorage.setItem(STORAGE_KEY,JSON.stringify(lots))},[lots]);
+ React.useEffect(()=>{localStorage.setItem(LOT_INV_KEY,JSON.stringify(lotInventory))},[lotInventory]);
  const filtered=lots.filter(x=>{const q=query.trim().toLowerCase();return (filter==='Todos'||x.status===filter)&&(!q||[x.lot,x.product,x.productCode,x.size,x.sku,x.status].join(' ').toLowerCase().includes(q))});
  const selected=lots.find(x=>x.id===selectedId)||filtered[0];
  const save=x=>{setLots(a=>a.some(y=>y.id===x.id)?a.map(y=>y.id===x.id?x:y):[...a,x]);setSelectedId(x.id);setModal(false);setEditing(null)};

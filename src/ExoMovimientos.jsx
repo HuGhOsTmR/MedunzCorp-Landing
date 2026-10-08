@@ -1,6 +1,5 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
-import ExoNav from './ExoNav';
 import { ArrowLeft, ArrowDownToLine, ArrowUpFromLine, RefreshCw, Lock, Unlock, Plus, Search, Package, CalendarDays } from 'lucide-react';
 import { LOT_INV_KEY, ensureLotInventory, availableLot } from './exo-lot-utils';
 import './exo-movimientos.css';

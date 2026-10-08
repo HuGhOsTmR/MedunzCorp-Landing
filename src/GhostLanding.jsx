@@ -154,7 +154,7 @@ export default function GhostLanding() {
 
       <footer className="ghost-footer">
         <div className="ghost-footer-brand">
-          <img src={ghostLogo} alt="GHOST" />
+          <img src={ghostNavbarLogo} alt="GHOST" />
         </div>
         <div>WEB · SOFTWARE · DIGITAL</div>
         <div>© {new Date().getFullYear()} GHOST / MEDUNZ CORP. · Created by Ghost W&SD</div>

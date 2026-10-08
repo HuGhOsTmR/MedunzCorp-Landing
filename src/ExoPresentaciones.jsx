@@ -1,6 +1,5 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
-import ExoNav from './ExoNav';
 import { ArrowLeft, Edit3, Package, Plus, Search, Trash2 } from 'lucide-react';
 import './exo-presentaciones.css';
 
@@ -61,8 +60,7 @@ export default function ExoPresentaciones(){
       <a href="https://ghost.medunzcorp.com/exo/productos" className="exo-presentations-back"><ArrowLeft size={15}/> Productos</a>
     </header>
 
-    <ExoNav active="presentaciones" />
-      <main className="exo-presentations-main">
+    <main className="exo-presentations-main">
       <section className="exo-presentations-hero">
         <div>
           <span className="exo-presentations-kicker">EXO · ESTRUCTURA COMERCIAL</span>

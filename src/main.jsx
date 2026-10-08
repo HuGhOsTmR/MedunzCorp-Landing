@@ -9,15 +9,15 @@ import JardinesLanding from './JardinesLanding';
 import MrCateringLanding from './MrCateringLanding';
 import MedrivLanding from './MedrivLanding';
 import './hupi.css';
-import ExoCodificacionSKU from './ExoCodificacionSKU';
-import ExoProductos from './ExoProductos';
-import ExoPresentaciones from './ExoPresentaciones';
-import ExoLotes from './ExoLotes';
-import ExoPedidos from './ExoPedidos';
-import ExoClientes from './ExoClientes';
-import ExoInventario from './ExoInventario';
-import ExoMovimientos from './ExoMovimientos';
-import ExoDashboard from './ExoDashboard';
+const ExoCodificacionSKU = React.lazy(() => import('./ExoCodificacionSKU'));
+const ExoProductos = React.lazy(() => import('./ExoProductos'));
+const ExoPresentaciones = React.lazy(() => import('./ExoPresentaciones'));
+const ExoLotes = React.lazy(() => import('./ExoLotes'));
+const ExoPedidos = React.lazy(() => import('./ExoPedidos'));
+const ExoClientes = React.lazy(() => import('./ExoClientes'));
+const ExoInventario = React.lazy(() => import('./ExoInventario'));
+const ExoMovimientos = React.lazy(() => import('./ExoMovimientos'));
+const ExoDashboard = React.lazy(() => import('./ExoDashboard'));
 
 const corporateHero = '/medunz-corp-hero.webp';
 
@@ -268,7 +268,8 @@ function setSiteIcon() {
 setSiteIcon();
 
 createRoot(document.getElementById('root')).render(
-  isExoSkuPath
+  <React.Suspense fallback={<div style={{ minHeight: '100vh', display: 'grid', placeItems: 'center', fontFamily: 'Arial, sans-serif', color: '#0756b8' }}>Cargando…</div>}>
+    {isExoSkuPath
     ? <ExoCodificacionSKU />
     : isExoProductsPath
     ? <ExoProductos />
@@ -298,5 +299,6 @@ createRoot(document.getElementById('root')).render(
             ? <MrCateringLanding />
             : isMedrivHost
               ? <MedrivLanding />
-              : <App />
+              : <App />}
+  </React.Suspense>
 );

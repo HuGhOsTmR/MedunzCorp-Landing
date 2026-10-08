@@ -1,6 +1,5 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
-import ExoNav from './ExoNav';
 import { ArrowLeft, Edit3, Plus, Search, Trash2, CalendarDays, Package } from 'lucide-react';
 import { LOT_INV_KEY, ensureLotInventory, availableLot } from './exo-lot-utils';
 import './exo-lotes.css';
@@ -34,7 +33,6 @@ export default function ExoLotes(){
  const remove=id=>{const inv=lotInventory.find(x=>(x.lotId||x.id)===id);if(inv&&(Number(inv.stock||0)>0||Number(inv.reserved||0)>0)){alert('No se puede eliminar un lote que todavía tiene existencias o reservas.');return}if(window.confirm('¿Eliminar este lote?')){setLots(a=>a.filter(x=>x.id!==id));setLotInventory(a=>a.filter(x=>(x.lotId||x.id)!==id));setSelectedId('')}};
  return <div className="exo-lots">
   <header className="exo-lots-header"><a href="https://ghost.medunzcorp.com" className="exo-lots-brand"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>GESTIÓN DE LOTES</strong></div><a href="https://ghost.medunzcorp.com/exo/presentaciones" className="exo-lots-back"><ArrowLeft size={15}/> Presentaciones</a></header>
-  <ExoNav active="lotes" />
       <main className="exo-lots-main">
    <section className="exo-lots-hero"><div><span className="exo-lots-kicker">EXO CLEAN · TRAZABILIDAD</span><h1>Lotes.<br/><em>Cada producción cuenta.</em></h1><p>Registra y controla los lotes de fabricación para mantener identificados el producto, la presentación, el SKU, las fechas y las cantidades producidas.</p></div><div className="exo-lots-mark"><Package size={40}/><strong>{lots.length}</strong><span>LOTES REGISTRADOS</span></div></section>
    <section className="exo-lots-toolbar"><div className="exo-lots-search"><Search size={17}/><input value={query} onChange={e=>setQuery(e.target.value)} placeholder="Buscar lote, producto o SKU..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option><option>Planificado</option><option>En producción</option><option>En cuarentena</option><option>Liberado</option><option>Bloqueado</option><option>Agotado</option></select><button className="exo-lots-btn primary" onClick={()=>{setEditing(null);setModal(true)}}><Plus size={16}/> Nuevo lote</button></section>

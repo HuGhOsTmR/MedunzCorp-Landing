@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { Activity, AlertTriangle, ArrowUpRight, Boxes, CheckCircle2, ChevronRight, ClipboardList, Clock3, Package, ShoppingCart, TrendingUp, Users, Warehouse, XCircle } from 'lucide-react';
 import './exo-dashboard.css';
 
@@ -45,7 +46,8 @@ export default function ExoDashboard(){
 
  return <div className="exo-dashboard">
   <header className="exo-dashboard-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>EXO CLEAN</span><strong>TORRE DE CONTROL</strong></div><nav><a href="https://ghost.medunzcorp.com/exo/productos">Productos</a><a href="https://ghost.medunzcorp.com/exo/pedidos">Pedidos</a><a href="https://ghost.medunzcorp.com/exo/inventario">Inventario</a><a href="https://ghost.medunzcorp.com/exo/lotes">Lotes</a><a href="https://ghost.medunzcorp.com/exo/movimientos">Kardex</a></nav></header>
-  <main className="exo-dashboard-main">
+  
+  <ExoNav active="dashboard" /><main className="exo-dashboard-main">
    <section className="exo-dashboard-hero"><div><span className="exo-kicker">EXO CLEAN · CONTROL GERENCIAL</span><h1>Dashboard.<br/><em>Una mirada sobre toda la operación.</em></h1><p>Ventas, pedidos, inventario, lotes y trazabilidad reunidos en una sola vista para detectar desviaciones y actuar a tiempo.</p></div><div className="exo-score-card"><div className="score-ring" style={{'--score':(overall*3.6)+'deg'}}><strong>{overall}</strong><span>/ 100</span></div><div><span>SCORE EXO</span><b className={scoreColor(overall)}>{overall>=85?'SALUDABLE':overall>=65?'ATENCIÓN':'RIESGO'}</b></div></div></section>
    <section className="exo-dashboard-kpis"><article className="kpi sales"><div><span>PIPELINE DE VENTAS</span><strong>{money(salesPipeline)}</strong><small>{openOrders.length} pedidos abiertos · {qty(unitsOrdered)} unidades</small></div><TrendingUp/></article><article className="kpi inventory"><div><span>DISPONIBLE</span><strong>{qty(availableInventory)} <small>u.</small></strong><small>{qty(physicalInventory)} físicas · {qty(reservedInventory)} reservadas</small></div><Warehouse/></article><article className="kpi orders"><div><span>PEDIDOS ACTIVOS</span><strong>{openOrders.length}</strong><small>{confirmedOrders.length} confirmados · {deliveryOrders.length} en entrega</small></div><ShoppingCart/></article><article className="kpi clients"><div><span>CLIENTES ACTIVOS</span><strong>{activeCustomers}</strong><small>de {customers.length} registrados</small></div><Users/></article></section>
    <section className="exo-score-section"><div className="section-title"><div><span>01 · SCORE CARD</span><h2>¿Cómo está funcionando EXO?</h2></div><span className="live"><Activity size={14}/> ACTUALIZACIÓN AUTOMÁTICA</span></div><div className="score-grid">{scoreItems.map(([label,value,desc])=><article className="score-item" key={label}><div className="score-item-head"><span>{label}</span><strong className={scoreColor(value)}>{value}</strong></div><div className="score-bar"><i style={{width:value+'%'}}/></div><small>{desc}</small></article>)}</div></section>

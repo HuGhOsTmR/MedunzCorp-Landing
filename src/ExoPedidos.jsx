@@ -1,6 +1,5 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
-import ExoNav from './ExoNav';
 import { ArrowLeft, ChevronRight, Edit3, Plus, Search, ShoppingCart, Trash2, UserRound, Truck } from 'lucide-react';
 import { LOT_INV_KEY, ensureLotInventory, allocateFEFO } from './exo-lot-utils';
 import './exo-pedidos.css';

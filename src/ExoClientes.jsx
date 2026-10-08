@@ -1,5 +1,6 @@
 import React from 'react';
 import GhostLogo from './assets/ghost-navbar-logo.svg';
+import ExoNav from './ExoNav';
 import { ArrowLeft, Edit3, Plus, Search, Trash2, UserRound, Building2, Phone, MapPin } from 'lucide-react';
 import './exo-clientes.css';
 
@@ -21,6 +22,7 @@ export default function ExoClientes(){
  const del=id=>{if(confirm('¿Eliminar este cliente?')){setItems(a=>a.filter(x=>x.id!==id));setSelectedId('')}};
  return <div className="exo-customers">
  <header className="exo-customers-header"><a href="https://ghost.medunzcorp.com"><img src={GhostLogo} alt="Ghost Web & Software Designer"/></a><div><span>GHOST W&amp;SD</span><strong>EXO / CLIENTES</strong></div><a className="exo-customers-back" href="https://ghost.medunzcorp.com/exo/pedidos"><ArrowLeft size={15}/> Pedidos</a></header>
+  <ExoNav active="clientes" />
  <main className="exo-customers-main">
  <section className="exo-customers-hero"><div><span className="exo-kicker">EXO · CARTERA COMERCIAL</span><h1>Clientes.<br/><em>Relaciones que permanecen.</em></h1><p>Centraliza la información comercial de personas y empresas para reutilizarla en pedidos, ventas, entregas y futuras comunicaciones.</p></div><div className="exo-customers-mark"><UserRound size={38}/><span>{items.length}<br/>CLIENTES</span></div></section>
  <section className="exo-customers-toolbar"><div className="exo-customers-search"><Search size={17}/><input value={q} onChange={e=>setQ(e.target.value)} placeholder="Buscar cliente, NIT, teléfono o correo..."/></div><select value={filter} onChange={e=>setFilter(e.target.value)}><option>Todos</option>{STATUSES.map(s=><option key={s}>{s}</option>)}</select><button className="exo-customers-button primary" onClick={()=>{setEditing(null);setModal(true)}}><Plus size={16}/> Nuevo cliente</button></section>

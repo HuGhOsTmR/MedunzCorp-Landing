@@ -1,5 +1,5 @@
 import React from 'react';
-import GhostLogo from './assets/ghost-navbar-logo.svg';
+import JsBarcode from 'jsbarcode';
 import ExoNav from './ExoNav';
 import { ArrowLeft, Download, Edit3, Package, Plus, Printer, Search, Trash2 } from 'lucide-react';
 import './exo-codificacion-sku.css';
@@ -15,6 +15,7 @@ const PRODUCTS = [
 ];
 
 const STORAGE_KEY = 'ghost_exo_sku_catalog_v1';
+const COMPANY_TEMP_CODE = '77606879467';
 
 function eanCheckDigit(base12) {
   const digits = String(base12).split('').map(Number);
@@ -69,17 +70,15 @@ function barcodePattern(value) {
   return pattern + '101';
 }
 
-function Barcode({ value, compact = false }) {
-  const pattern = barcodePattern(value);
-  const height = compact ? 34 : 76;
-  return (
-    <div className={compact ? 'barcode compact' : 'barcode'}>
-      <svg viewBox={`0 0 ${pattern.length} ${height}`} preserveAspectRatio="none" role="img" aria-label={`Código provisional ${value}`}>
-        {pattern.split('').map((bit, i) => bit === '1' && <rect key={i} x={i} y="0" width="1" height={height} />)}
-      </svg>
-      {!compact && <div className="barcode-number">{value}</div>}
-    </div>
-  );
+function Barcode({ value, format = 'EAN13', compact = false }) {
+  const svgRef = React.useRef(null);
+  React.useEffect(() => {
+    if (!svgRef.current || !value) return;
+    try {
+      JsBarcode(svgRef.current, String(value), { format, displayValue: !compact, font: 'monospace', fontSize: compact ? 10 : 13, height: compact ? 38 : 62, margin: 10, marginLeft: 14, marginRight: 14, background: '#ffffff', lineColor: '#063b82', width: 1.7, textMargin: 4 });
+    } catch (error) { if (svgRef.current) svgRef.current.innerHTML = ''; }
+  }, [value, format, compact]);
+  return <div className={compact ? 'barcode compact' : 'barcode'}><svg ref={svgRef} role='img' aria-label={'Código de barras ' + value} /></div>;
 }
 
 function readStored() {
@@ -121,8 +120,8 @@ export default function ExoCodificacionSKU() {
   };
 
   const exportCsv = () => {
-    const headers = ['Producto','Presentación','SKU','Código provisional','GTIN oficial','Lote','Estado'];
-    const rows = catalog.map((x) => [x.product,x.presentation,x.sku,x.provisionalCode,x.officialGtin,x.lot,x.status]);
+    const headers = ['Producto','Presentación','SKU','Código empresa temporal','RCN interno','GTIN oficial','Lote','Estado'];
+    const rows = catalog.map((x) => [x.product,x.presentation,x.sku,COMPANY_TEMP_CODE,x.provisionalCode,x.officialGtin,x.lot,x.status]);
     const csv = [headers, ...rows].map((r) => r.map((v) => `"${String(v ?? '').replace(/"/g, '""')}"`).join(',')).join('\\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
@@ -135,11 +134,11 @@ export default function ExoCodificacionSKU() {
     <div className="exo-app">
       <header className="exo-header">
         <a className="exo-brand" href="https://ghost.medunzcorp.com" aria-label="Volver a Ghost">
-          <img src={GhostLogo} alt="Ghost Web & Software Designer" />
+          <span className="exo-wordmark">EXO <b>clean</b></span>
         </a>
         <div className="exo-header-title">
           <span>GHOST W&amp;SD</span>
-          <strong>EXO / CODIFICACIÓN SKU</strong>
+          <strong>EXO / IDENTIFICACIÓN DE PRODUCTOS</strong>
         </div>
         <a className="exo-back" href="https://ghost.medunzcorp.com"><ArrowLeft size={15} /> Ghost</a>
       </header>
@@ -150,7 +149,7 @@ export default function ExoCodificacionSKU() {
           <div>
             <div className="exo-kicker">EXO · SISTEMA DE IDENTIFICACIÓN</div>
             <h1>Codificación<br /><em>de productos.</em></h1>
-            <p>Catálogo maestro para estructurar SKU y códigos numéricos provisionales de las presentaciones EXO.</p>
+            <p>Catálogo maestro de SKU, identificación temporal de empresa y códigos RCN para las presentaciones EXO.</p>
           </div>
           <div className="exo-hero-mark"><Package size={38} strokeWidth={1.2} /><span>23<br />PRESENTACIONES</span></div>
         </section>
@@ -167,7 +166,7 @@ export default function ExoCodificacionSKU() {
             <div className="exo-table-head"><div><span className="exo-label">CATÁLOGO MAESTRO</span><h2>{filtered.length} registros</h2></div><span className="exo-status">● PROVISIONAL</span></div>
             <div className="exo-table-scroll">
               <table>
-                <thead><tr><th>Producto</th><th>Presentación</th><th>SKU</th><th>Código provisional</th><th></th></tr></thead>
+                <thead><tr><th>Producto</th><th>Presentación</th><th>SKU</th><th>RCN interno</th><th></th></tr></thead>
                 <tbody>
                   {filtered.map((item) => (
                     <tr key={item.id} className={selected?.id === item.id ? 'active' : ''} onClick={() => setSelectedId(item.id)}>
@@ -185,8 +184,8 @@ export default function ExoCodificacionSKU() {
                 <div className="exo-detail-top"><span className="exo-label">FICHA DEL PRODUCTO</span><span className="exo-pill">ACTIVO</span></div>
                 <h2>{selected.product}</h2><div className="exo-presentation">{selected.presentation}</div>
                 <div className="exo-sku-block"><span>SKU</span><strong>{selected.sku}</strong></div>
-                <Barcode value={selected.provisionalCode} />
-                <div className="exo-code-note">CÓDIGO PROVISIONAL · 13 DÍGITOS</div>
+                <div className="exo-label-block"><span>EMPRESA + SKU + LOTE · CODE 128</span><Barcode value={COMPANY_TEMP_CODE + "|" + selected.sku + "|" + (selected.lot || "SIN-LOTE")} format="CODE128" /><small>{COMPANY_TEMP_CODE} · {selected.sku} · {selected.lot || "SIN-LOTE"}</small></div>
+<div className="exo-label-block exo-rcn-block"><span>RCN INTERNO · EAN-13 RESTRINGIDO</span><Barcode value={selected.provisionalCode} format="EAN13" /><small>{selected.provisionalCode}</small></div>
                 <div className="exo-meta-grid"><div><span>GTIN oficial</span><strong>{selected.officialGtin || 'Pendiente'}</strong></div><div><span>Lote</span><strong>{selected.lot || 'Sin asignar'}</strong></div><div><span>Estado</span><strong>{selected.status}</strong></div></div>
                 <div className="exo-detail-actions"><button className="exo-button dark" onClick={() => window.print()}><Printer size={15} /> Imprimir</button><button className="exo-button light" onClick={() => { setEditing(selected); setModalOpen(true); }}><Edit3 size={15} /> Editar</button></div>
               </>
@@ -231,7 +230,7 @@ function SkuModal({ initial, catalog, onClose, onSave, onDelete }) {
         <div className="exo-modal-head"><div><span className="exo-label">{initial ? 'EDITAR REGISTRO' : 'NUEVO REGISTRO'}</span><h2>{initial ? 'Actualizar SKU' : 'Crear SKU'}</h2></div><button type="button" onClick={onClose}>×</button></div>
         <label>Producto<select value={product} onChange={(e) => setProduct(e.target.value)}>{PRODUCTS.map((p) => <option key={p.code}>{p.name}</option>)}</select></label>
         <label>Presentación<select value={presentation} onChange={(e) => setPresentation(e.target.value)}>{currentProduct.sizes.map((s) => <option key={s}>{s}</option>)}</select></label>
-        <label>GTIN oficial <input name="gtin" placeholder="Pendiente" defaultValue={initial?.officialGtin || ''} /></label>
+        <label>GTIN oficial (asignado por GS1) <input name="gtin" placeholder="Pendiente de asignación GS1" defaultValue={initial?.officialGtin || ''} /></label>
         <label>Lote <input name="lot" placeholder="Se asignará en producción" defaultValue={initial?.lot || ''} /></label>
         <label>Estado<select name="status" defaultValue={initial?.status || 'Activo'}><option>Activo</option><option>Inactivo</option><option>En desarrollo</option></select></label>
         <div className="exo-modal-foot">{initial && <button type="button" className="exo-danger" onClick={() => { onDelete(initial.id); onClose(); }}><Trash2 size={15} /> Eliminar</button>}<span /><button type="button" className="exo-button light" onClick={onClose}>Cancelar</button><button className="exo-button dark" type="submit">Guardar SKU</button></div>

@@ -115,3 +115,22 @@
  .exo-meta-grid{margin:0 5mm}
  .exo-detail-actions{display:none!important}
 }
+
+
+/* Print-only correction: application navigation must never appear on the product label. */
+@media print{
+  .exo-nav,
+  nav.exo-nav,
+  .exo-nav-scroll,
+  .exo-nav-ghost{
+    display:none!important;
+    visibility:hidden!important;
+    height:0!important;
+    max-height:0!important;
+    overflow:hidden!important;
+  }
+  .exo-app{padding-top:0!important;margin-top:0!important}
+  .exo-main{padding-top:0!important;margin-top:0!important}
+  .exo-layout{display:block!important}
+  .exo-detail{position:static!important;transform:none!important;float:none!important}
+}

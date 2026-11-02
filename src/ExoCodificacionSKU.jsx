@@ -184,8 +184,7 @@ export default function ExoCodificacionSKU() {
                 <div className="exo-print-brand">EXO <b>clean</b></div><div className="exo-detail-top"><span className="exo-label">FICHA DEL PRODUCTO</span><span className="exo-pill">ACTIVO</span></div>
                 <h2>{selected.product}</h2><div className="exo-presentation">{selected.presentation}</div>
                 <div className="exo-sku-block"><span>SKU</span><strong>{selected.sku}</strong></div>
-                <div className="exo-label-block"><span>EMPRESA + SKU + LOTE · CODE 128</span><Barcode value={COMPANY_TEMP_CODE + "|" + selected.sku + "|" + (selected.lot || "SIN-LOTE")} format="CODE128" /><small>{COMPANY_TEMP_CODE} · {selected.sku} · {selected.lot || "SIN-LOTE"}</small></div>
-<div className="exo-label-block exo-rcn-block"><span>RCN INTERNO · EAN-13 RESTRINGIDO</span><Barcode value={selected.provisionalCode} format="EAN13" /><small>{selected.provisionalCode}</small></div>
+                <div className="exo-label-block"><span>EXO CLEAN</span><Barcode value={COMPANY_TEMP_CODE + "|" + selected.sku + "|" + (selected.lot || "SIN-LOTE")} format="CODE128" /><small>{COMPANY_TEMP_CODE} · {selected.sku} · {selected.lot || "SIN-LOTE"}</small></div>
                 <div className="exo-meta-grid"><div><span>GTIN oficial</span><strong>{selected.officialGtin || 'Pendiente'}</strong></div><div><span>Lote</span><strong>{selected.lot || 'Sin asignar'}</strong></div><div><span>Estado</span><strong>{selected.status}</strong></div></div>
                 <div className="exo-detail-actions"><button className="exo-button dark" onClick={() => window.print()}><Printer size={15} /> Imprimir</button><button className="exo-button light" onClick={() => { setEditing(selected); setModalOpen(true); }}><Edit3 size={15} /> Editar</button></div>
               </>

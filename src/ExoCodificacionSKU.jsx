@@ -181,7 +181,7 @@ export default function ExoCodificacionSKU() {
           <aside className="exo-detail">
             {selected ? (
               <>
-                <div className="exo-detail-top"><span className="exo-label">FICHA DEL PRODUCTO</span><span className="exo-pill">ACTIVO</span></div>
+                <div className="exo-print-brand">EXO <b>clean</b></div><div className="exo-detail-top"><span className="exo-label">FICHA DEL PRODUCTO</span><span className="exo-pill">ACTIVO</span></div>
                 <h2>{selected.product}</h2><div className="exo-presentation">{selected.presentation}</div>
                 <div className="exo-sku-block"><span>SKU</span><strong>{selected.sku}</strong></div>
                 <div className="exo-label-block"><span>EMPRESA + SKU + LOTE · CODE 128</span><Barcode value={COMPANY_TEMP_CODE + "|" + selected.sku + "|" + (selected.lot || "SIN-LOTE")} format="CODE128" /><small>{COMPANY_TEMP_CODE} · {selected.sku} · {selected.lot || "SIN-LOTE"}</small></div>

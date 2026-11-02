@@ -25,3 +25,93 @@
 
 /* JsBarcode draws its own white background and dark bars; do not override every SVG rect. */
 .barcode svg{overflow:visible}.barcode svg rect{shape-rendering:crispEdges}
+
+
+/* EXO CLEAN brand refresh — black, deep green and lime */
+:root{
+  --exo-blue:#176b16;
+  --exo-blue-dark:#073b12;
+  --exo-sky:#e9f7d8;
+  --exo-sky-2:#c9ef72;
+  --exo-orange:#a8e600;
+  --exo-orange-dark:#5a8e00;
+  --exo-ink:#102512;
+  --exo-muted:#647463;
+  --exo-line:#d9e6d4;
+}
+.exo-app{background:linear-gradient(145deg,#f4f8f1 0%,#fff 54%,#eef6e9 100%);color:var(--exo-ink)}
+.exo-header{border-bottom:1px solid #d9e6d4;box-shadow:0 3px 16px rgba(4,38,10,.07)}
+.exo-wordmark{color:#073b12}
+.exo-wordmark b{color:#8ac900}
+.exo-header-title strong,.exo-back{color:#073b12}
+.exo-kicker,.exo-hero h1 em,.exo-presentation,.exo-status{color:#75ad00}
+.exo-hero{border-bottom:2px solid #9bd500}
+.exo-hero h1{color:#073b12}
+.exo-hero-mark{background:linear-gradient(145deg,#05280c,#176b16);box-shadow:0 12px 28px rgba(8,55,15,.22)}
+.exo-nav{border-bottom-color:#dce8d5}
+.exo-nav a{color:#526650}
+.exo-nav a:hover{color:#073b12;background:#edf8df}
+.exo-nav a.active{background:#176b16;color:#fff;box-shadow:0 4px 12px rgba(12,70,17,.2)}
+.exo-nav-ghost{color:#073b12!important}
+.exo-toolbar select,.exo-search,.exo-table-card,.exo-detail{border-color:#d9e6d4}
+.exo-button.dark{background:linear-gradient(135deg,#a9e600,#75b900);color:#102512;box-shadow:0 7px 17px rgba(119,176,0,.22)}
+.exo-button.dark:hover{background:#91cc00}
+.exo-button.light{color:#14501a;border-color:#b9d2ad}
+.exo-table-head{border-bottom-color:#d9e6d4}
+.exo-table-card th{background:#edf7e5;color:#17451b}
+.exo-table-card td{border-top-color:#e5eee0}
+.exo-table-card tbody tr:hover,.exo-table-card tbody tr.active{background:#f1f9e9}
+.exo-table-card code{color:#17451b}
+.exo-detail{padding:0;min-height:0;border-radius:20px;box-shadow:0 12px 35px rgba(12,52,14,.08)}
+.exo-detail-hero{padding:24px 25px 22px;background:radial-gradient(circle at 85% 20%,rgba(160,226,0,.3),transparent 30%),linear-gradient(125deg,#041e09 0%,#075018 66%,#0b641a 100%);color:#fff;position:relative;overflow:hidden;border-radius:19px 19px 28px 28px}
+.exo-detail-hero:after{content:"";position:absolute;left:-8%;right:-8%;bottom:-35px;height:55px;border-top:5px solid #a8e600;border-radius:50%;transform:rotate(-3deg);pointer-events:none}
+.exo-detail-top{position:relative;z-index:1}
+.exo-detail-top .exo-label{color:#fff;letter-spacing:.14em}
+.exo-pill{background:#a8e600;color:#073b12!important;border:0;border-radius:30px;font-weight:900}
+.exo-detail-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;position:relative;z-index:1;margin-top:28px}
+.exo-detail h2{font-family:Arial,'Helvetica Neue',sans-serif;font-size:clamp(27px,3vw,38px);line-height:1.05;font-weight:900;letter-spacing:-.04em;color:#fff;margin:0 0 5px}
+.exo-presentation{color:#b5ed21;font-size:15px;font-weight:900}
+.exo-detail-wordmark{color:#fff;font-size:37px;font-weight:1000;font-style:italic;line-height:.8;letter-spacing:-.09em;text-align:center;text-shadow:0 2px 10px rgba(0,0,0,.35);transform:skew(-7deg)}
+.exo-detail-wordmark span{color:#b6ed16}
+.exo-detail-wordmark small{display:block;color:#fff;font-size:18px;letter-spacing:-.04em;margin-top:7px}
+.exo-sku-block{margin:20px 25px 14px;background:#edf8e4;border-radius:14px;color:#123b14}
+.exo-sku-block span{color:#597457}
+.exo-sku-block strong{color:#073b12}
+.exo-label-block{margin:14px 25px 18px;padding:16px 12px 12px;border:2px solid #9bd500;border-radius:20px;background:#fff;box-shadow:0 5px 16px rgba(23,80,13,.05)}
+.exo-label-block>span{color:#073b12;font-size:18px;letter-spacing:-.04em;margin-bottom:12px}
+.exo-barcode-brand{font-size:18px!important;font-weight:1000!important;font-style:italic}
+.exo-barcode-brand b{color:#86c900}
+.exo-label-block small{color:#173e18;font-size:10px}
+.exo-label-block .barcode{max-width:100%}
+.exo-label-block .barcode svg{max-height:90px}
+.exo-meta-grid{margin:0 25px;border-top-color:#d9e6d4}
+.exo-meta-grid div{border-bottom-color:#d9e6d4}
+.exo-meta-grid span{color:#71816e}
+.exo-meta-grid strong{color:#153d17}
+.exo-detail-actions{margin:20px 25px 25px}
+.exo-footer{border-top-color:#d9e6d4}
+.exo-modal-backdrop{background:rgba(3,25,7,.68)}
+.exo-modal{border-top-color:#a8e600}
+.exo-modal select,.exo-modal input{border-color:#d9e6d4}
+.exo-app button:focus-visible,.exo-app a:focus-visible,.exo-app input:focus-visible,.exo-app select:focus-visible{outline-color:#8ac900}
+@media(max-width:600px){
+ .exo-detail-hero{padding:20px 18px 21px}
+ .exo-detail-heading{margin-top:22px}
+ .exo-detail-wordmark{font-size:30px}
+ .exo-sku-block{margin:17px 18px 12px}
+ .exo-label-block{margin:12px 18px 15px;padding:13px 8px}
+ .exo-meta-grid{margin:0 18px}
+ .exo-detail-actions{margin:17px 18px 20px}
+}
+@media print{
+ .exo-detail{max-width:90mm;margin:0 auto;padding:0;border:1px solid #d9e6d4;box-shadow:none}
+ .exo-detail-hero{border-radius:0;background:#073b12!important;color:#fff!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .exo-detail-hero:after{border-color:#a8e600}
+ .exo-detail h2{color:#fff!important}
+ .exo-detail-wordmark{color:#fff!important}
+ .exo-sku-block,.exo-label-block,.exo-pill,.exo-button.dark{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+ .exo-label-block{margin:8px 5mm}
+ .exo-sku-block{margin:8px 5mm}
+ .exo-meta-grid{margin:0 5mm}
+ .exo-detail-actions{display:none!important}
+}

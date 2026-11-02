@@ -188,7 +188,7 @@ export default function ExoCodificacionSKU() {
                 <div className="exo-sku-block"><span>SKU</span><strong>{selected.sku}</strong></div>
                 <div className="exo-label-block"><span className="exo-barcode-brand">EXO <b>clean</b></span><Barcode value={COMPANY_TEMP_CODE + "|" + selected.sku + "|" + (selected.lot || "SIN-LOTE")} format="CODE128" /><small>{COMPANY_TEMP_CODE} · {selected.sku} · {selected.lot || "SIN-LOTE"}</small></div>
                 <div className="exo-meta-grid"><div><span>GTIN oficial</span><strong>{selected.officialGtin || 'Pendiente'}</strong></div><div><span>Lote</span><strong>{selected.lot || 'Sin asignar'}</strong></div><div><span>Estado</span><strong>{selected.status}</strong></div></div>
-                <div className="exo-detail-actions"><button className="exo-button dark" onClick={() => window.print()}><Printer size={15} /> Imprimir</button><button className="exo-button light" onClick={() => { setEditing(selected); setModalOpen(true); }}><Edit3 size={15} /> Editar</button></div>
+                <div className="exo-detail-actions"><button className="exo-button dark" onClick={() => { const previousTitle = document.title; const fileCode = String(selected.sku || "EXO").replace(/^EXO-/, ""); document.title = `EXO CLEAN - ${fileCode}`; window.onafterprint = () => { document.title = previousTitle; window.onafterprint = null; }; window.print(); }}><Printer size={15} /> Imprimir</button><button className="exo-button light" onClick={() => { setEditing(selected); setModalOpen(true); }}><Edit3 size={15} /> Editar</button></div>
               </>
             ) : <div className="exo-empty">Selecciona un producto para ver su ficha.</div>}
           </aside>
